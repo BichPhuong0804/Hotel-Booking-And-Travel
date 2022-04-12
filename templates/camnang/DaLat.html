@@ -1,0 +1,369 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Cẩm nang du lịch Đà Lạt.{% endblock %}
+{% block content %}
+    <div class="container-fluid py-3">
+        <div class="container">
+            <div>
+                <div class="col-12">
+                    <p id="tieude" class="h3" style="color: #343a40;">Tổng quan du lịch Đà Lạt mới nhất</p>
+                    <div class="d-flex">
+                        <img src="{% static 'img/decor/cat.png' %}" alt='' width="50px" height="50px">
+                        <p style="color: #555; font-weight: bold">Lượt xem: {{vi.view}} </p>
+                        <div class="d-flex">
+                            {% for obj in qs %}
+                            <form action="." method='POST' class="ui form ml-4">
+                                {% csrf_token %}
+                                <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                                {% if user not in obj.liked.all %}
+                                    <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                        <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                        <span style="color: #fff; font-weight: 600">Thích</span>
+                                    </button>
+                                {% else %}
+                                    <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                        <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                        <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                    </button>
+                                {% endif %}
+                            </form>
+                            <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="background-image: url({% static 'img/decor/bg.jpg' %})">
+                <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 5px;">
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 30px;">
+                </div>
+                <div class="col-12">
+                        <p id="tieude"><b>ĐÀ LẠT</b></p>
+                </div>
+                <div class="col-12" style="color: black; ">
+                        <p class="m-0"> Đà Lạt là một thành phố trực thuộc tỉnh  Lâm Đồng, nằm trên cao nguyên Lâm Viên, ở độ cao 1.500 m so với mặt nước biển và diện tích tự nhiên: 393,29 km². Với nhiều cảnh quan đẹp, Đà Lạt là một trong những thành phố du lịch nổi tiếng nhất của Việt Nam. Trong thời Pháp thuộc, tên tiếng Latin Dat Aliis Laetitiam Aliis Temperiem có nghĩa là "cho những người này niềm vui, cho những người khác sự mát mẻ". Đà Lạt được mệnh danh là : Thành phố Hoa, Thành phố Tình Yêu, thành phố Mùa Xuân, thành phố Sương Mù.</p> 
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 5px; margin-top: 15px;">
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 20px;">
+                </div>
+            </div>
+            <div class="mb-3 pb-3">
+                <a><img class="img-fluid w-100" src="{% static 'img/dalat/dl1.webp' %}" alt=""></a>
+                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Những điều cần biết khi du lịch Đà Lạt (Ảnh: ST)</p>
+            </div>
+            <div class="mb-3 pb-3">
+                <a href="{% url 'hotel' %}"><img class="img-fluid w-100" src="{% static 'img/decor/dulich.jpg' %}" alt=""></a>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="col-12">
+                        <div class="single-services section-padding2">
+                            <div class="details-caption" style="color: #343a40">
+                                <h3>1. Đôi nét về Đà Lạt</h3>
+                                <p>Dù đã đi du lịch Đà Lạt tận những 4 lần chỉ trong vài năm ngắn ngủi, nhưng mình vẫn thấy Đà Lạt là sự lựa chọn tuyệt vời cho những ai muốn trốn tránh cái nóng oi bức của mùa hè. Cảm giác được thăm thú, vãn cảnh và đắm chìm trong vẻ đẹp của thiên nhiên, quả thật là trải nghiệm không thể diễn tả bằng lời. Những kinh nghiệm và hướng dẫn du lịch Đà Lạt 2021 sau đây sẽ giúp bạn tận hưởng chuyến đi “ngon, bổ, rẻ”.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/sidebar/dalat.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Đà Lạt - Thành phố của những sắc hoa</p>
+                                </div>
+                                <p>Có lẽ vì thiên nhiên Đà Lạt quá đẹp, mà người ta đã đặt cho thành phố này biết bao nhiêu là cái tên mỹ miều. Là thành phố sương mù cũng đúng, mà thành phố ngàn hoa cũng chẳng sai, rồi thành phố đáng sống nhất Việt Nam. Và cứ mỗi lần nhắc đến Đà Lạt, là chỉ thấy những cái hay, cái đẹp, là nơi nghỉ dưỡng lý tưởng mà điểm phượt cũng hợp lý nữa.</p>
+
+                                <h3>2. Du lịch Đà Lạt nên đi vào thời điểm nào?</h3>
+                                <p>Với Kinh nghiệm du lịch Đà Lạt thì theo mình cảm nhận Đà Lạt không giống như các thành phố khác khi du lịch chỉ mang tính thời vụ. Riêng Đà Lạt, bạn có thể đến quanh năm bởi mỗi mùa lại có nét đẹp riêng của nó, thời tiết ôn hòa ít nắng gió hay mưa bão. Bạn có thể thoải mái lựa chọn thời điểm phù hợp nhất cho chuyến đi Đà Lạt của mình.</p>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 15px; font-weight: 500;">Du lịch Đà Lạt từ tháng 11 đến hết tháng 6</p>
+                                        <p>Là thời điểm mùa khô ở Đà Lạt, giai đoạn này được xem là thời điểm đẹp nhất để đi du lịch Đà Lạt. Thời tiết những tháng này khá đẹp, bầu trời luôn hửng nắng mỗi ngày, cũng có rất nhiều hoa quả để thưởng thức và selfie cũng đẹp hơn nữa. Tuy nhiên tháng nào hay mùa nào Đà Lạt cũng có một nét đẹp riêng của nó. Mình sẽ nêu ra những cái đẹp theo từng mùa cho mọi người chọn lựa nhé.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/dalat/dl2.jpg' %}" alt="">
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 15px; font-weight: 500;">Du lịch Đà Lạt từ cuối tháng 10 đến cuối tháng 11</p>
+                                        <p>Những tháng này người ta vẫn hay gọi thời điểm này là “LẬP ĐÔNG”. Mình thấy lúc này Đà Lạt cũng rất đẹp. Đây là lúc tiết trời Đà Lạt chuyển từ Thu sang Đông, cái se se lạnh đã chớm bắt đầu, sáng sớm và chiều tối sương mờ giăng lối. Mùa này là mùa của những trái hồng chín mọng, mùa của những bông hoa dã quỳ bắt đầu nhuộm vàng kín lối trên mọi nẻo đường và là lúc hoa cải trắng bắt đầu nở rộ. Đẹp một cách kinh khủng.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/dalat/dl3.jpg' %}" alt="">
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 15px; font-weight: 500;">Du lịch Đà Lạt từ nửa cuối tháng 11 đến giữa tháng 1</p>
+                                        <p>Là lúc Đà Lạt chính thức vào đông. Lúc này trời khá lạnh và thường lạnh đỉnh điểm vào những ngày gần Noel. Trời mùa này ở Đà Lạt thỉnh thoảng có mưa đêm và sương mù. Thời điểm này cũng rất được nhiều người yêu thích vẻ đẹp “Đà Lạt hoàng hôn”. Mùa này nhất định phải đem theo áo lạnh và khăn quàng cổ cả nhà nhé. Đặc trưng của mùa này chính là tiết trời lạnh, sương mù và những cánh đồng hoa cỏ tuyết. Lúc này Đà Lạt và Sapa chẳng khác là mấy vì cái LẠNH TÊ BUỐT như nhau.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/dalat/dl4.jpg' %}" alt="">
+                                        </div>
+                                    </li>
+                                </ul>
+                                <p>Đặc biệt nếu bạn có kế hoạch phượt Đà Lạt 2 ngày thì việc lựa chọn thời điểm khá quan trọng. Thời tiết tốt giúp bạn thuận lợi đi thăm Đà Lạt.</p>
+
+                                
+
+                                <h3>3. Cần chuẩn bị những gì khi đi du lịch Đà Lạt</h3>
+                                <p>Chuyến đi Đà Lạt là điều bạn mong đợi bấy lâu nay. Giờ đây, khi giấc mơ ấy đã trở thành hiện thực thì hãy nhớ lên một kế hoạch thật chi tiết, rõ ràng. Quan trọng là cần chuẩn bị một số món cần thiết để chuyến đi trở nên trọn vẹn hơn.</p>
+                                <p>Các loại giấy tờ cần thiết: CMND, bằng lái xe, các loại vé tàu/ vé máy bay. CMND + Bằng lái xe để sử dụng cho việc thuê khách sạn, thuê xe máy, còn đối với các loại vé, nếu sợ mất bạn có thể dùng vé điện tử. Đến nơi thì nhờ nhân viên in giúp.</p>
+                                <p>
+                                    <ul style="padding-left: 30px">
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Tiền bạn và thẻ ATM: Ở Đà Lạt khá phổ biến các điểm rút tiền tự động, nên ngoài những chi phí như xe ôm, ăn uống dọc đường cần dùng đến tiền mặt, bạn nên mang theo thẻ ATM cho tiện. Khi cần dùng đến, chỉ nên rút một khoản vừa đủ, không nên để tiền mặt quá nhiều trong người.</p></li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Trang phục: Nhiệt độ Đà Lạt trung bình dao động từ 16-18 độ C. Đó là lý do mà khi đi du lịch Đà Lạt, bạn nên chọn cho mình những bộ đồ đủ ấm hoặc áo dài tay. Hơn nữa, trang phục mùa đông rất hợp với khung cảnh lãng mạn, se lạnh nơi cao nguyên Đà Lạt.</p></li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Đồ dùng cá nhân: Hầu như ở các khách sạn Đà Lạt đều chuẩn bị khăn lâu, dầu gội, sữa tắm,vv… Nhưng nếu bạn ngại dùng đồ bên ngoài, hãy mang theo đồ cá nhân của mình để sử dụng cho an tâm. Tốt nhất, bạn nên bỏ chúng trong một cái bọc, để khi cần đến thì có thể thấy ngay. Nhớ cầm theo điện thoại, sạc pin rất quan trọng.</p></li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Các loại thuốc: Nếu cảm thấy sức khỏe yếu, bạn nên mang theo một số loại thuốc như thuốc chống say xe, thuốc đau đầu, thuốc đau bụng. Ngoài ra, nên mang theo một lọ bôi chống côn trùng cắn.</p></li>
+                                    </ul>
+                                </p>
+                            
+                                <h3>4. Đến Đà Lạt du lịch đi bằng phương tiện gì?</h3>
+                                <p>Theo mình thấy thì chỉ có 2 phương tiện di chuyển tốt nhất để di du lịch Đà Lạt đó là Máy Bay và Ô Tô. Các bạn ở các tỉnh phía bắc có quãng đường di chuyển khá xa thì nên lựa chọn đi máy bay vừa nhanh vừa tiết kiệm thời gian trong chuyến đi Đà Lạt của mình. Còn riêng những bạn phía Nam thì Ô Tô là lựa chọn tốt nhất vừa tiện lại còn rất tiết kiệm chi phí nhé.</p>
+                                <p>
+                                    <ul style="padding-left: 30px;">
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Thuê xe máy: Trải nghiệm phượt thú vị. Đây là phương tiện cơ động nhất, cũng là phương tiện hợp lý nhất về chi phí. Đặc biệt phù hợp với thanh thiếu niên, nhóm nhỏ, bạn nên thuê xe máy di chuyển gần cho tiết kiệm nhé. Chỉ 120.000VNĐ /1 ngày/ 24 tiếng, rất rẻ và tiết kiệm cho chuyến du lịch Đà Lạt của bạn.</p></li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Thuê taxi: Trải nghiệm nhanh chóng, tiện lợi. Ở Đà Lạt thì giá TAXI cũng khá rẻ vì ngồi TAXI không bật điều hòa, cước tính cũng chỉ khoảng 8.000vnđ – 10.000vnđ/km tùy thuộc vào mỗi hãng xe. Cũng giống các tỉnh thành khác, việc lựa chọn phương tiện này chỉ thích hợp cho những ai có túi tiền rủng rỉnh. Nhưng bù lại, nó rất tiện và an toàn, bạn chỉ cần book tax là 5 phút sau có mặt. Khi đi taxi thì nên chọn những hãng uy tín và có đồng hồ tính giờ để đảm bảo không bị thiệt.</p></li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>GRAP tại Đà Lạt: Trải nghiệm hợp lý. Giống như mọi nơi thì Đà Lạt vẫn có GRAP nhé. Bạn đã có điểm đến rõ ràng thì cũng nên lựa chọn phương tiện này để rõ giá cả đi đến các điểm tham quan tránh tình trạng chạy lòng vòng của TAXI ở đây. Kinh nghiệm du lịch Đà Lạt của mình, nếu như bạn đi Đà Lạt ngắn ngày, nên chọn phương tiện này để đi.</p></li>
+                                    </ul>
+                                </p>
+                                
+                                <h3>5. Các phương tiện đi lại tại Đà Lạt</h3>
+                                <p>Việc di chuyển tại Huế cũng khá dễ dàng. Bạn có thể lựa chọn những phương tiện sau cho chuyến du lịch Huế của mình:</p>
+                                <p>
+                                    <ul style="padding-left: 30px;">
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Taxi: Taxi là loại xe rất phổ biến, thuận tiện cho du khách đặc biệt là những du khách đi theo nhóm hoặc khi thời tiết không tốt. Tuy nhiên, chi phí taxi khá đắt đỏ, bạn nên cân nhắc.</p></li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Xe máy: Để chủ động du lịch Huế và khám phá các món ẩm thực địa phương thì bạn nên thuê xe máy. Giá thuê cũng không quá đắt, từ 100.000 đến 200.000 VNĐ/ngày.</p></li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Xích lô: Đến mảnh đất cố đô, bạn cũng có thể thử trải nghiệm di chuyển bằng xích lô để tận hưởng không khí trong lành, bình yên nơi đây. Giá giao động từ 40.000 đến 70.000 VNĐ/1 chuyến tuỳ lịch trình.</p></li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Thuê ô tô: Nếu bạn muốn kết hợp nhiều điểm tham quan thì có thể thuê xe ô tô du lịch. Mức giá thuê xe 4 chỗ, 7 chỗ, 16 chỗ giao động từ 400.000 đến 1.600.000 VNĐ tùy lộ trình.</p></li>
+                                    </ul>
+                                </p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/dalat/dl5.jpg' %}" alt="">
+                                </div>
+
+                                <h3>6. Ăn gì khi đi du lịch Đà Lạt?</h3>
+                                <p>Đến với Đà Lạt không phải chỉ có những điểm tham quan đẹp mà còn mê mệt với những món ăn ẩm thực nổi tiếng đặc trưng của vùng đất này. Và cũng có lẽ, đặc sản đường phố cũng là một điều gì đó nhắc nhớ đến thành phố ngàn hoa. Với Kinh nghiệm du lịch Đà Lạt của mình thì trong bài viết này mình sẽ liệt kê toàn bộ những quán ăn ngon kèm theo những món ăn mê lòng người nhé.</p>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Nem Nướng Bà Hùng – Đặc sản nổi tiếng Đà Lạt</p>
+                                        <p>Quán nem nướng Bà Hùng rất nổi tiếng tại Đà Lạt và giờ có vài cơ sở để cho bạn lựa chọn, rất tiện cho bạn thưởng thức dù ở vị trí nào. Còn khi mình ghé đến đây tại địa chỉ Lô D51 Khu Quy Hoạch – Hoàng Văn Thụ – Phường 4 – Đà Lạt. Và đặc biệt, nói đến món nem nướng Đà Lạt, thực sự rất khác nem nướng ở Đà Nẵng hay Nha Trang, cùng tìm hiểu nha.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/dalat/dl6.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Nem nướng Bà Hùng</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bánh Căn – món ngon Đà Lạt nhất định phải thử</p>
+                                        <p>Có rất nhiều nơi cũng có bán nhiều thứ bánh này nhưng đến du lịch Đà Lạt thưởng thức món này có hương vị vô cùng lạ nhé. Thứ bánh bình dân này là món ăn được rất nhiều bạn trẻ tìm kiếm khi đến Đà Lạt. Ở Đà Lạt, bánh căn ăn với nước chấm pha mỡ hành, thêm xíu mại và giò tạo nên hương vị hấp dẫn khó quên. Những chiếc bánh thơm giòn làm từ nguyên liệu chính là gạo cùng các bước chế biến cầu kỳ, phức tạp, dọn lên ăn khi còn nóng nổi. Bạn có thể tìm thấy các quán bánh căn ngon dọc đường Tăng Bạt Hổ.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/dalat/dl7.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Bánh căn</p>
+                                        </div>
+                                    </li>  
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Món Lẩu Gà Lá É – Món ăn được yêu thích ở Đà Lạt</p>
+                                        <p>Chắc chắn đây là món lẩu Gà đặc sản Đà Lạt mang đến bạn một hương vị mới lạ và thú vị với món lá é. Cùng họ với hương nhu, húng quế, lá é có vị chua chua, chát chát. Khi nhúng vào nồi lẩu gà ngọt lịm thì vừa bùi bùi lại the the tạo nên hương vị ấn tượng. Lẩu Gà là món ăn mà những vùng khác đều có nhưng món Lẩu Gà kết hợp với hương vị của Lá É thì chỉ có mỗi Đà Lạt mới có thôi. Một số địa chỉ bạn tham khảo nếu muốn thưởng thức món ăn hấp dẫn này như quán Tao Ngộ đầu đường 3/4, quán 668 2B Chu Văn An. Bạn nên lưu lại 1 trong 2 địa chỉ trên để đến thưởng thức nhé.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/dalat/dl8.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Lẩu gà lá é</p>
+                                        </div>
+                                    </li>  
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Chợ Đêm – Thiên Đường Ăn Uống sầm uất nhất Đà Lạt</p>
+                                        <p>Vừa là điểm tham quan nổi tiếng vừa là điểm thưởng thức các món ngon, có lẽ vì thế mà chợ đêm Đà Lạt có gấp đôi sự quyến rũ. Có thể kể đến rất nhiều món ăn vặt nổi bật và mang nét riêng của TP. Đà Lạt mà bạn không thể bắt gặp ở nơi khác như: Bánh tráng nướng Đà Lạt, đậu hũ nóng, các món nướng, dâu tây lắc, kem trộn, khoai nướng,vv… Dường như, với kiểu thời tiết se lạnh của tiết trời Đà Lạt, thì những món nóng luôn được yêu thích. Đó là kinh nghiệm du lịch Đà Lạt đi chợ đêm mà mình muốn chia sẻ với các bạn.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/dalat/dl9.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Chợ đêm Đà Lạt</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Quán Xiên Nướng BO BỰ – Rất đông khách ở Đà Lạt</p>
+                                        <p>Với khí hậu mát mẻ và se lạnh, đồ nướng chắc chắn là một lựa chọn tuyệt vời khi đến Đà Lạt. Mình có thưởng thức đồ nướng chỉ 5k/1 xiên rất rẻ và ngon tại Quán BO BỰ nằm tại địa chỉ 12 Phan Đình Phùng – Đà Lạt. Quán rất nhiều các loại món nướng được găm vào xiên và tất cả các xiên này đều có giá 5k nhé. Ngoài ra ở đây cũng có nhiều loại lẩu giá rẻ cho mọi người lựa chọn đa dạng.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/dalat/dl10.webp' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Quán xiên nướng Bo Bự</p>
+                                        </div>
+                                    </li> 
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Lẩu Thái Khap Bun Kha – món ăn ấm bụng ở Đà Lạt</p>
+                                        <p>Đà Lạt khá lạnh vào buổi tối, nếu mọi người quây quần bên nồi lẩu nóng hổi thì còn gì tuyệt vời hơn. Lẩu Thái là cái tên được nhiều người dân Đà Lạt biết đến. Khi đến đây bạn sẽ được thưởng thức món lẩu mực khổng lồ với hương vị không thể nào quên. Đó chính là dai dai, giòn giòn của mực khổng lồ. Cùng với vị tươi ngon của hải sản và rau xanh.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/dalat/dl11.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Lẩu thái Khap Bun Kha</p>
+                                        </div>
+                                    </li> 
+                                </ul>
+                                <h3>7. Du lịch Đà Lạt nên đi đâu chơi?</h3>
+                                <p>Khi đã đi hết những điểm tham quan gần thành phố rồi thì tại sao bạn không khám phá nốt những điểm du lịch xa trung tâm thành phố Đà Lạt nhỉ. Sau đây là những điểm du lịch rất nổi tiếng nhất mình gợi ý đến mọi người. Theo kinh nghiệm du lịch Đà Lạt của mình, đây là những điểm rất đáng để đi nếu có thời gian. Hãy khám phá hết 7 điểm nổi tiếng tại Đà Lạt cùng mình nha.</p>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Đỉnh Núi LangBiang – Nơi ngắm trọn vẹn Thành Phố Đà Lạt</p>
+                                        <p>Du lịch Đà Lạt bạn không thể không đến khu du lịch núi Langbiang. Đến đây bạn sẽ được cảm nhận rõ sự hùng vỹ của thiên nhiên cao nguyên, cùng với đó là trải nghiệm cưỡi ngựa cầm súng chụp hình. Nhưng bạn nên lưu ý vì khu này khi cưỡi ngựa và chụp bằng điện thoại của bạn mỗi lần chụp 1 tấm bị mất 10k. Khi nháy 10 tấm là mất toi 100k đó nhé. Đó là điểm trừ của mình khi đến đây khi bị đánh lừa là chỉ mất 10k chụp hình thôi. Bạn nhớ để ý kẻo bị mất tiền không đáng nhé.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/dalat/dl12.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Đỉnh núi LangBiang</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Tuyệt Tình Cốc – Nét hoang sơ thung lũng Đà Lạt</p>
+                                        <p>Tuyệt Tình Cốc thực chất là một mỏ đá hoa cương đã bị bỏ hoang nằm ở suối Cạn, xã Lát, huyện Lạc Dương. Sau thời gian dài không khai thác, mưa và các mạch nước ngầm đã tạo nên một hồ nước với màu xanh ngọc bích ảo diệu như trong những bộ truyện kiếm hiệp của Kim Dung. Xung quanh hồ nước là những vách đá dựng đứng uy nghi pha trộn với nét hoang sơ của núi rừng.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/dalat/dl13.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Tuyệt tình cốc</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bàn Tay Phật – Nơi bàn tay ngửa giữa Núi Trời ở Đà Lạt</p>
+                                        <p>Nơi đây chỉ có mỗi bàn tay đặt nhô ra ở lưng chừng đèo như đang hứng trọn nắng gió, mưa sa của đất trời. Bàn tay được kết lại bằng những sợi của cây rừng rất chắc chắn. Đứng đây bạn có thể ngắm trọn vẹn Núi Rừng và cảm nhận không khí vô cùng mát mẻ và trong lành. Giờ đây bàn tay Phật ở Hoa Điền Sơn Trang nổi lên như minh chứng điển hình cho vùng đất du lịch Đà Lạt không bao giờ cũ với nhiều nét mới độc và lạ thu hút. Có lẽ vì thế mà nhiều bạn trẻ trên khắp đất nước mong muốn 1 lần được đến nơi này.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/dalat/dl14.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Bàn tay Phật</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Thác Datanla – Thác đẹp và Hút khách nhất Đà Lạt</p>
+                                        <p>Thác Datanla Đà Lạt là một trong những địa điểm du lịch lý tưởng của du khách. Khi du khách đến đây tham quan có thể trút bỏ được hết những buồn phiền. Những lo toan trong cuộc sống bộn bề lo toan. Những công việc tấp nập trong thành phố. Nhưng khi đến đây du khách sẽ được thả hồn vào với núi trời. Được tham gia chơi những trò chơi mạo hiểm. Cùng với gia đình ngắm hình quang cảnh thiên nhiên. Chụp cho mình những bức ảnh đẹp nhất. Để không bao giờ quên được những kỷ niệm khi bạn đến tham quan Đà Lạt.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/dalat/dl17.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Thác Datanla</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Chùa Linh Quy Pháp Ấn – Cổng Trời Đà Lạt</p>
+                                        <p>Ngôi chùa Linh Quy Pháp Ấn là một trong những địa điểm hấp dẫn du khách. Bởi nơi này sở hữu không gian đẹp mê hoặc lòng người, được nhiều bạn trẻ check in. Chùa Linh Quy Pháp Ấn có cảnh cổng Thần Đạo uy nghiêm được ví như “Cổng Trời” của Đà Lạt. Đứng ở cổng, du khách phóng tầm mắt ra xa để chiêm ngưỡng khung cảnh tuyệt diệu bốn bề của toàn cảnh núi rừng.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/dalat/dl15.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Chùa Linh Quy Pháp Ấn</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Thiền Viện Trúc Lâm – Điểm đến tâm linh Đà Lạt</p>
+                                        <p>Thiền viện Trúc Lâm nằm uy nghi trên núi Phụng Hoàng, về phía trên Hồ Tuyền Lâm. Đây là điểm tham quan và chiêm bái quen thuộc của du khách và các phật tử khi tới Đà Lạt. Đứng từ đây, hít thở bầu không khí trong lành, du khách sẽ thấy tâm hồn thoải mái, mọi ưu phiền dường như đều tan biến hết.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/dalat/dl16.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Thiền Viện Trúc Lâm</p>
+                                        </div>
+                                    </li>                                      
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex mt-4">
+                        {% for obj in qs %}
+                        <form action="." method='POST' class="ui form ml-4">
+                            {% csrf_token %}
+                            <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                            {% if user not in obj.liked.all %}
+                                <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Thích</span>
+                                </button>
+                            {% else %}
+                                <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                </button>
+                            {% endif %}
+                        </form>
+                        <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                        {% endfor %}
+                    </div>
+
+                    <section class="comment-area">
+                        <div class="container">
+                            <div class="comment-content">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="comment-details">
+                                            <div class="section-title">
+                                                <h5>Bình luận</h5>
+                                            </div>
+                                            <form action="." method="POST" style="margin-top: 1.3em;">
+                                                {% csrf_token %}
+                                                {% if not comments.all %} 
+                                                <div class="col-lg-12">
+                                                    <center><h6 class="mb-4">Chưa có bình luận nào hết á :((</h6></center>
+                                                </div>
+                                                {% else %}
+                                                    {% for x in comments %}
+                                                    <div class="comment-item">
+                                                        <div class="user-avt">
+                                                            <img src="{% static 'img/decor/cat.png' %}" alt="">
+                                                        </div>
+                                                        <div class="comment-info">
+                                                            <h6>{{ x.user }} - <span>{{ x.created_on }}</span></h6>
+                                                            <p>{{ x.body }}</p>
+                                                        </div>
+                                                    </div>
+                                                    {% endfor %}
+                                                {% endif %}
+                                                <input type="text" name="user" value="{{request.user}}" maxlength="200" required="" id="id_user" style="display: none">
+                                                <input type="text" name="post_id" maxlength="200" value="CN13" required id="id_post_id" style="display: none">
+                                                <div class="comment-body">
+                                                    <textarea placeholder="Nhập bình luận..." name="body" cols="40" rows="10" required id="id_body" style="width: 100%; outline: none; border: 1px solid #e53637; border-radius: 5px; padding: 10px;"></textarea>
+                                                    <button type="submit" class="btn button btn-lg" name="comment_submit"><i class="fa fa-location-arrow"></i> Bình luận</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                
+                <div class="col-lg-4 pt-3 pt-lg-0">
+                    <!-- Popular News Start -->
+                    <div class="pb-3">
+                        <div class="bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0 h3">Nổi bật</h3>
+                        </div>
+                        {% for item in oli %}
+                        <div class="d-flex mb-3 haha">
+                            <a href="{{item.link}}"><img src="/media/{{item.bg}}" style="width: 100px; height: 100px; object-fit: cover;"></a>
+                            <div class="w-100 d-flex flex-column justify-content-center bg-light px-3" style="height: 100px;">
+                                <div class="mb-1" style="font-size: 13px;">
+                                    <span>{{item.date}}</span>
+                                </div>
+                                <a class="h6 m-0" href="{{item.link}}">{{item.camnang_name}}</a>
+                                <div class="mb-2" style="font-size: 14px;">
+                                    <span>
+                                        <i class="far fa-eye"></i>
+                                        <span id="view">{{item.view}}</span> 
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!-- Popular News End -->
+
+                    <!-- Tags Start -->
+                    <div class="pb-3">
+                        <div class="bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0 h3">Từ khóa</h3>
+                        </div>
+                        <div class="d-flex flex-wrap m-n1">
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Cẩm nang</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Du lịch</a>
+                            <a href="{% url 'cn_dalat' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đà Lạt</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Khách Sạn</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đi phượt</a>
+                            <a href="{% url 'cn_vungtau' %}" class="btn1 btn-sm btn-outline-secondary m-1">Vũng Tàu</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Kinh nghiệm du lịch</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đi chơi</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Tham quan</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Chỗ ở</a>
+                            <a href="{% url 'weather' %}" class="btn1 btn-sm btn-outline-secondary m-1">Thời tiết</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Nhà nghỉ</a>
+                            <button onclick="deadlines()" class="btn1 btn-sm btn-outline-secondary m-1" style="cursor: pointer; outline: none">Deadline</button>
+                            <script>function deadlines() {alert("NAPUN có sẵn khăn giấy đây. KHÓC ĐIIII :))");}</script>
+                        </div>
+                    </div>
+                    <!-- Tags End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid py-3">
+        <div class="container">
+            <img width="50px" height="50px" src="{% static 'img/decor/pen.png' %}" atl="">
+            <div class="d-flex align-items-center bg-light justify-content-between py-2 px-4 mb-3">
+                <p class="h3 m-0 orange" style="font-style: italic; text-align: justify;">Với những kinh nghiệm du lịch Đà Lạt tự túc được chia sẻ trong bài viết, hi vọng du khách sẽ có thêm các thông tin tham khảo bổ ích cho chuyến du lịch của mình. Hãy ghé qua những địa điểm nổi tiếng, quán ăn, nhà hàng ngon để thưởng thức trọn vẹn nét đẹp của Đà Lạt. Và đừng quên <a href="{% url 'hotel' %}">đặt khách sạn tại NAPUN</a> để có một trải nghiệm thực tế nhé ! <i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

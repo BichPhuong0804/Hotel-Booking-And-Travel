@@ -1,0 +1,388 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Cẩm nang du lịch Phú Yên.{% endblock %}
+{% block content %}
+    <div class="container-fluid py-3">
+        <div class="container">
+            <div>
+                <div class="col-12">
+                    <p id="tieude" class="h3" style="color: #343a40;">Bỏ túi kinh nghiệm du lịch Phú Yên tự túc, phá đảo xứ hoa vàng</p>
+                    <div class="d-flex">
+                        <img src="{% static 'img/decor/cat.png' %}" alt='' width="50px" height="50px">
+                        <p style="color: #555; font-weight: bold">Lượt xem: {{vi.view}} </p>
+                        <div class="d-flex">
+                            {% for obj in qs %}
+                            <form action="." method='POST' class="ui form ml-4">
+                                {% csrf_token %}
+                                <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                                {% if user not in obj.liked.all %}
+                                    <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                        <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                        <span style="color: #fff; font-weight: 600">Thích</span>
+                                    </button>
+                                {% else %}
+                                    <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                        <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                        <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                    </button>
+                                {% endif %}
+                            </form>
+                            <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="background-image: url({% static 'img/decor/bg.jpg' %})">
+                <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 5px;">
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 30px;">
+                </div>
+                <div class="col-12">
+                    <p id="tieude"><b>PHÚ YÊN</b></p>
+                </div>
+                <div class="col-12" style="color: black; ">
+                    <p class="m-0">Phú Yên đẹp tựa một cô thôn nữ, có nét chân chất, mộc mạc của làng quê Việt Nam lại ẩn chứa những nét nhẹ nhàng, thuần khiết, trong trẻo. Vẻ đẹp của Phú Yên đi cùng với những câu hát tuổi thơ “Bóng trăng trắng ngà, có cây đa to, có thằng Cuội già, ôm một mối mơ” trong bộ phim “Tôi thấy hoa vàng trên cỏ xanh” do đạo diễn Victor Vũ chắp tay thực hiện, đã làm lay động trái tim của biết bao nhiêu khán giả. Cũng chính bởi lẽ đó, du lịch Phú Yên đã trở thành một điểm đến lí tưởng trong lòng rất nhiều du khách!</p>
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 5px; margin-top: 15px;">
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 20px;">
+                </div>
+            </div>
+            <div class="mb-3 pb-3">
+                <img class="img-fluid w-100" src="{% static 'img/phuyen/py1.webp' %}" alt="">
+                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Những điều cần biết khi du lịch Phú Yên (Ảnh: ST)</p>
+            </div>
+            <div class="mb-3 pb-3">
+                <a href="{% url 'hotel' %}"><img class="img-fluid w-100" src="{% static 'img/decor/dulich.jpg' %}" alt=""></a>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="col-12">
+                        <div class="single-services section-padding2">
+                            <div class="details-caption" style="color: #343a40">
+                                <h3>1. Tổng quan về du lịch Phú Yên</h3>
+                                <p>Phú Yên là tỉnh thuộc miền Nam Trung Bộ, nối liền Bình Định và Khánh Hòa. Nơi đây mang vẻ đẹp dịu dàng, duyên dáng khi ôm trọn hai ngọn đèo: Đèo Cù Mông giáp Bình Định và đèo Cả giáp Khánh Hòa. Điểm nổi bật ghi dấu trong lòng khách du lịch khi đặt chân tới nơi đây là hình ảnh đồng lúa thẳng cách cò bay, bãi biển xanh mượt bát ngát, những đầm nước trong lành hay những gành đá đĩa nhấp nhô đầy lí thú.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/phuyen/py2.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Cánh đồng Phú Yên đẹp mộng mơ qua ống kính của đạo diễn Victor Vũ (Ảnh: sưu tầm)</p>
+                                </div>
+                                <p>Phải dùng một từ quá tuyệt vời, quá đẹp về du lịch Phú Yên… Nơi có tiềm năng lớn để phát triển du lịch, với rất nhiều thứ mà các tỉnh thành khác phải ao ước có được, từ những danh thắng có một không hai như Gành Đá Đĩa, bãi Xép, những con đường chạy dọc biển siêu đẹp, đến những món ăn ngon, bổ và SIÊU RẺ… Chúng tạo nên một Phú Yên khác, rất khác so với các tỉnh thành khác. Cô bạn mình có bảo, nếu mà mình ở Phú Yên một tháng chắc sẽ “lăn” về Sài Gòn mất.hi.</p>
+
+                                <h3>2. Thời điểm lý tưởng để du lịch Phú Yên</h3>
+                                <p>Theo kinh nghiệm của những người từng đi du lịch Phú Yên, thời điểm thuận tiện nhất, thích hợp nhất để có một chuyến đi lý tưởng ở nơi đây là vào mùa nắng trải dài từ tháng 1 đến tháng 8. Đây cũng là mùa du lịch của Phú Yên nên trước khi đi bạn cần đặt trước phòng khách sạn cho mình để tiết kiệm thời gian khi tới nơi.</p>
+                                <p>Nên tránh thời điểm Phú Yên đang vào mùa mưa từ tháng 9 đến tháng 12 để có những trải nghiệm trọn vẹn nhất. Bởi lẽ mùa nắng cảnh sắc Phú Yên như được điểm thêm sức sống, rực rỡ hơn, tươi sắc hơn. Những đồng lúa vàng ánh lên trong nắng, những bãi biển, gành đá cũng lấp lánh khi ánh sáng chiếu rọi.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuyen/py3.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Phú Yên đẹp rực rỡ trong mùa nắng từ tháng 1 đến tháng 8 (Ảnh: sưu tầm)</p>
+                                </div>
+                                <p>Ngoài ra nếu muốn tham dự những lễ hội văn hóa truyền thống ở nơi đây, tháng 1 – 2 là thời điểm vô cũng hợp lí với những hoạt động văn hóa nổi bật như: Đua thuyền đầm Hồ Loan (7/1), đua thuyền sông Đà Rằng (07/01), Hội đua ngựa (08/01),…</p>
+                                                                    
+                                <h3>3. Phương tiện di chuyển tới Phú Yên</h3>
+                                
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p>Máy bay: Bạn có thể lựa chọn những chuyến bay của những hãng hàng không Vietnam Airlines, Vietjet Air, Jetstar làm phương tiện di chuyển tới Phú Yên. Có hai tuyến bay tới Phú Yên là Hà Nội – Phú Yên và Sài Gòn – Phú Yên với mức giá vé dao động 1.500.000 – 1.900.000 đồng. Nếu săn được vé rẻ đến Phú Yên thì mức giá vé chỉ khoảng hơn 600.000đ/chiều. Phú Yên có sân bay Tuy Hòa cách trung tâm thành phố 10km nên bạn phải thuê xe ôm hoặc taxi để có thể di chuyển vào trong trung tâm thành phố. </p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuyen/py4.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Sân bay Tuy Hòa cách trung tâm thành phố 10km (Ảnh: sưu tầm)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p>Tàu hỏa: Nếu ở Hà Nội bạn có thể lựa chọn cách đến du lịch Phú Yên bằng tàu hỏa theo tuyến đường Hà Nội – Phú Yên. Để có thể tối ưu hóa thời gian và thuận tiện cho chuyến đi của bạn, nên chọn tàu SE3 chạy từ 10h tối hôm trước và đến ga Phú Yên vào 8h30 tối hôm sau. Nếu bạn xuất phát từ TP. HCM nên chọn những chuyến tàu đêm SE2, SE4 để có thẻ đến Phú Yên vào sáng hôm sau.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuyen/py5.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Có thể di chuyển bằng tàu hỏa từ Hà Nội và Sài Gòn tới Phú Yên (Ảnh: sưu tầm)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p>Xe khách: Nếu quãng đường từ điểm xuất phát của bạn tới Phú Yên nằm trong khoảng 300km thì một chuyến đi phượt sẽ là một lựa chọn thú vị. Những chú ý cơ bản khi đi du lịch bằng xe máy là luôn tuân thủ luật giao thông, chú ý quan sát, mang đầy đủ giấy tờ và dụng cụ bảo vệ cần thiết cho một chuyến đi đường dài bằng xe máy. Ngoài ra nên tìm hiểu về tuyến đường đi cũng như những đặc điểm của tuyến đường đó để có những sự chuẩn bị cần thiết. Cảnh Phú Yên vô cùng đẹp, hãy lái xe an toàn để có một chuyến đi thực sự đáng nhớ nhé!</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuyen/py6.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hãy cài GPS hoặc mang theo bản đồ để thuận tiện cho việc di chuyển (Ảnh: sưu tầm)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p>Phương tiện cá nhân: Với những du khách tới từ Sài Gòn có thể chọn xe khách làm phương tiện di chuyển của mình. Các bạn mua vé tại Bến xe miền Đông, Sài Gòn, xe Thuận Thảo có cả vé ngồi và giường nằm với mức giá dao động 180.000 – 300.000 đồng/vé.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuyen/py7.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Xe Thuận Thảo có tuyến Sài Gòn – Phú Yên (Ảnh: sưu tầm)</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                                
+                                <h3>4. Phương tiện đi lại khi du lịch ở Phú Yên</h3>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p>Xe máy: Xe máy là phương tiện di chuyển thuận tiện và lý thú nhất khi bạn có chuyến đi trải nghiệm Phú Yên. Có lẽ bởi vậy, Phú Yên có rất nhiều địa điểm cho thuê xe máy với nhiều hãng xe, loại xe khác nhau. Giá thuê xe máy rơi vào khoảng 80.000 – 120.000 đồng và khi thuê cần đặt cọc CMND hay giấy tờ tùy thân để đảm bảo.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuyen/py8.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Xe máy là phương tiện được nhiều người chọn lựa khi du lịch Phú Yên (Ảnh: sưu tầm)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Taxi, xe 7 chỗ, xe 16 chỗ: Nếu đi cùng gia đình, cơ quan thì ô tô vẫn là phương tiện thuận tiện hơn cả.</p></li>
+                                </ul>
+                                
+                                
+                                <h3>5. Những địa điểm du lịch ở Phú Yên “không thể bỏ lỡ” </h3>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bãi Xép</p>
+                                        <p>Bãi Xép vốn là một chốn hẹn hò lí tưởng của những cặp tình nhân trong những buổi chiều hoàng hôn lãng mạn. Và từ khi công chiếu bộ phim “Tôi thấy hoa vàng trên cỏ xanh”, khung cảnh Gành Ông, Bãi Xép đã trở thành tâm điểm chú ý và là điểm đến được lựa chọn nhiều nhất trong những ngày cuối năm.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuyen/py9.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Cảnh thả diều tại Gành Ông, Bãi Xép (Ảnh: sưu tầm)</p>
+                                        </div>
+                                        <p>Bãi Xép tuy chỉ dài khoảng 500m nhưng lại mang một vẻ đẹp hữu tình với hai bãi đá bao bọc ở hai đầu bãi biển. Bãi đá nhấp nhô, gập ghềnh, bãi bên trái chạy lấn ra phía biển tạo nên một tổng thể không gian mới lạ, vừa giúp chắn gió. Đứng ở những gành đá phóng tầm mắt ra vùng biển trời biếc xanh mới thấy được vẻ đẹp non nước hữu tình, say đắm lòng người đến nhường nào.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuyen/py10.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Bãi Xép đẹp như tranh với những gành đá nhấp nhô, kì thú (Ảnh: Sưu tầm)</p>
+                                        </div>
+                                        <p>Bãi Xép cách trung tâm thành phố Tuy Hòa 14km về phía Bắc. Từ thành phố Tuy Hòa chạy thẳng theo đường Lê Duẩn để tới huyện Tuy An. Đây là cung đường rộng rãi, mát mẻ, được dân phượt rất yêu thích bởi nó được bao quanh bởi những rặng dương biển hai bên đường vô cùng đẹp mắt. Hoặc bạn có thể đi theo tuyến đường quốc lộ 1A đến xã An Chấn, Tuy An rẽ vào Khu du lịch Sao Việt để đến với Bãi Xép.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuyen/py11.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Có hai con đường để tới chinh phục Bãi Xép (Ảnh: sưu tầm)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Hòn Yến</p>
+                                        <p>Hòn Yến mang một vẻ đẹp nên thơ, mộng mơ giữa lòng xứ “hoa vàng trên cỏ xanh”. Các thành phố Tuy Hòa 20km về hướng Đông Bắc, từ Nhơn Hội nhìn ra sẽ thấy hai hòn đảo nằm kề sát cạnh nhau: Hòn lớn với thế chóp nón khổng lồ là hòn Yến còn hòn nhỏ hơn là hòn Sụn. Có người nói rằng trước đây hai hòn đảo này là một ngọn núi lớn, nhưng do quá trình bào mòn của sóng biển đã biến thành hai hòn đảo chơ vơ giữa mặt biển.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuyen/py12.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hai hòn đảo nằm giữa mặt biển tạo nên một cấu trúc thú vị (Ảnh: sưu tầm)</p>
+                                        </div>
+                                        <p>Hòn Yến có được một vị thế hết sức đặc biệt khi bao quanh mình là một loạt những thắng cảnh, địa điểm thú vị. Một dãy núi đá vươn mình ra ngoài khơi gọi là Gành Yến, gành Hổ Chảo nằm ngay dưới chân Gành Yến với những khối đá đen thẫm bí ẩn. Phía bên phải hòn Yến là Mũi Yến nằm bên lắng Ông Nam Hải, được coi là nơi thờ cúng của dân làng. Phóng tầm mắt ra xa hơn một chút bạn sẽ bắt gặp bãi Xép đẹp mộng mơ, với hình ảnh của những thước phim trong “Tôi thấy hoa vàng trên cỏ xanh”</p>
+                                    </li>  
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Vịnh Vũng Rô</p>
+                                        <p>Vịnh Vũng Rô với một vẻ đẹp mộng mơ mà không kém phần hùng vĩ chính là một lựa chọn lí tưởng cho lịch trình khám phá du lịch Phú Yên của bạn. </p>
+                                        <p>Vịnh Vũng Rô không quá lớn nhưng mang một vẻ đẹp nhẹ nhàng với bãi biển phẳng lặng lăn tăn gợn sóng. Vịnh Vũng Rô được bao bọc bởi 3 dãy núi là Đèo Cả, Đá Bia và Hòn Bà. Trong những năm tháng kháng chiến, Vũng Rô được coi là một địa chỉ đỏ trong các phong trào cách mạng nhưng khi giành được độc lập, vịnh đã thay mình, khoác lên tấm áo xanh của hòa bình tự do, trong lành, nhẹ nhàng, bình yên.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuyen/py13.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Vịnh Vũng Rô đẹp mộng mơ (Ảnh: sưu tầm)</p>
+                                        </div>
+                                        <p>Thời điểm lí tưởng để tới với Vũng Rô là mùa hè, mùa của hải sản. Du khách có thể tự mình lên những bè cá để buông cần, hoặc có thể đứng từ Đèo Cả nhìn xuống vịnh, chiêm ngưỡng cảnh tượng những thuyền cá đậu san sát nhau tại bến. Đến với Vũng Rô ngoài những bãi biển chạy dài tăm tắp cũng những bãi cát trắng phau, du khách còn có cơ hội được tới thăm quan bãi tàu không số, những minh chứng còn sót lại của năm tháng chiến tranh hào hùng của dân tộc.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuyen/py14.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Những bãi tàu san sát ở Vịnh Vũng Rô (Ảnh: sưu tầm)</p>
+                                        </div>
+                                    </li>  
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Tháp Nhạn</p>
+                                        <p>Tháp Nhạn là một biểu tượng tiêu biểu của thành phố Tuy Hòa. Đứng từ phía núi Nhạn nhìn ra xa, khách du lịch có thể thấy ngọn tháp Chăm cổ kính sừng sững hiện lên trước mắt. Núi Nhạn là một trong những ngọn núi cao nhất của thành phố Tuy Hòa, là nơi linh thiêng, đất lành chim đậu, cứ mỗi đội xuân về, chim chóc đều tụ lại nơi đây, cất tiếng hót vang ở một vùng trời.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuyen/py15.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Tháp Nhạn là một công trình văn hóa đặc trưng du lịch ở Phú Yên (Ảnh: sưu tầm)</p>
+                                        </div>
+                                        <p>Tháp Nhạn được đặt trong khuôn viên đất ở gần chân núi. Các tầng tháp đều có phong cách, màu sắc giống nhau, càng lên cao càng thu nhỏ lại. Tháp Nhạn hướng về phía Đông, là hướng của mặt trời, hướng về thần linh, chứa đựng ý nghĩa về một sự sống sinh sôi, nảy nở.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuyen/py16.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Tháp Nhạn đẹp huyền bí dưới hoàng hôn (Ảnh: sưu tầm)</p>
+                                        </div>
+                                        <p>Tháp Nhạn được coi là một biểu tượng văn hóa nổi bật mà bất cứ khách du lịch nào tới Phú Yên đều phải đặt chân tới. Vào mỗi dịp lễ Tết, nhân dân ở đây đều tới để cầu nguyện cho một cuộc sống an lành, hạnh phúc. Nơi đây cũng tổ chức nhiều chương trình ca múa nhạc truyền thống để phục vị khách du lịch gần xa tới đây thăm quan.</p>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Núi Đá Bia</p>
+                                        <p>Núi Đá Bia là ngọn núi cao nhất thuộc dãy núi Đèo Cả, nổi tiếng với tảng đá bia cao 80m. Từ núi Đá Bia, du khách có thẻ nhìn bao quát quang cảnh Phú Yên hùng vĩ với biển trời rộng lớn, những con tàu như những chấm nhỏ ở phía đằng xa, những bản làng, ruộng đồi ánh lên trong nắng mới. Phía Đông là Vũng Rô phẳng lặng, êm đềm, phía Tây là Đèo Cả uốn lượn, quanh co, nhẹ nhàng, bốn phía bao quanh là những bờ biển trải dài bất tận.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuyen/py17.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Đứng từ núi Đá Bia có thể bắt gọn Phú Yên trong tầm mắt (Ảnh: sưu tầm)</p>
+                                        </div>
+                                    </li>                                        
+                                </ul>
+                                <h3>6. Đi du lịch Phú Yên thì ăn gì?</h3>
+                                <p>Du ngoạn cùng ẩm thực Phú Yên – sức hút không thể chối từ, cùng NAPUN khám phá những món ngon ở Phú Yên nhất định bạn phải thưởng thức khi tới vùng đất này nhé.</p>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bánh hỏi lòng heo – Bò tơ Phú Yên</p>
+                                        <p>Sẽ thật tiện lợi khi chung 1 quán ăn mà có lại có tới 2 món đặc sản. Với thực đơn hơn 40 món chuyên bò thì Tiệm ăn Dì Mai và bánh hỏi lòng heo, huyết chưng gia truyền. Bạn có thể thỏa sức lựa chọn với nhiều cách chế biến đặc sắc và đậm vị tại tiệm ăn Dì Mai.</p>
+                                        <p>Buổi sáng để bắt đầu 1 ngày với chuỗi hành trình khám phá thì bánh hỏi lòng heo cũng sẽ là lựa chọn chất lượng và no bụng. Bánh hỏi mềm, lòng giòn ngon ăn kèm bánh tráng và rau sống chấm với nước mắm nguyên chất bỏ vài lát ớt cay, chốt hạ bằng chén huyết chưng theo công thức gia truyền và chén cháo nóng là bữa sáng đặc trưng của người dân địa phương nơi đây mà thực khách nên ghé thử nhé.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuyen/py18.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Bánh hỏi lòng heo, huyết chưng gia truyền (Ảnh quán Dì Mai)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bánh canh hẹ</p>
+                                        <p>Bánh canh là một món ăn bình dân ở Phú Yên, tuy vậy chủng loại bánh canh ở Phú Yên rất phong phú như: bánh canh bột gạo, bánh canh bột lọc, bánh canh chả cá, bánh canh hẹ,… chỉ cần đi lòng vòng 10 phút cũng có thể đếm được tới 4-5 quán bán bánh canh bên vỉa hè, nhiều nhất là xung quanh bưu điện thành phố Tuy Hòa.</p>
+                                        <p>Mỗi món bánh canh là một loại hương vị khác nhau, không quán nào giống quán nào. Bánh canh có thể được nấu với các vị cá dằm, chả cá là phổ biến, đặc biệt người ta dùng lá hẹ như một loại phụ gia đặc biệt thêm vào bánh canh để tăng thêm mùi vị.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuyen/py19.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Bánh canh hẹ Phú Yên (Ảnh – h.oanhpham)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bánh hỏi lòng heo</p>
+                                        <p>Món ăn này có lẽ đã quá nổi tiếng khi nhắc đến vùng đất xứ Nẫu. Đến nỗi người dân vùng đất này còn bảo rằng “đến đây mà chưa ăn qua món này thì coi như chưa tới”. Bánh hỏi được làm từ bột gạo và có quy trình chế biến đặc biệt công phu, tỉ mỉ. Một dĩa bánh hỏi được rắc mỡ hành lên ăn kèm với một dĩa thịt quay, thịt nướng, lòng heo… tùy thích. Đây là món ăn đặc biệt thường xuất hiện trong những dịp lễ, cúng giỗ, cưới hỏi, lễ cúng ở đình, chùa và là một nét văn hóa ẩm thực của địa phương.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuyen/py20.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Bánh hỏi lòng heo thường được ăn trong bữa sáng (Ảnh – ringlusm)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Mắt cá ngừ đại dương</p>
+                                        <p>Mắt cá thường to bằng nắm tay, ướp gia vị bảo quản cẩn thận. Khi chế biến, một con mắt cá được ướp cùng với thuốc bắc, sả, ớt, tiêu… sau đó đặt vào một cái thố (om đất) rồi chưng cánh thủy. Đợi nung lửa độ hơn nửa giờ, mắt cá đã chín, thấm gia vị, người dùng có thể ăn kèm rau tía tô xắt ghém. Khi ăn món này ta sẽ cảm nhận được vị béo ngầy ngậy của mắt cá, vị thơm của thuốc bắc, vị cay nồng mằn mặn của gia vị. Có thể nói đây là món ăn có mùi vị độc đáo, độc nhất vô nhị chỉ có ở đất Tuy Hòa.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuyen/py21.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Mắt cá ngừ, món ăn không phải ai cũng dám thử (Ảnh – trangpinkyy)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Chả dông</p>
+                                        <p>Con dông có hình dáng như kỳ nhông nhưng lớn chỉ độ bằng ngón chân cái, sống nhiều ở vùng đất cát dọc bờ biển Phú Yên và các tỉnh miền Trung. Thịt dông được băm nhuyễn trộn với xã và ớt dùng làm nguyên liệu. Trộn đều thịt dông với một ít nấm mèo và bún khô. Dùng bánh tráng mỏng cuốn lại phần thịt đã chuẩn bị thành những cuốn đều bằng ngón tay cái người lớn và đem chiên chín vàng.</p>
+                                        <p>Dùng chả dông được ăn với rau sống nước mắm tỏi ớt trộn đâu phụng đăm nhuyễn rất ngon. Món chả dông làm nên dánh tiếng của các cửa hàng ăn trên đường Nguyễn Công Trứ khu Đại Nam cũ ở Thành phố Tuy Hòa. Ở đây thực khách có thể gọi một phần chả dông có thêm nem nướng được phục vụ cùng rau sống và bánh tránh để cuốn ăn kèm.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuyen/py22.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Chả dông (Ảnh – canhbuomxinhdep)</p>
+                                        </div>
+                                    </li> 
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Gỏi rong biển</p>
+                                        <p>Rong biển sinh trưởng và phát triển ở các rạng, gành đá. Từ lâu, người dân ven biển đã biết đến và sử dụng rong biển tự nhiên làm món ăn bổ dưỡng cho sức khỏe. Vùng biển gành Đá Đĩa là một môi trường tuyệt vời cho rong biển phát triển. Vì thế thời gian gần đây khi hàng quán mọc lên, các đầu bếp, chủ nhà hàng đã tận dụng ngay nguồn nguyên liệu tươi ngon từ thiên nhiên này để làm thành món gỏi rong biển phục vụ du khách.</p>
+                                        <p>Rong biển tươi vớt lên từ các rạng đá được ngâm lại nước ngọt và rửa sạch, bỏ gốc, xắt gọn cho vừa đũa gắp. Rong biển được bày ở đĩa riêng hoặc bày chung ở giữa trong một đĩa lớn, xung quanh là rau thơm các loại xắt ghém, dừa nạo, xoài băm, một lát chanh tươi, điểm thêm ít đậu phộng rang giòn; một chén mắm chua ngọt hoặc mắm nguyên chất dằm ớt xiêm xanh (những người ăn chay có thể dùng xì dầu), bánh tráng mè nướng. Chỉ vậy là đã xong món gỏi rong biển. Người ăn chỉ việc bẻ nhỏ bánh tráng mè nướng, cho rong biển cùng các loại kết hợp vào chén, chan một tí nước mắm là có thể thưởng thức. Hương vị biển đặc trưng của rong, mùi thơm hòa quyện của rau, vị béo của dừa, chua chua của xoài băm, gìn thơm của đậu phộng, bánh tráng nướng, nước mắm ngon… quyện vào nhau tạo nên một hương vị đậm đà khó quên.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuyen/py23.webp' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Gỏi rong biển ở Phú Yên (Ảnh – shinshin.irene)</p>
+                                        </div>
+                                        <p>Rong biển sinh trưởng và phát triển ở các rạng, gành đá. Từ lâu, người dân ven biển đã biết đến và sử dụng rong biển tự nhiên làm món ăn bổ dưỡng cho sức khỏe. Vùng biển gành Đá Đĩa là một môi trường tuyệt vời cho rong biển phát triển. Vì thế thời gian gần đây khi hàng quán mọc lên, các đầu bếp, chủ nhà hàng đã tận dụng ngay nguồn nguyên liệu tươi ngon từ thiên nhiên này để làm thành món gỏi rong biển phục vụ du khách.</p>
+                                        <p>Rong biển tươi vớt lên từ các rạng đá được ngâm lại nước ngọt và rửa sạch, bỏ gốc, xắt gọn cho vừa đũa gắp. Rong biển được bày ở đĩa riêng hoặc bày chung ở giữa trong một đĩa lớn, xung quanh là rau thơm các loại xắt ghém, dừa nạo, xoài băm, một lát chanh tươi, điểm thêm ít đậu phộng rang giòn; một chén mắm chua ngọt hoặc mắm nguyên chất dằm ớt xiêm xanh (những người ăn chay có thể dùng xì dầu), bánh tráng mè nướng. Chỉ vậy là đã xong món gỏi rong biển. Người ăn chỉ việc bẻ nhỏ bánh tráng mè nướng, cho rong biển cùng các loại kết hợp vào chén, chan một tí nước mắm là có thể thưởng thức. Hương vị biển đặc trưng của rong, mùi thơm hòa quyện của rau, vị béo của dừa, chua chua của xoài băm, gìn thơm của đậu phộng, bánh tráng nướng, nước mắm ngon… quyện vào nhau tạo nên một hương vị đậm đà khó quên.</p>
+                                    </li>   
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Cá mương Ngân Sơn</p>
+                                        <p>Cá mương có thân hình thon dài, độ 10-15cm, có vảy màu trắng bạc, to bằng ngón tay trỏ người lớn, sống ở sông suối. Trong các món chế biến từ loại cá này, “đỉnh” nhất là món nướng. Cá tươi được nướng trực tiếp trên lửa than hồng. Mùi thơm lan tỏa, thịt dai ngon ngọt, chín con nào ta thưởng thức con đó, ăn lai rai lúc nóng phải nói lạ miệng, thơm giòn, ngọt đặc trưng. Ngoài ra, cá mương chiên xù cũng là món dễ làm. Cá mương cuốn với bánh tráng rau sống chấm nước mắm ngon có thể ăn no bụng mà vẫn còn cảm giác thèm.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuyen/py24.webp' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Ở Phú Yên, cá mương có nhiều nhất ở đoạn sông Ngân Sơn (Ảnh – Quỳnh Mai)</p>
+                                        </div>
+                                        <p>Món cá mương trước đây chỉ là món bình dân của những người ở ven sông. Bây giờ nó đã là đặc sản vào các hàng quán, mà nhiều và tươi ngon nhất là cá mương trong các quán ở huyện miền núi Đồng Xuân, khu vực hạ lưu sông Ngân Sơn. Tuy nhiên, với thương hiệu và sự lan tỏa của món ăn dân dã này, hiện nay cá mương cũng xuất hiện trong nhiều quán xá ở TP Tuy Hòa.</p>
+                                    </li>                              
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex mt-4">
+                        {% for obj in qs %}
+                        <form action="." method='POST' class="ui form ml-4">
+                            {% csrf_token %}
+                            <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                            {% if user not in obj.liked.all %}
+                                <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Thích</span>
+                                </button>
+                            {% else %}
+                                <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                </button>
+                            {% endif %}
+                        </form>
+                        <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                        {% endfor %}
+                    </div>
+
+                    <section class="comment-area">
+                        <div class="container">
+                            <div class="comment-content">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="comment-details">
+                                            <div class="section-title">
+                                                <h5>Bình luận</h5>
+                                            </div>
+                                            <form action="." method="POST" style="margin-top: 1.3em;">
+                                                {% csrf_token %}
+                                                {% if not comments.all %} 
+                                                <div class="col-lg-12">
+                                                    <center><h6 class="mb-4">Chưa có bình luận nào hết á :((</h6></center>
+                                                </div>
+                                                {% else %}
+                                                    {% for x in comments %}
+                                                    <div class="comment-item">
+                                                        <div class="user-avt">
+                                                            <img src="{% static 'img/decor/cat.png' %}" alt="">
+                                                        </div>
+                                                        <div class="comment-info">
+                                                            <h6>{{ x.user }} - <span>{{ x.created_on }}</span></h6>
+                                                            <p>{{ x.body }}</p>
+                                                        </div>
+                                                    </div>
+                                                    {% endfor %}
+                                                {% endif %}
+                                                <input type="text" name="user" value="{{request.user}}" maxlength="200" required="" id="id_user" style="display: none">
+                                                <input type="text" name="post_id" maxlength="200" value="CN15" required id="id_post_id" style="display: none">
+                                                <div class="comment-body">
+                                                    <textarea placeholder="Nhập bình luận..." name="body" cols="40" rows="10" required id="id_body" style="width: 100%; outline: none; border: 1px solid #e53637; border-radius: 5px; padding: 10px;"></textarea>
+                                                    <button type="submit" class="btn button btn-lg" name="comment_submit"><i class="fa fa-location-arrow"></i> Bình luận</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                                    
+                <div class="col-lg-4 pt-3 pt-lg-0">
+                    <!-- Popular News Start -->
+                    <div class="pb-3">
+                        <div class="bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0 h3">Nổi bật</h3>
+                        </div>
+                        {% for item in oli %}
+                        <div class="d-flex mb-3 haha">
+                            <a href="{{item.link}}"><img src="/media/{{item.bg}}" style="width: 100px; height: 100px; object-fit: cover;"></a>
+                            <div class="w-100 d-flex flex-column justify-content-center bg-light px-3" style="height: 100px;">
+                                <div class="mb-1" style="font-size: 13px;">
+                                    <span>{{item.date}}</span>
+                                </div>
+                                <a class="h6 m-0" href="{{item.link}}">{{item.camnang_name}}</a>
+                                <div class="mb-2" style="font-size: 14px;">
+                                    <span>
+                                        <i class="far fa-eye"></i>
+                                        <span id="view">{{item.view}}</span> 
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!-- Popular News End -->
+
+                    <!-- Tags Start -->
+                    <div class="pb-3">
+                        <div class="bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0 h3">Từ khóa</h3>
+                        </div>
+                        <div class="d-flex flex-wrap m-n1">
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Cẩm nang</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Du lịch</a>
+                            <a href="{% url 'cn_dalat' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đà Lạt</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Khách Sạn</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đi phượt</a>
+                            <a href="{% url 'cn_vungtau' %}" class="btn1 btn-sm btn-outline-secondary m-1">Vũng Tàu</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Kinh nghiệm du lịch</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đi chơi</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Tham quan</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Chỗ ở</a>
+                            <a href="{% url 'weather' %}" class="btn1 btn-sm btn-outline-secondary m-1">Thời tiết</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Nhà nghỉ</a>
+                            <button onclick="deadlines()" class="btn1 btn-sm btn-outline-secondary m-1" style="cursor: pointer; outline: none">Deadline</button>
+                            <script>function deadlines() {alert("NAPUN có sẵn khăn giấy đây. KHÓC ĐIIII :))");}</script>
+                        </div>
+                    </div>
+                    <!-- Tags End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid py-3">
+        <div class="container">
+            <img width="50px" height="50px" src="https://cdn-icons-png.flaticon.com/512/1645/1645943.png" atl="">
+            <div class="d-flex align-items-center bg-light justify-content-between py-2 px-4 mb-3">
+                <p class="h3 m-0 orange" style="font-style: italic; text-align: justify;">Với những kinh nghiệm du lịch Phú Yên tự túc được chia sẻ trong bài viết, hi vọng du khách sẽ có thêm các thông tin tham khảo bổ ích cho chuyến du lịch của mình. Hãy ghé qua những địa điểm nổi tiếng, quán ăn, nhà hàng ngon để thưởng thức trọn vẹn nét đẹp của Phú Yên. Và đừng quên <a href="{% url 'hotel' %}">đặt khách sạn tại NAPUN</a> để có một trải nghiệm thực tế nhé ! <i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

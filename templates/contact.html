@@ -1,0 +1,177 @@
+{% extends 'base1.html' %}
+{% load static %}
+{% block title %}Liên hệ{% endblock %}
+{% block css %}
+    <style>
+        #id_name {
+            width: 100%;
+        }
+
+        #id_message {
+            width: 100%;
+        }
+
+        #id_email {
+            width: 100%;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="slider-area w-100 ">
+        <div class="single-slider hero-overly slider-height2 d-flex align-items-center w-100" style="background-image: url({% static 'img/decor/contact.jpg' %}); width: 100%">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="hero__caption">
+                            <div class="hero-text1">
+                            </div>
+                            <div class="stock-text" data-animation="fadeInUp" data-delay=".8s">
+                                <h2>Liên hệ</h2>
+                                <h2>Liên hệ</h2>
+                            </div>
+                            <div class="hero-text2 mt-110" data-animation="fadeInUp" data-delay=".9s">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    <div class="container section" id="section-team">
+        <div class="row justify-content-center text-center mb-5">
+            <div class="ab-us mb-5 d-flex">
+            <img src="{% static 'img/decor/left-wing.png' %}" width="90px" height="90px" alt="">
+            <h2 class="heading" data-aos="fade-up" style="font-weight: bold; font-size: 60px; color: #ff5f13;">VỀ CHÚNG TÔI</h2>
+            <img src="{% static 'img/decor/right-wing.png' %}" width="90px" height="90px" alt="">
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-md-6 col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="block-2">
+                <div class="flipper">
+                <div class="front" style="background-image: url({% static 'img/contact/tv1.jpg' %})">
+                    <div class="box">
+                    <h2>Bích Phượng</h2>
+                    <p>Thành viên 1</p>
+                    </div>
+                </div>
+                <div class="back">
+                    <!-- back content -->
+                    <blockquote>
+                    <p>&ldquo;Cuộc sống không phải luôn luôn hoàn hảo nhưng nó là kết quả của những gì bạn tạo ra. Vì thế hãy làm nó có giá trị, làm sao cho nó đáng nhớ và đừng bao giờ để ai đó đánh cắp hạnh phúc của bạn.&rdquo;</p>
+                    </blockquote>
+                    <div class="author d-flex">
+                    <div class="image mr-3 align-self-center">
+                        <img src="{% static 'img/contact/tv1.jpg' %}" alt="">
+                    </div>
+                    <div class="name align-self-center">Bích Phượng<span class="position">Thành viên 1</span></div>
+                    </div>
+                </div>
+                </div>
+            </div> <!-- .flip-container -->
+            </div>
+    
+            <div class="col-md-6 col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="block-2">
+                <!-- .hover -->
+                <div class="flipper">
+                <div class="front" style="background-image: url({% static 'img/contact/tv2.jpg' %})">
+                    <div class="box">
+                    <h2>Thanh Nhàn</h2>
+                    <p>Thành viên 2</p>
+                    </div>
+                </div>
+                <div class="back">
+                    <!-- back content -->
+                    <blockquote>
+                    <p>&ldquo;Lo lắng chỉ làm lãng phí thời gian, nó không làm thay đổi gì cả, ngoài việc lấy đi niềm vui và làm cho bạn lúc nào cũng bận rộn mà chẳng hoàn tất được gì cả.&rdquo;</p>
+                    </blockquote>
+                    <div class="author d-flex">
+                    <div class="image mr-3 align-self-center">
+                        <img src="{% static 'img/contact/tv2.jpg' %}" alt="">
+                    </div>
+                    <div class="name align-self-center">Thanh Nhàn<span class="position">Thành viên 2</span>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div> <!-- .flip-container -->
+            </div>
+        </div>
+        </div>
+    </div>
+       
+    <section class="contact-section">
+        <div class="container">                    
+            <div class="row">
+                <br><br>
+                <div class="col-12">
+                    <h2 class="contact-title">Liên hệ với chúng tôi</h2>
+                </div>
+                <div class="col-lg-8">
+                    <form method="POST" class="form-contact contact_form"  id="contactForm" novalidate="novalidate">
+                        {% csrf_token %} 
+
+                        {% for hidden in form.hidden_fields %}
+                        {{hidden}}
+                        {% endfor %}
+
+                        {% for field in form.visible_fields %}
+                        <div class="form-group">
+                            {{ field.errors }}
+
+
+                            <label>{{ field.label_tag }}</label>
+                            <p>{{ field }}</p>
+                            {% comment %} <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input class="form-control valid" name="message-name" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nhập tên'" placeholder="Nhập tên">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input class="form-control valid" name="message-email" id="email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nhập email'" placeholder="Nhập email">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <textarea class="form-control w-100" name="message" id="message" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nhập tin nhắn'" placeholder=" Nhập tin nhắn"></textarea>
+                                    </div>
+                                </div>
+                            </div> {% endcomment %}
+                        </div>
+                        {% endfor %}
+                        <div class="form-group mt-3">
+                            <button type="submit" class="button button-contactForm boxed-btn">Gửi</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-3 offset-lg-1">
+                    <div class="media contact-info">
+                        <span class="contact-info__icon"><i class="fas fa-home"></i></span>
+                        <div class="media-body">
+                            <h3>1111 Kha Vạn Cân, Linh Trung, Thủ Đức, TP.HCM</h3>
+                        </div>
+                    </div>
+                    <div class="media contact-info">
+                        <span class="contact-info__icon"><i class="fas fa-phone"></i></span>
+                        <div class="media-body">
+                            <h3>+(84) 1234-567-8901</h3>
+                        </div>
+                    </div>
+                    <div class="media contact-info">
+                        <span class="contact-info__icon"><i class="fas fa-envelope"></i></span>
+                        <div class="media-body">
+                            <h3>napun28@gmail.com</h3>
+                            <p>Gửi mail bất cứ lúc nào!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>            
+    </section>
+{% endblock %}
+       

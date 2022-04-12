@@ -1,0 +1,386 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Top những địa điểm đáng đến ở Miền Nam.{% endblock %}
+{% block content %}
+    <div class="container-fluid py-3">
+        <div class="container">
+            <div>
+                <div class="col-12">
+                    <p id="tieude" class="h3" style="color: #343a40;">Top những địa điểm du lịch miền Nam đẹp nhất không thể bỏ lỡ</p>
+                    <div class="d-flex">
+                        <img src="{% static 'img/decor/cat.png' %}" alt='' width="50px" height="50px">
+                        <p style="color: #555; font-weight: bold">Lượt xem: {{vi.view}} </p>
+                        <div class="d-flex">
+                            {% for obj in qs %}
+                            <form action="." method='POST' class="ui form ml-4">
+                                {% csrf_token %}
+                                <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                                {% if user not in obj.liked.all %}
+                                    <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                        <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                        <span style="color: #fff; font-weight: 600">Thích</span>
+                                    </button>
+                                {% else %}
+                                    <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                        <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                        <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                    </button>
+                                {% endif %}
+                            </form>
+                            <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="background-image: url({% static 'img/decor/bg.jpg' %})">
+                <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 5px;">
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 30px;">
+                </div>
+                <div class="col-12">
+                    <p id="tieude"><b>MIỀN NAM</b></p>
+                </div>
+                <div class="col-12" style="color: black; ">
+                    <p class="m-0">Không hùng vĩ cảnh núi non trập trùng như miền Bắc, cũng chẳng hoa lệ, mĩ miều như vẻ đẹp nắng gió của miền Trung. Miền Nam gây thương nhớ cho bao du khách bởi sự dịu dàng, yên bình và mộc mạc. Du lịch miền Nam nổi bật với những cánh đồng ruộng bao la cò bay thẳng cánh, những con sông xanh mướt hiền hòa, những vườn trái cây sum sê trĩu quả… Về miền Đông Nam Bộ với những di tích lịch sử hào hùng và nền văn hóa độc đáo. Còn miền Tây sông nước là những phiên chợ nổi nhộn nhịp sớm mai, những con lạch, con mương cùng câu hò ngọt ngào của cô gái miền Tây xinh đẹp… Tất cả cảnh đẹp miền Nam và con người nơi đây để lại trong lòng du khách những ấn tượng không thể nào quên.</p>
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 5px; margin-top: 15px;">
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 20px;">
+                </div>
+            </div>
+            <div class="mb-3 pb-3">
+                <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn1.jpg' %}" alt="">
+                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Top những địa điểm đáng đến khi đi du lịch ở miền Nam (Ảnh: ST)</p>
+            </div>
+            <div class="mb-3 pb-3">
+                <a href="{% url 'hotel' %}"><img class="img-fluid w-100" src="{% static 'img/decor/dulich.jpg' %}" alt=""></a>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="col-12">
+                        <div class="single-services section-padding2">
+                            <div class="details-caption" style="color: #343a40">
+                                <h3>1. Thành phố Hồ Chí Minh</h3>
+                                <p>Thành phố Hồ Chí Minh là trung tâm kinh tế- văn hóa lớn nhất Việt Nam với nhiều đô thị sầm uất và những công trình cao đồ sộ.  Và mới đây nhất là tòa nhà Landmark 81 xác lập kỷ lục là tòa nhà cao nhất Việt Nam và cao nhất Đông Nam Á. Thành phố Hồ Chí Minh lộng lẫy, xa hoa trong ánh đèn của đô thị là thế, nhưng vẫn còn lưu giữ lại những nét kiến trúc duyên dáng từ thời Pháp thuộc. Nhắc đến cảnh đẹp Việt Nam, chắc chắn ai cũng muốn đến đây một lần để tham quan hết thành phố từng được mệnh danh ” Hòn ngọc viễn đông”.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn2.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Chuỗi quán cafe trên đường Nguyễn Huệ, Quận 1, TP.HCM. Ảnh: @mr.ocsen</p>
+                                </div>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn3.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Tòa nhà Landmark 81 cao nhất Việt Nam. Ảnh: Đông Giang</p>
+                                </div>
+                                <p>Những địa danh nổi tiếng ở TP. HCM được du khách ưa chuộng như: Dinh Độc Lập, nhà thờ Đức Bà, Landmark 81, khu du lịch Bình Quơí ,các trung tâm thương mại lớn… Xa hơn nữa là địa đạo Củ Chi- Căn cứ kháng chiến của Việt Nam nằm sâu trong lòng đất. Đây là địa điểm thu hút ở TP. HCM được khách nước ngoài quan tâm và yêu mến.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn4.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Địa đạo Củ Chi là địa điểm tham quan nổi tiếng thu hút nhiều du khách nước ngoài. Ảnh: @iv_onn</p>
+                                </div> 
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn5.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Khu du lịch Bình Quới. Ảnh: @suehoang8</p>
+                                </div> 
+
+                                <h3>2. Tây Ninh</h3>
+                                <p>Tây Ninh là một tỉnh thuộc vùng Đông Nam Bộ Việt Nam. Vùng đất xinh đẹp này là cầu nối giữa Thành phố Hồ Chí Minh và thủ đô Phnôm Pênh do đó sở hữu nhiều kiến trúc giao thoa độc đáo của 2 đất nước. Tây Ninh còn khá nhiều kiến trúc tâm linh nổi tiếng mà du khách ai cũng muốn khám phá. Đặc biệt , danh thắng tâm linh Núi Bà Đen là địa điểm nổi tiếng thu hút du khách trong và ngoài nước.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn6.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Kiến trúc độc đáo của Tòa Thánh Tây Ninh. By: Dương Vĩnh Tuyên</p>
+                                </div>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn7.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Góc nhìn Tây Ninh từ Núi Bà Đen. Ảnh: Nguyễn Duy Tùng</p>
+                                </div>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn8.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Núi Bà Đen là địa điểm ”hot” giới trẻ tìm kiếm vào mỗi dịp cuối tuần. Ảnh: Nguyễn Duy Tùng</p>
+                                </div>
+
+                                <h3>3. Vũng Tàu</h3>
+                                <p>Nhắc đến du lịch Vũng Tàu cúng ta sẽ có cảm giác yên bình của biển xanh tươi mát cùng bãi cát trắng chạy dài, là những con đường thoáng mát, rộng rãi rợp bóng cây xanh, là những dãy núi hùng vĩ, xanh rờn cùng những ngôi chùa thanh tịnh…Thành phố Vũng Tàu không chỉ bình dị, chan hòa mà còn vô vàn những danh lam thắng cảnh, những địa điểm du lịch đặc sắc, thu hút. Ở đây được giới trẻ yêu thích với vẻ đẹp thiên nhiên cùng nhiều điểm du lịch thú vị: Bạch Dinh, Tượng chúa Kito, ngọn Hải Đăng, các bãi tắm, resort ven biển có view tuyệt đẹp…</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn9.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Trên đỉnh tượng chúa Ki tô. Ảnh: Tracy</p>
+                                </div>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn10.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hòn Bà nhìn từ xa. Ảnh: Huỳnh Ngọc Nhật Hạ</p>
+                                </div>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn11.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Dọc theo con đường Núi Lớn. Ảnh: @Lephuong1335.</p>
+                                </div>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn12.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Vẻ đẹp xanh trong trên Côn Đảo, Vũng Tàu . Ảnh: Butbi45</p>
+                                </div>
+                                <p><em>Tham khảo: <a href="{% url 'cn_vungtau' %}">Cẩm nang du lịch Vũng Tàu</a> để biết thêm chi tiết</em></p>
+
+                                <h3>4. Long An</h3>
+                                <p>Long An là cửa ngõ nối liền hai vùng Đông Nam Bộ và Đồng bằng sông Cửu Long nên Long An có nhiều điểm du lịch hấp dẫn thu hút du khách. Cũng giống những tỉnh miền sông nước, Long An dịu dàng với những đồng sen bát ngát, rừng tràm xanh mướt với những con đường xuyên rừng bí hiểm… Chắc chắn đây là điểm nghỉ dưỡng lý thú cho những ai muốn khám khá cuộc sống miền sông nước hữu tình.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn13.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Con đường xuyên rừng Làng nổi Tân Lập. Ảnh: Hoang Than</p>
+                                </div>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn14.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Vẻ bí ẩn, huyền diệu trong rừng tràm. Ảnh: @applekwonn</p>
+                                </div>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn15.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Long An mùa nước nổi. Ảnh: Huong Son Pham Le</p>
+                                </div>
+
+                                <h3>5. Đồng Tháp</h3>
+                                <p>Long An là cửa ngõ nối liền hai vùng Đông Nam Bộ và Đồng bằng sông Cửu Long nên Long An có nhiều điểm du lịch hấp dẫn thu hút du khách. Cũng giống những tỉnh miền sông nước, Long An dịu dàng với những đồng sen bát ngát, rừng tràm xanh mướt với những con đường xuyên rừng bí hiểm… Chắc chắn đây là điểm nghỉ dưỡng lý thú cho những ai muốn khám khá cuộc sống miền sông nước hữu tình.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn16.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Đồng Tháp Mười mùa sen nở rộ. Ảnh: @diamondnailswestcovina</p>
+                                </div>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn17.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Vườn trái cây Xẻo Quýt, Đồng Tháp. Ảnh: Sưu tầm</p>
+                                </div>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn18.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Làng hoa Sa Đéc nổi tiếng Đồng Tháp. Ảnh: Trung Pham</p>
+                                </div>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn19.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Loài sen ” khổng lồ” chỉ có ở Chùa Phước Kiểng, Đồng Tháp. Ảnh: @hueandsun</p>
+                                </div>
+
+                                <h3>6. An Giang</h3>
+                                <p>An Giang là một tỉnh Tây Nam Bộ, nơi đầu tiên của vùng đồng bằng sông Cửu Long nhận nguồn nước sông Mê Kông. Đặt chân đến vùng đất An Giang, cảm giác đầu tiên chính là sự bình yên, thoải mái nơi đây. Những ruộng lúa xanh non, tươi mát. Bầu trời cao vút, trong veo. Tiếng chim hót ríu tít trên những ngọn cây cao hòa với tiếng trẻ em vui đùa dưới ruộng lúa. Tất cả tạo nên mọt bức tranh đồng quê tươi đẹp mà ắt hẳn, ai đến đây một lần sẽ nhớ mãi.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn20.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Kiến trúc độc đáo chùa Khơ Me ở An Giang. Ảnh: Hòa Huy Ngô</p>
+                                </div>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn21.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Rừng Tràm Trà Sư mùa nước nổi. Ảnh: Hòa Huy Ngô</p>
+                                </div>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn22.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Mùa cấy lúa ở An Giang. Ảnh: Nguyễn Hoàng Nam</p>
+                                </div>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn23.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Lò đúc bánh xèo độc đáo thu hút khách du lịch. Ảnh: Nguyễn Bình</p>
+                                </div>
+                                <p><em>Tham khảo: <a href="{% url 'cn_angiang' %}">Cẩm nang du lịch An Giang</a> để biết thêm chi tiết</em></p>
+                                
+                                <h3>7. Đảo Phú Quốc</h3>
+                                <p>Đảo Phú Quốc ( còn được gọi tên Đảo Ngọc) là hòn đảo lớn nhất và xinh đẹp nhất của Việt Nam. Đảo thuộc huyện Phú Quốc, tỉnh Kiên Giang. Đảo Phú Quốc là sự kết hợp hoàn hảo giữa những bãi biển đẹp, hoàng hôn lãng mạn, những cánh rừng xanh ngát và bầu không khí thanh bình. Đặc biệt nơi này là thiên đường của những nhà hàng, resort ven biển thuộc hàng cao cấp và sang chảnh nhất Việt Nam. Do đó, Đảo Phú Quốc là điểm đến lý tưởng để nghỉ dưỡng, thu hút đông đảo du khách trên khắp thế giới.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn24.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Đường ra nhà hàng ở Bãi Sao, Phú Quốc. Ảnh: fede_scara</p>
+                                </div>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn25.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Phú Quốc được mệnh danh là thiên đường đảo Ngọc của Việt Nam. Ảnh: alegnapelle</p>
+                                </div>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn26.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Cổng Trời, điểm check-in nổi bậc của huyện đảo Phú Quốc. Ảnh: ngocangela</p>                                    
+                                </div>
+                                <p><em>Tham khảo: <a href="{% url 'cn_phuquoc' %}">Cẩm nang du lịch Phú Quốc</a> để biết thêm chi tiết</em></p>
+                                
+                                <h3>7. Cà Mau</h3>
+                                <p>Mũi Cà Mau thuộc điểm tận cùng của Việt Nam, là mảnh đất thiêng liêng của người dân nơi đây và là địa danh hấp dẫn khách du lịch trong và ngoài nước. Đến với mảnh đất cuối cùng Việt Nam, bạn sẽ được cảm nhận sự linh thiêng, “cái hồn” của dân tộc qua từng tấc đất. Ở đây còn chất chứa sự thân thương, gần gũi của những con người Cà Mau đến lạ kỳ. Du lịch Cà Mau hứa hẹn mang lại cho du khách nhiều điểm tham quan hấp dẫn: hòn Núi Bạc, đầm Thị Tường, Hòn Khoai, Mũi Cà Mau…</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn27.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Cảnh chài lưới trên đầm Thị Tường. Ảnh: NGUYỄN VĂN HIẾU</p>
+                                </div>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn28.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Trên đồng Năn. Ảnh: Thuần Võ</p>
+                                </div>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn29.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hòn Đá Bạc là địa chỉ nổi tiếng ở Cà Mau. Ảnh: moc nhan</p>                                    
+                                </div>
+
+                                <h3>8. Kiên Giang</h3>
+                                <p>Kiên Giang nằm tận cùng phía tây nam Việt Nam, có đường bờ biển dài cùng biên giới giáp với lãnh thổ Campuchia. Du lịch Kiên Giang được nhiều người biết đến là vùng đất văn hoá và du lịch nổi tiếng ở khu vực Đồng bằng sông Cửu Long. Ngoài đảo Ngọc Phú Quốc, Đến Kiên Giang, du khách có vô vàn lựa chọn những chuyến hành trình hấp dẫn, nổi bật với những điểm đến hấp dẫn như: thắng cảnh Hà Tiên, đảo Nam Du, rừng U Minh Thượng, nhiều chùa chiềng theo kiến trúc Khmer độc đáo…</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn30.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Động Sơn Trà kỳ bí thuộc huyện Kim Lương, Kiên Giang. Ảnh: Tuấn Nguyễn</p>
+                                </div>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn31.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Đảo Nam Du nổi tiếng ở Kiên Giang. Ảnh: Delta Tran</p>
+                                </div>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn32.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Phơi mực tại làng chài trên đảo Nam Du. Ảnh: Thanh Hai Nguyen</p>                                    </p>
+                                </div>
+
+                                <h3>9. Cần Thơ</h3>
+                                <p>Cần Thơ là một tỉnh lớn thuộc đồng bằng sông Cửu Long miền Tây Nam Bộ Việt Nam. Nhắc đến du lịch Cần Thơ, người ta sẽ nghĩ ngay đến sự nhộn nhịp của chợ nổi vào mỗi buổi sáng sớm, những vườn cây ăn quả sum suê và kiến trúc độc đáo của những ngôi nhà cổ, v.v . Tất cả tạo nên vẻ đẹp hài hòa, đặc biệt mà không thể nhầm lẫn với bất cứ đâu. Du lịch Cần Thơ là điểm lý tưởng cho những ai muốn khám phá khu vực miền Tây sông nước.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn33.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Chợ nổi Cái Răng nhộn nhịp vào mỗi buổi sớm mai. Ảnh: Sưu tầm</p>
+                                </div>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn34.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Chở lúa về nhà theo phong cách ” miền tây”. Ảnh: Nghĩa Trần</p>
+                                </div>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn35.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Bến Ninh Kiều về đêm- biểu tượng của thành phố Cần Thơ. Ảnh: Nguyễn Xuân Hãn</p>                                    
+                                </div>
+
+                                <h3>10. Đà Lạt</h3>
+                                <p>Được thiên nhiên ưu ái với khí hậu quanh năm mát mẻ, dễ chịu, thành phố cao nguyên xinh đẹp này luôn là địa điểm du lịch và nghỉ dưỡng lý tưởng cho hàng triệu du khách mỗi năm.</p>
+                                <p>Các địa điểm du lịch nổi tiếng của Đà Lạt đa phần đều tập trung ở khu vực trung tâm thành phố. Đây đều là những địa điểm quen thuộc nhưng vẫn không thôi thu hút với vẻ đẹp riêng.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn36.webp' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hồ Xuân Hương đẹp nhất là vào lúc ráng chiều. @callme.nguyentam</p>
+                                </div>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn37.webp' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Nụ hoa atiso nổi tiếng tại Quảng trường Lâm Viên. @leduy1994</p>
+                                </div>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn38.webp' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Nhà thờ Con Gà mang nét kiến trúc Roman đặc trưng. @hiep__phan</p>                                    
+                                </div>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn39.webp' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Nhà thờ Domaine de Marie nổi bật với tông màu hồng. @jarareab.jb</p>                                    
+                                </div>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmiennam/mn40.webp' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Chợ đêm Đà Lạt nhộn nhịp với đủ quầy hàng ăn uống, thời trang, lưu niệm. @tu.noisy.biography</p>                                    
+                                </div>
+                                <p><em>Tham khảo: <a href="{% url 'cn_dalat' %}">Cẩm nang du lịch Đà Lạt</a> để biết thêm chi tiết</em></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex mt-4">
+                        {% for obj in qs %}
+                        <form action="." method='POST' class="ui form ml-4">
+                            {% csrf_token %}
+                            <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                            {% if user not in obj.liked.all %}
+                                <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Thích</span>
+                                </button>
+                            {% else %}
+                                <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                </button>
+                            {% endif %}
+                        </form>
+                        <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                        {% endfor %}
+                    </div>
+
+                    <section class="comment-area">
+                        <div class="container">
+                            <div class="comment-content">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="comment-details">
+                                            <div class="section-title">
+                                                <h5>Bình luận</h5>
+                                            </div>
+                                            <form action="." method="POST" style="margin-top: 1.3em;">
+                                                {% csrf_token %}
+                                                {% if not comments.all %} 
+                                                <div class="col-lg-12">
+                                                    <center><h6 class="mb-4">Chưa có bình luận nào hết á :((</h6></center>
+                                                </div>
+                                                {% else %}
+                                                    {% for x in comments %}
+                                                    <div class="comment-item">
+                                                        <div class="user-avt">
+                                                            <img src="{% static 'img/decor/cat.png' %}" alt="">
+                                                        </div>
+                                                        <div class="comment-info">
+                                                            <h6>{{ x.user }} - <span>{{ x.created_on }}</span></h6>
+                                                            <p>{{ x.body }}</p>
+                                                        </div>
+                                                    </div>
+                                                    {% endfor %}
+                                                {% endif %}
+                                                <input type="text" name="user" value="{{request.user}}" maxlength="200" required="" id="id_user" style="display: none">
+                                                <input type="text" name="post_id" maxlength="200" value="CN14" required id="id_post_id" style="display: none">
+                                                <div class="comment-body">
+                                                    <textarea placeholder="Nhập bình luận..." name="body" cols="40" rows="10" required id="id_body" style="width: 100%; outline: none; border: 1px solid #e53637; border-radius: 5px; padding: 10px;"></textarea>
+                                                    <button type="submit" class="btn button btn-lg" name="comment_submit"><i class="fa fa-location-arrow"></i> Bình luận</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                                    
+                <div class="col-lg-4 pt-3 pt-lg-0">
+                    <!-- Popular News Start -->
+                    <div class="pb-3">
+                        <div class="bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0 h3">Nổi bật</h3>
+                        </div>
+                        {% for item in oli %}
+                        <div class="d-flex mb-3 haha">
+                            <a href="{{item.link}}"><img src="/media/{{item.bg}}" style="width: 100px; height: 100px; object-fit: cover;"></a>
+                            <div class="w-100 d-flex flex-column justify-content-center bg-light px-3" style="height: 100px;">
+                                <div class="mb-1" style="font-size: 13px;">
+                                    <span>{{item.date}}</span>
+                                </div>
+                                <a class="h6 m-0" href="{{item.link}}">{{item.camnang_name}}</a>
+                                <div class="mb-2" style="font-size: 14px;">
+                                    <span>
+                                        <i class="far fa-eye"></i>
+                                        <span id="view">{{item.view}}</span> 
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!-- Popular News End -->
+
+                    <!-- Tags Start -->
+                    <div class="pb-3">
+                        <div class="bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0 h3">Từ khóa</h3>
+                        </div>
+                        <div class="d-flex flex-wrap m-n1">
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Cẩm nang</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Du lịch</a>
+                            <a href="{% url 'cn_dalat' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đà Lạt</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Khách Sạn</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đi phượt</a>
+                            <a href="{% url 'cn_vungtau' %}" class="btn1 btn-sm btn-outline-secondary m-1">Vũng Tàu</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Kinh nghiệm du lịch</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đi chơi</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Tham quan</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Chỗ ở</a>
+                            <a href="{% url 'weather' %}" class="btn1 btn-sm btn-outline-secondary m-1">Thời tiết</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Nhà nghỉ</a>
+                            <button onclick="deadlines()" class="btn1 btn-sm btn-outline-secondary m-1" style="cursor: pointer; outline: none">Deadline</button>
+                            <script>function deadlines() {alert("NAPUN có sẵn khăn giấy đây. KHÓC ĐIIII :))");}</script>
+                        </div>
+                    </div>
+                    <!-- Tags End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid py-3">
+        <div class="container">
+            <img width="50px" height="50px" src="https://cdn-icons-png.flaticon.com/512/1645/1645943.png" atl="">
+            <div class="d-flex align-items-center bg-light justify-content-between py-2 px-4 mb-3">
+                <p class="h3 m-0 orange" style="font-style: italic; text-align: justify;">Trên đây là Top những địa điểm du lịch miền Nam mà du khách không nên bỏ qua. Hy vọng sẽ đem đến bạn những lựa chọn phù hợp cho kỳ nghỉ của mình. Còn chần chờ gì nữa, hãy xách balo lên và đi thôi nào. Và đừng quên <a href="{% url 'hotel' %}">đặt khách sạn tại NAPUN</a> để có một trải nghiệm thực tế nhé ! <i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

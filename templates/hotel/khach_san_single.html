@@ -1,0 +1,296 @@
+{% extends 'base1.html' %}
+{% load static %}
+{% block title %}Khách sạn{% endblock %}
+{% block css %}
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+  <link rel="stylesheet" href="{% static 'fonts/ionicons/css/ionicons.css' %}">
+  <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+  <link rel="stylesheet" href="{% static 'css/hotel.css' %}">
+  <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+{% endblock %}
+ 
+{% block content %}
+  <div class="slider-area w-100 ">
+    <div class="single-slider hero-overly slider-height2 d-flex align-items-center w-100"
+      style="background-image: url({% static 'img/decor/hotel.jpg' %}); width: 100%">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="hero__caption">
+              <div class="hero-text1">
+              </div>
+              <div class="stock-text" data-animation="fadeInUp" data-delay=".8s">
+                <h2>Đặt khách sạn</h2>
+                <h2>Đặt khách sạn</h2>
+              </div>
+              <div class="hero-text2 mt-110" data-animation="fadeInUp" data-delay=".9s">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section slider-section bg-light">
+    <div class="container">
+      <div class="row justify-content-center text-center mb-5">
+        <div class="col-md-7">
+          {% for i in ht %}
+          <h2 class="heading" data-aos="fade-up" id="hotel-name">{{i.hotel_name}}</h2>
+          <p data-aos="fade-up" data-aos-delay="100" style="text-align: center;"><span class="fa fa-map-marker mr-2"></span>{{i.address}}</p>
+          {% if love %}
+         
+          {% else %}
+          <p style="border: 2px dotted #f15d30; padding: 5px; text-align: center"><a href="{% url 'favorite' i.hotel_id %}">
+            <i class="fas fa-heart text-left" style="font-size: 30px; color: #f15d30; font-weight: bold"></i>
+            THÊM VÀO YÊU THÍCH
+          </a></p>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+      <div class="row">
+        <div class="col-md-12">
+          <div class="home-slider major-caousel owl-carousel mb-5" data-aos="fade-up" data-aos-delay="200">
+            {% for i in img %}
+              <div class="slider-item">
+                <a href="/media/{{i.img}}" data-fancybox="images"><img src="/media/{{i.img}}" alt="Image placeholder" class="img-fluid"></a>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>   
+
+  <section class="section department-single">
+    <div class="container">      
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="department-content mt-5">
+            <h3 class="text-md">Thông tin chi tiết</h3>
+            <div class="divider my-4"></div>
+            {% for i in ht %}
+            <p>{{i.description |linebreaks}}</p>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="col-lg-4 ">
+          <div class="sidebar-widget schedule-widget mt-5">
+            <h5 class="mb-4">Thời gian làm việc</h5>
+  
+            <ul class="list-unstyled">
+              <li class="d-flex justify-content-between align-items-center">
+                <a>Thứ hai - Thứ sáu</a>
+                <span>9:00 - 17:00</span>
+              </li>
+              <li class="d-flex justify-content-between align-items-center">
+                <a>Thứ bảy</a>
+                <span>9:00 - 16:00</span>
+              </li>
+              <li class="d-flex justify-content-between align-items-center">
+                <a>Chủ nhật</a>
+                <span>Không làm việc</span>
+              </li>
+            </ul>
+            <div class="sidebar-contatct-info mt-4">
+              <p class="mb-0">Mọi thắc mắc xin liên hệ</p>
+              {% for i in ht %}
+              <h3>{{i.phone}}</h3>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-6">
+              <h3 class="mt-5 mb-4">Mọi đối tượng</h3>
+              <div class="divider my-4"></div>
+              <ul class="list-unstyled department-service">
+                <li><i class="fas fa-user-check mr-2"></i><span style="font-weight: bold">Đi công tác</span></li>
+                <li><i class="fas fa-user-check mr-2"></i><span style="font-weight: bold">Du lịch cặp đôi</span></li>
+                <li><i class="fas fa-user-check mr-2"></i><span style="font-weight: bold">Du lịch một mình</span></li>
+                <li><i class="fas fa-user-check mr-2"></i><span style="font-weight: bold">Gia đình có trẻ nhỏ</span></li>
+                <li><i class="fas fa-user-check mr-2"></i><span style="font-weight: bold">Gia đình có thanh thiếu niên</span></li>
+                <li><i class="fas fa-user-check mr-2"></i><span style="font-weight: bold">Nhóm</span></li>
+              </ul>
+            </div>
+            <div class="col-lg-6">
+              <h3 class="mt-5 mb-4">Tiện nghi</h3>
+              <div class="divider my-4"></div>
+              <ul class="list-unstyled department-service">
+                {% for i in fn %}
+                <li><i class="fas fa-check mr-2"></i><span style="font-weight: bold">{{i.firnish_name}}</span></li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+
+          <div class="hotel_search" style="background: none; border: 1px solid #e12454">
+            <div class="container">
+              <div class="row align-items-center">
+                <div class="col-lg-3">
+                  <div class="form_area">
+                    {% for h in ht %}
+                    <h3 style="color: #e12454; font-weight: bold">Bạn muốn nghỉ tại {{h.hotel_name}} vào lúc nào ?</h3>
+                    {% endfor %}
+                  </div>
+                </div>
+             
+                <div class="col-lg-9">
+                  <div class="search_wrap">
+                    <form class="search_form" id="booking" method="GET" name='check' action=".">
+                      {% csrf_token %}    
+                      <div class="input_field">
+                        <label for="id_check_in" style="color: #111"><b>Ngày nhận phòng</b></label>
+                        <input type="date" value='{{check_in}}' name="check_in" required id="id_check_in" class="form-control" style="color: #111;">
+                      </div>
+
+                      <div class="input_field">
+                        <label for="id_check_out" style="color: #111"><b>Ngày trả phòng</b></label>
+                        <input type="date" name="check_out" value='{{check_out}}' required id="id_check_out" class="form-control" style="color: #111;">
+                      </div>
+
+                      <div class="search_btn">
+                        <button class="boxed-btn1 mt-4" type="submit">Kiểm tra</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-12">
+              <h3 class="mt-5 mb-4">Danh sách phòng</h3>
+              <div class="divider my-4"></div>
+              <div class="table-responsive">
+                <table class="table table-striped text-align-center">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th><div class="d-flex item-align-center justify-content-center "><span>Loại phòng</span></div></th>
+                      <th><div class="d-flex item-align-center justify-content-center "><span>Hình ảnh</span></div></th>
+                      <th><div class="d-flex item-align-center justify-content-center "><span>Giá</span></div></th>
+                      {% if check_in and check_out %}
+                      <th><div class="d-flex item-align-center justify-content-center "><span>Đặt phòng</span></div></th>
+                      {% endif %}
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {% if check %}
+                          {% for i in check %}
+                            <tr>
+                              <td><div class="ftco-animate d-flex item-align-center justify-content-center" style="padding-top: 30px;"><h5 style="font-weight: bold">{{i.room_name}}</h5><div></td>
+                              <td>
+                                <div class="container-fluid ftco-animate d-flex item-align-center justify-content-center">
+                                  <a href="/media/{{i.imga}}" data-fancybox="{{i.room_name}}" title="{{i.room_name}}"><img src="/media/{{i.imga}}" alt="{{r.room_name}}" height="200px" width="230px"></a>
+                                </div>
+                              </td>
+                              <td><div class="ftco-animate d-flex vertical-align justify-content-center item-align-center" style="margin-top: 80px;"><h5>${{i.price}}</h5><div></td>
+                              {% if check_in and check_out %}
+                                <td>
+                                  <div class="container-fluid ftco-animate d-flex item-align-center justify-content-center">
+                                    <form method='GET' action='https://localhost:8000/hotel/booking/{{i.hotel_id}}/' id='bookingroom'>
+                                      {% csrf_token %}
+                                      <input type="text" name="room_id" maxlength="500" required value='{{i.room_id}}' id="id_room_id" style="display: none">
+                                      <input type="text" value='{{check_in}}' name="check_in" required id="id_check_in" style="display: none">
+                                      <input type="text" name="check_out" value='{{check_out}}' required id="id_check_out" style="display: none">
+                                      <button class="boxed-btn1 mt-5" type="submit">Đặt phòng</button>
+                                    </form>
+                                  </div>
+                                </td>
+                              {% endif %}
+                            </tr>
+                          {% endfor %}
+                      {% else %}
+                        <tr>
+                          <div class="col-lg-12">
+                            <center><h6 class="mb-4">Úi khách sạn hết phòng vào ngày này rùi :((</h6></center>
+                          </div>
+                        </tr>
+                      {% endif %}
+                  </tbody>
+                </table>
+              </form>
+              </div>
+            </div>
+          </div>
+           
+          <div class="row">
+            <div class="devider col-lg-12">
+              <h3 class="mt-5 mb-4">Bản đồ</h3>
+              <div class="divider my-4"></div>
+              {% for i in ht %}
+              <div id="map">
+                <iframe src="{{i.map}}" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="comment-area">
+      <div class="container">
+          <div class="comment-content">
+              <div class="row">
+                  <div class="col-lg-12 col-md-12">
+                      <div class="comment-details">
+                          <div class="section-title">
+                              <h5>Bình luận</h5>
+                          </div>
+                          <form action="." method="POST" style="margin-top: 1.3em;">
+                              {% csrf_token %}
+                              {% if not comments.all %} 
+                              <div class="col-lg-12">
+                                  <center><h6 class="mb-4">Chưa có bình luận nào hết á :((</h6></center>
+                              </div>
+                              {% else %}
+                                  {% for x in comments %}
+                                  <div class="comment-item">
+                                      <div class="user-avt">
+                                          <img src="{% static 'img/decor/cat.png' %}" alt="">
+                                      </div>
+                                      <div class="comment-info">
+                                          <h6>{{ x.user }} - <span>{{ x.created_on }}</span></h6>
+                                          <p>{{ x.body }}</p>
+                                      </div>
+                                  </div>
+                                  {% endfor %}
+                              {% endif %}
+                              <input type="text" name="user" value="{{request.user}}" maxlength="200" required="" id="id_user" style="display: none">
+                              {% for i in ht %}
+                              <input type="text" name="post_id" maxlength="200" value="{{i.hotel_id}}" required id="id_post_id" style="display: none">
+                              {% endfor %}
+                              <div class="comment-body">
+                                  <textarea placeholder="Nhập bình luận..." name="body" cols="40" rows="10" required id="id_body" style="width: 100%; height: 100px; outline: none; border: 1px solid #e53637; border-radius: 5px; padding: 10px;"></textarea>
+                                  <button type="submit" class="btn button btn-lg" name="comment_submit"><i class="fa fa-location-arrow"></i> Bình luận</button>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+{% endblock %} 
+
+{% block js %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <script src="{% static 'js/hotel.js' %}"></script>
+  <script src="{% static 'js/nice-select.js' %}"></script>
+{% endblock %}
+  

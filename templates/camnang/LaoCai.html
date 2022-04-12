@@ -1,0 +1,364 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Cẩm nang du lịch Lào Cai.{% endblock %}
+{% block content %}
+    <div class="container-fluid py-3">
+        <div class="container">
+            <div>
+                <div class="col-12">
+                    <p id="tieude" class="h3" style="color: #343a40;">Tất tần tật kinh nghiệm du lịch Lào Cai cho tín đồ du lịch</p>
+                    <div class="d-flex">
+                        <img src="{% static 'img/decor/cat.png' %}" alt='' width="50px" height="50px">
+                        <p style="color: #555; font-weight: bold">Lượt xem: {{vi.view}} </p>
+                        <div class="d-flex">
+                            {% for obj in qs %}
+                            <form action="." method='POST' class="ui form ml-4">
+                                {% csrf_token %}
+                                <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                                {% if user not in obj.liked.all %}
+                                    <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                        <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                        <span style="color: #fff; font-weight: 600">Thích</span>
+                                    </button>
+                                {% else %}
+                                    <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                        <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                        <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                    </button>
+                                {% endif %}
+                            </form>
+                            <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="background-image: url({% static 'img/decor/bg.jpg' %})">
+                <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 5px;">
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 30px;">
+                </div>
+                <div class="col-12">
+                    <p id="tieude"><b>LÀO CAI</b></p>
+                </div>
+                <div class="col-12" style="color: black; ">
+                    <p class="m-0">Được ví như “mái nhà” chung của 25 dân tộc anh em , Lào Cai trở nên thú vị hơn trong mắt team phượt khi hội tụ những nét văn hóa độc đáo khác nhau. Hơn thế nữa, vào mỗi thời điểm khác nhau trong năm, vùng đất này sẽ khoác lên mình những sắc màu rất riêng mà không nơi nào có được. Sẽ luôn có nhiều hơn một lý do để các bạn thích du hí cân nhắc chọn Lào Cai là điểm đến lý tưởng trong hành trình tiếp theo của mình. Cùng NAPUN theo dõi bài viết về kinh nghiệm du lịch Lào Cai sau đây để thấy rõ hơn những lý do đó nhé!</p>
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 5px; margin-top: 15px;">
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 20px;">
+                </div>
+            </div>
+            <div class="mb-3 pb-3">
+                <img class="img-fluid w-100" src="{% static 'img/laocai/lc1.webp' %}" alt="">
+                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Những điều cần biết khi du lịch Lào Cai (Ảnh: ST)</p>
+            </div>
+            <div class="mb-3 pb-3">
+                <a href="{% url 'hotel' %}"><img class="img-fluid w-100" src="{% static 'img/decor/dulich.jpg' %}" alt=""></a>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="col-12">
+                        <div class="single-services section-padding2">
+                            <div class="details-caption" style="color: #343a40">
+                                <h3>1. Đúng nơi, đúng thời điểm</h3>
+                                <p>Mang trong mình những tính chất khí hậu của vùng nhiệt đới gió mùa, tuy nhiên thời tiết nơi đây lại có phần thay đổi thất thường do chịu ảnh hưởng từ nhiều yếu tố, nhất là địa hình. Kinh nghiệm du lịch Lào Cai từ những người đã mòn chân ở đây sẽ phần nào giúp các bạn xác định được khoảng thời gian phù hợp với mình. </p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/laocai/lc2.webp' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Những dải ruộng bậc thang tạo nên nét đẹp độc đáo tại Lào Cai (Nguồn: Sưu tầm)</p>
+                                </div>
+                                <p>Trời sẽ có nắng nhiều vào khoảng tháng 4 - tháng 8, nếu bạn là người thích vi vu bằng xe máy trên những cung đường thì giai đoạn này chính là thời điểm vàng đó!</p>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Nếu bạn là fan của khung cảnh mùa lúa chín hoặc hoa đào, hoa mận mùa đơm hoa, thì nên lên kế hoạch đến Lào Cai từ tháng 8-3. Tuy nhiên, khoảng từ tháng 1 - tháng 3 hằng năm, vùng này thường hơi lạnh, độ ẩm không khí cao nên đôi khi sẽ hơi ẩm ướt. Nhưng đổi lại bạn sẽ được tận hưởng bầu không khí se lạnh dễ chịu.</p></li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Còn nếu mục đích của bạn đến Lào Cai để săn tuyết, thì tranh thủ đến đây vào độ tháng 12 - tháng 1 nhé! Trong khoảng thời gian này, bạn nhớ trang bị thêm quần áo chống lạnh để bảo vệ sức khỏe nhé!</p></li>
+                                </ul>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/laocai/lc3.webp' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Có một Lào Cai rất đỗi lãng mạn khi màn đêm buông xuống, phố xá lên đèn, khung cảnh mờ ảo trong làn sương (Nguồn: Sưu tầm)</p>
+                                </div>
+                                                                    
+                                <h3>2. Phương tiện di chuyển</h3>
+                                <p>Lào Cai cách trung tâm thành phố Hà Nội khoảng hơn 300km, vì thế có rất nhiều phương tiện di chuyển cho bạn lựa chọn. Trước đây thì du lịch Lào Cai chủ yếu là bằng tàu hỏa, nhưng giao thông cải tiến, có đường cao tốc Hà Nội - Lào Cai, vì thế mà nhiều người lựa chọn xe máy và ô tô khách di chuyển thay tàu hỏa như trước đây.</p>
+                                <p>Nếu bạn xuất phát từ Tp. Hồ Chí Minh, có thể đi máy bay đến Hà Nội, rồi từ Hà Nội xuất phát đi Lào Cai theo những hướng dẫn phía trên nhé!</p>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Du lịch Lào Cai bằng tàu hỏa: Đây là phương tiện phổ biến nhất, bởi giá rẻ và an toàn. Để sử dụng phương tiện này, bạn có thể mua vé tại ga Hà Nội và đi tới Lào Cai với giá vé khoảng 150k - 300k/ghế và giường nằm khoảng 450k - 600k/vé. Thời gian di chuyển mất khoảng 8 giờ đồng hồ.</p></li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Đi Lào Cai bằng ô tô khách: Tại bến xe khách Mỹ Đình hay Lương Yên, Gia Lâm có rất nhiều nhà xe có tuyến Hà Nội - Lào Cai với giá vé khoảng 250k - 300k/người/chiều.</p></li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Phượt Lào Cai bằng xe máy: Nếu bạn là một phượt thủ, có sức khỏe tốt thì mới nên lựa chọn xe máy, bởi quãng đường đi khá xa. Theo kinh nghiệm đi phượt Lào Cai từ Hà Nội bằng xe máy của mình, bạn có thể chạy theo một trong 2 cũng đường sau:</p>
+                                        <p style="padding-left: 10px;">- Lộ trình 1: Hà Nội – Vĩnh Phúc – Việt Trì – Phong Châu – Đoan Hùng – Yên Bái – Lào Cai.</p>
+                                        <p style="padding-left: 10px;">- Lộ trình 2: Hà Nội – Hòa Lạc – Sơn Tây – Cầu Trung Hà – Cầu Phong Châu – Phong Châu – Đoan Hùng – dọc đường 70 – Lào Cai</p>
+                                    </li>
+                                </ul>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/laocai/lc4.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Phương tiện du lịch Lào Cai(Ảnh: Sưu tầm)</p>
+                                </div>
+                                
+                                <h3>3. Gạch đầu dòng những địa điểm phải đến khi đi Lào Cai</h3>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Sapa - Khám phá châu Âu tại Việt Nam</p>
+                                        <p>Nhắc đến Lào Cai, chẳng ai lại không nghĩ ngay đến viễn cảnh được chạm tay vào những làn mây bồng bềnh. Chắc hẳn không có tín đồ du lịch nào lại chưa từng mê mẩn những cung đường ngập sương và cái không khí se se lạnh của buổi sớm Sapa.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/laocai/lc5.webp' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Thị trấn Sapa được thiên nhiên ưu ái ban tặng khung cảnh và khí hậu như nơi trời </p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Đón mùa vàng trên Sàng Ma Sáo</p>
+                                        <p>Là một xã vùng cao thuộc huyện Bát Xát tỉnh Lào Cai, Sàng Ma Sáo là mảnh ghép đẹp tuyệt vời giữa Tây Bắc hùng vĩ, nên thơ. Cứ tháng 9 hàng năm, Sàng Ma Sáo lại khoác lên mình tấm áo vàng rực rỡ, quyến rũ với những đường cong uốn lượn nơi ruộng bậc thang tựa những nấc thang lên thiên đường. </p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/laocai/lc6.webp' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Một trong những khung cảnh đặc trưng tại Sàng Ma Sáo</p>
+                                        </div>
+                                        <p>Nếu đã chọn Sàng Ma Sáo làm nơi dừng chân, bạn đừng quên ghé thăm những bản làng nằm xa dưới chân núi. Nằm lọt thỏm giữa địa hình hiểm trở, chia cắt mạnh và xung quanh toàn vực sâu, những bản làng này hiện lên như những nét chấm phá tuyệt mĩ. </p>
+                                        <p>Tuy nghe có vẻ đáng sợ là thế, kinh nghiệm du lịch Lào Cai được chia sẻ từ những người đi trước lại cho rằng, cảm giác đứng nhìn xuống những vực sâu hun hút là một trải nghiệm rất đáng thử. Nếu bạn thuộc team phượt thì đây là một trong những cung đường đáng chinh phục một lần trong đời đấy.</p>
+                                        <p>Nhìu Cồ San cũng là một nơi nên nằm trên lịch trình du lịch Lào Cai của bạn. Vào mùa nước đổ, trên ngọn núi Nhìu Cồ San nhìn như tấm gương khổng lồ. Đây cũng chính là nơi được ví von như giao điểm của mặt đất và mây trời, với độ cao 2.300 m so với mực nước biển.</p>
+                                        <p>Các bạn muốn ghé thăm Sàng Ma Sáo có thể bắt xe lên Sapa và đi thêm một đoạn chừng 70km nữa. Bạn nên sắp xếp lịch trình phù hợp để chuyến đi diễn ra thuận lợi, tiết kiệm thời gian, khoảng cách di chuyển giữa các điểm hợp lý.</p>
+                                    </li>  
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bản Lao Chải - Tả Van</p>
+                                        <p>Tọa lạc ở vị trí cách trung tâm thị trấn Sapa tầm 7km-11km, bản Lao Chải - Tả Van là nơi cư trú của nhiều đồng bào dân tộc như Mông, Dao Đỏ, Giáy,...</p>
+                                        <p>Từ lâu, những bản làng Tây Bắc đã mang trong mình một nét quyến rũ rất khác so với khu thành thị. Và cũng chính vì điều đó, chúng càng hấp dẫn hơn trong mắt các tín đồ mê du lịch. Trong những âm sắc trầm bổng của thiên nhiên, Lao Chải - Tả Van sẽ cho bạn phóng xa tầm mắt xuống những thửa ruộng bậc thang chín vàng óng ả, mà xa xa đó là những mái nhà tranh mờ ảo khói chiều.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/laocai/lc7.webp' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Bản Tả Van mang vẻ đẹp bình yên, trong trẻo khi đến mùa lúa chín</p>
+                                            <p>Nếu muốn được trải nghiệm cuộc sống của đồng bào nơi đây, hay nhìn tận mắt được những vẻ đẹp nguyên sơ của núi rừng, thì bạn hãy dành ra một đêm để ngủ lại trong những ngôi nhà bằng tranh của người trong bản.</p>
+                                        </div>
+                                    </li>  
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Núi Hàm Rồng</p>
+                                        <p>Núi Hàm Rồng là một ngọn núi nằm trong dãy Hoàng Liên Sơn hùng vĩ với ý nghĩa “Hàm của rồng”. Hàm Rồng là một trong số ít các núi ở Việt Nam có yếu tố tượng hình rõ nét và đẹp.</p>
+                                        <p>Nằm sát thị trấn Sa Pa, cao gần 2000m, quanh núi Hàm Rồng có nhiều kiểu núi khác nhau; rừng kín thường xanh, với các loại cây lá rộng xanh quanh năm và các loại dây leo, bụi rậm chằng chịt, rừng hỗn hợp cây lá rộng, lá kim…</p>
+                                        <p>Vùng núi cao với đặc điểm là rừng thưa, ít rậm rạp, thỉnh thoảng có cây lá rộng xen kẽ. Cao hơn rừng kín thường xanh ẩm á nhiệt đới với đặc điểm rừng thưa, ít tầng hệ thực vật lá kim phát triển. Với độ cao của đỉnh núi thì hầu như không còn cây cối nhiều, chỉ có lác đác trúc núi (trúc lùn) và gió bụi thổi.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/laocai/lc8.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Vườn hoa trên núi Hàm Rồng (Ảnh – cungphuot.info)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Cầu Mây</p>
+                                        <p>Cầu Mây cách thị trấn Sa Pa khoảng 7 km về phía Đông Nam, từ đường lớn, du khách đi theo con đường mới mở tuy hơi dốc và cua nhiều, nhưng đường đến Tả Van giờ đã được mở rộng rất thuận tiện.</p>
+                                        <p>Trước kia, đây là cây cầu duy nhất để các cư dân địa phương đi từ Xã Tả Van đến trung tâm thị trấn Sa Pa, do quá trình phong hoá nên cây cầu càng ngày càng xuống cấp. Đồng thời do sự phát triển của du lịch Sa Pa, lượng khách hiếu kỳ về một cây cầu đẹp ngày càng tăng nên người ta đã làm thêm một cây cầu mới bằng gỗ vững chãi nằm bên cạnh dành cho người dân địa phương đi lại còn cây cầu cũ thì được tu sửa lại và chỉ dành cho những du khách hiếu kỳ đến thăm quan.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/laocai/lc9.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Cầu Mây cũ ở Sa Pa, nơi đây giờ chỉ được sử dụng cho mục đích du lịch</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Nóc nhà Đông Dương Fanxipan</p>
+                                        <p>Với độ cao 3143m Fansipan là ngọn núi cao nhất Việt Nam đồng thời cũng là ngọn núi cao nhất 3 nước Đông Dương thuộc dãy núi Hoàng Liên Sơn, cách Sa Pa 9km về phía Tây Nam. Theo tiếng địa phương, tên của ngọn núi là Hủa Xi Pan có nghĩa là Phiến đá khổng lồ chênh vênh.</p>
+                                        <p>Đỉnh Fansipan hiện là điểm hẹn của nhiều nhà leo núi. Việc chinh phục đỉnh núi này có thể được thực hiện qua các tour của các công ty du lịch lữ hành chuyên nghiệp hoặc tự túc với sự dẫn đường của người bản xứ. Lộ trình leo núi có thể bắt đầu từ Sa Pa đến đỉnh đèo Trạm Tôn hoặc ít phổ biến hơn là khu du lịch Cát Cát bằng ô tô hoặc xe ôm. Tại đây có số người dân tộc Mông, Dao làm nghề cửu vạn phục vụ khách leo núi đông nhất.</p>
+                                        <p>Trước kia từ Sa Pa lên đỉnh Fansipan và quay trở về mất khoảng chừng 5–6 ngày. Hiện nay thời gian tổng cộng của chuyến leo núi chỉ còn 3 ngày, thậm chí 2 ngày hoặc với những người thành thạo và sức khỏe tốt thì có thể thực hiện trong một ngày.</p>
+                                        <p>Mỗi đoàn leo núi có ít nhất hai hướng dẫn viên hoặc người dẫn đường. Ngày thứ hai khi du khách lên đỉnh Fansipan, một trong hai người sẽ ở lại trại nấu ăn. Ở gần đỉnh núi, du khách có thể hái măng về cho bữa ăn. Viếc nấu nướng cũng rất khó khăn, du khách phải đi kiếm củi, làm bếp. Ban đêm thường mưa và nhiệt độ hạ xuống rất thấp.</p>
+                                        <p>Thời điểm leo núi thích hợp là từ tháng 9 năm truớc đến tháng 3 năm sau. Tuy nhiên đường lên Fansipan đẹp nhất là khoảng cuối tháng 2, khi các loài hoa núi bắt đầu nở.</p>
+                                        <p>Với những người không có sức khỏe và thời giam, thời gian lên đến đỉnh Fansipang hiện nay chỉ còn khoảng 30 phút nhờ phương tiện cáp treo. Cáp treo sẽ đưa bạn lên tới ga cách đỉnh khoảng 600m, việc của bạn chỉ là leo nốt lên những bậc thang cuối cùng.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/laocai/lc10.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Fanxipan - Đỉnh núi cao nhất Việt Nam</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Chợ phiên Bắc Hà</p>
+                                        <p>Chợ Bắc Hà họp vào chủ nhật hàng tuần từ sáng đến 2h. Đây là phiên chợ lý tưởng để khám phá vẻ nguyên sơ, mang đậm bản sắc các dân tộc Tây Bắc.</p>
+                                        <p>Nằm trên vùng núi cao và cách thành phố Lào Cai khoảng 76 km, du khách đến Bắc Hà sẽ phải đi qua những con đèo gấp khúc uốn lượn, càng lên cao càng dốc đứng rợn gáy - đặc trưng địa hình Tây Bắc. Dọc đường đi, cứ cách vài km lại thấy lác đác người dân tộc Mông, Dao trong trang phục sặc sỡ địu gùi sau lưng, đi bộ, dắt trâu ngựa lên núi để bán. Đôi lúc, vài chiếc xe máy chở người, thồ hàng vụt qua cho kịp giờ lên phiên.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/laocai/lc11.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Chợ phiên Bắc Hà (Nguồn: Sưu tầm)</p>
+                                        </div>
+                                        <p>Được nhiều người biết đến là chợ vùng cao lớn nhất Lào Cai, tụ tập nhiều thương lái ở các dân tộc xa gần về trao đổi, buôn bán nhưng Bắc Hà còn nức tiếng hơn bởi vẻ nguyên sơ, đậm chất dân tộc. Chợ đã được xây mới trên nền bê tông, không còn trên một quả đồi thoai thoải nhưng giao thương vẫn giữ được nhiều nét truyền thống. Đến đây có thể tìm thấy bất kỳ vật dụng nào cần thiết cho cuộc sống của người dân tộc từ cuốc, xẻng tới đồ thổ cẩm hay thậm chí là trâu ngựa, được phân chia khá rõ ràng thành các khu chợ nhỏ hơn để dễ tìm kiếm.</p>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Vườn quốc gia Hoàng Liên</p>
+                                        <p>Vườn quốc gia Hoàng Liên là một vườn quốc gia Việt Nam được thành lập năm 2002, nằm ở độ cao từ 1.000-3000m so với mặt biển trên dãy Hoàng Liên Sơn thuộc địa bàn các xã San Sả Hồ, Lao Chải, Tả Van, Bản Hồ (huyện Sa Pa, tỉnh Lào Cai) và một phần các xã Phúc Khoa, Trung Đồng (huyện Tân Uyên, tỉnh Lai Châu).</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/laocai/lc12.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Vườn quốc gia Hoàng Liên​</p>
+                                        </div>
+                                        <p>Vườn quốc gia Hoàng Liên được chọn là một Trung tâm đa dạng của các loài thực vật trong Chương trình bảo tồn các loàì thực vật của Hiệp hội Bảo vệ Thiên nhiên Thế giới (IUCN). Vườn cũng được Quỹ môi trường toàn cầu được xếp vào loại A, cao cấp nhất về giá trị đa dạng sinh học của Việt Nam.</p>
+                                    </li>
+                                </ul>
+                                <h3>4. Những món ngon ở Lào cai bạn sẽ nhớ mãi sau khi ăn</h3>
+                                <p>Đến với mảnh đất vùng Tây Bắc, bạn sẽ có cơ hội trải nghiệm các món ăn độc đáo từ nguyên liệu, cách chế biến đến tên gọi.</p>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">CUỐN SỦI</p>
+                                        <p>Cuốn sủi còn được gọi với cái tên phở khan, khá giống với món phở Tíu. Cũng là bánh phở trắng mềm dưới bát, phía bên trên lớp phở được rắc chút mỳ bằng củ dong rang giòn cùng thịt bò, gia vị được nấu sền sệt thành một thứ nước sốt có hương vị riêng. Trên cùng của bát cuốn sủi là hạt tiêu, lạc, rau thơm và vài lát ớt.</p>
+                                        <p>Ở Lào Cai, có rất nhiều quán hàng cuốn sủi và nhà hàng chế biến món ăn kiểu người Hoa. Nhưng đa phần những khách đi tàu lên Lào Cai thường dừng lại ở ngay quán ăn chỉ cách ga có vài bước chân. Tại đây, trong khi chờ đợi món cuốn sủi, bạn có thể tranh thủ vệ sinh cá nhân và chuẩn bị hành lý cho chuyến đi khám phá mảnh đất Lào Cai.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/laocai/lc13.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Cuốn sủi khá giống với món phở Tíu. Ảnh: Lam Linh.</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">THỊT LỢN CẮP NÁCH</p>
+                                        <p>Một điều thú vị khác của ẩm thực Lào Cai là các món ăn chế biến từ thịt lợn cắp nách thơm ngon, giàu dinh dưỡng, đủ các món nướng, luộc, dồi, giả cầy, sườn nấu canh, lạp xường, thịt hun khói. Rồi lợn sữa quay, vịt quay, thơm ngon tạo nên không khí nhộn nhịp, sôi động.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/laocai/lc14.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Dồi lợn cắp nách nhỏ nhưng ‘có võ’. Ảnh: alobacsi.</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">PHỞ CHUA BẮC HÀ</p>
+                                        <p>Một bát phở chua gồm có bánh phở mới tráng còn ấm nóng, thịt lợn xá xíu, rau sống thái nhỏ, lạc và cuối cùng chan một ít nước chua. Với phở chua, yếu tố quyết định vị ngon chính là nước chua. Theo truyền thống, nước chua được làm từ việc ngâm, trộn rau cải với nước đường và chắt lọc được nước chua. Đây là cả một quy trình khắt khe, mà chất lượng của nước chua phụ thuộc rất lớn vào tay nghề của người làm.</p>
+                                        <p>Trước khi ăn, bạn nên bỏ thêm một ít muối hạt vì phở chua sẽ hơi nhạt so với khẩu vị chung của mọi người. Phở chua phải ăn lạnh mới ngon, nên thích hợp ăn vào mùa hè. Mùa đông đến Bắc Hà bạn có thể gặp khó khăn khi muốn tìm món này vì nhiều hàng không bán phở chua.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/laocai/lc15.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Phở chua quan trọng nhất chính là phần nước chua. Ảnh: Tâm Anh.</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">THẮNG CỐ NGỰA BẮC HÀ</p>
+                                        <p>Món ăn hấp dẫn thu hút đông người nhất phải kể đến thắng cố. Thắng cố thì vùng núi phía Bắc nào cũng có, nhưng ở Lào Cai lại mang một vị riêng đặc sắc không thể lẫn vào đâu được vì được chế biến từ “lục phủ ngũ tạng” của con ngựa. Gia vị kèm theo không thể thiếu gồm thảo quả, địa liền cùng với hạt dổi, củ sả, quế chi… được tẩm ướp với thịt trước lúc đem xào rồi chế nước hầm nhừ trong chảo lớn.</p>
+                                        <p>Từ hương vị đặc trưng quyến rũ, chảo thắng cố sôi lục bục trên bếp lửa hồng nhìn khá bắt mắt bởi những miếng thịt, miếng mỡ vàng nhạt, đoạn lòng trăng trắng điểm xuyết những lá hành xanh ngắt dậy mùi thơm của thịt, của gia vị làm ấm lại không gian giữa tiết trời se lạnh. Bát thắng cố trở nên lôi cuốn hơn khi được nhấp với thứ rượu thóc San Lùng (Bát Xát), rượu ngô Bản Phố (Bắc Hà) được chưng cất bởi thứ men làm từ cây hồng mi khiến thực khách đắm chìm trong tinh hoa của đất trời ban tặng.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/laocai/lc16.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Bát bánh đa cua full topping (Nguồn: Wiki Travel)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">NEM MĂNG ĐẮNG</p>
+                                        <p>Món ăn này được chế biến theo bí quyết cổ truyền. Đồng bào lấy những chiếc măng vầu đắng, luộc chín rồi lột lấy những tấm lá bánh tẻ, mềm và dai như những tấm lụa mỏng. Nguyên liệu này dùng như chiếc bánh đa nem thông thường trong món nem rán phổ thông.</p>
+                                        <p>Phần nhân của món nem măng đắng được làm từ thịt gà băm nhỏ. Gà phải là gà tơ, trọng lượng mỗi con không quá 0,6-0,7 kg. Thịt và xương được băm nhỏ cùng với củ kiệu, lá hẹ và các gia vị: hạt tiêu, nước mắm. Phần nhân được gói trong lá măng đắng và rán vàng. Món ăn được trình bày ra đĩa nhỏ, trông rất đẹp mắt. Khi ăn, thực khách sẽ cảm nhận vị đăng đắng của măng, vị ngọt của thịt gà tơ. Độ dẻo của vỏ nem cộng với cảm giác sậm sựt của nhân nem trong miệng sẽ làm cho thực khách thấy thú vị.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/laocai/lc17.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Vỏ nem của món ăn độc đáo này chính là măng vầu đắng. Ảnh: loca.</p>
+                                        </div>
+                                    </li> 
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">QUẢ TỲ BÀ</p>
+                                        <p>Quả tỳ bà hay còn gọi là nhót tây, đặc sản của Lạng Sơn, Lào Cai về tới Hà Nội có giá bán lẻ khá cao nhưng vẫn được nhiều khách thủ đô đặt mua vì tò mò. Quà tỳ bà chín vàng có mùi thơm mát, vị ngọt hoặc ngọt chua (ngọt nhiều hơn chua), là loại quả trồng trong vườn nhà của người dân đồng bào vùng cao. Quả này ngâm đường ăn sẽ chữa được viêm họng và phòng cảm cúm rất tốt trong mùa lạnh.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/laocai/lc18.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Quả tỳ bà chín có vị chua xen lẫn ngọt. Ảnh: T.M.</p>
+                                        </div>
+                                    </li>                                
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex mt-4">
+                        {% for obj in qs %}
+                        <form action="." method='POST' class="ui form ml-4">
+                            {% csrf_token %}
+                            <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                            {% if user not in obj.liked.all %}
+                                <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Thích</span>
+                                </button>
+                            {% else %}
+                                <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                </button>
+                            {% endif %}
+                        </form>
+                        <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                        {% endfor %}
+                    </div>
+
+                    <section class="comment-area">
+                        <div class="container">
+                            <div class="comment-content">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="comment-details">
+                                            <div class="section-title">
+                                                <h5>Bình luận</h5>
+                                            </div>
+                                            <form action="." method="POST" style="margin-top: 1.3em;">
+                                                {% csrf_token %}
+                                                {% if not comments.all %} 
+                                                <div class="col-lg-12">
+                                                    <center><h6 class="mb-4">Chưa có bình luận nào hết á :((</h6></center>
+                                                </div>
+                                                {% else %}
+                                                    {% for x in comments %}
+                                                    <div class="comment-item">
+                                                        <div class="user-avt">
+                                                            <img src="{% static 'img/decor/cat.png' %}" alt="">
+                                                        </div>
+                                                        <div class="comment-info">
+                                                            <h6>{{ x.user }} - <span>{{ x.created_on }}</span></h6>
+                                                            <p>{{ x.body }}</p>
+                                                        </div>
+                                                    </div>
+                                                    {% endfor %}
+                                                {% endif %}
+                                                <input type="text" name="user" value="{{request.user}}" maxlength="200" required="" id="id_user" style="display: none">
+                                                <input type="text" name="post_id" maxlength="200" value="CN03" required id="id_post_id" style="display: none">
+                                                <div class="comment-body">
+                                                    <textarea placeholder="Nhập bình luận..." name="body" cols="40" rows="10" required id="id_body" style="width: 100%; outline: none; border: 1px solid #e53637; border-radius: 5px; padding: 10px;"></textarea>
+                                                    <button type="submit" class="btn button btn-lg" name="comment_submit"><i class="fa fa-location-arrow"></i> Bình luận</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                                    
+                <div class="col-lg-4 pt-3 pt-lg-0">
+                    <!-- Popular News Start -->
+                    <div class="pb-3">
+                        <div class="bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0 h3">Nổi bật</h3>
+                        </div>
+                        {% for item in oli %}
+                        <div class="d-flex mb-3 haha">
+                            <a href="{{item.link}}"><img src="/media/{{item.bg}}" style="width: 100px; height: 100px; object-fit: cover;"></a>
+                            <div class="w-100 d-flex flex-column justify-content-center bg-light px-3" style="height: 100px;">
+                                <div class="mb-1" style="font-size: 13px;">
+                                    <span>{{item.date}}</span>
+                                </div>
+                                <a class="h6 m-0" href="{{item.link}}">{{item.camnang_name}}</a>
+                                <div class="mb-2" style="font-size: 14px;">
+                                    <span>
+                                        <i class="far fa-eye"></i>
+                                        <span id="view">{{item.view}}</span> 
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!-- Popular News End -->
+
+                    <!-- Tags Start -->
+                    <div class="pb-3">
+                        <div class="bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0 h3">Từ khóa</h3>
+                        </div>
+                        <div class="d-flex flex-wrap m-n1">
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Cẩm nang</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Du lịch</a>
+                            <a href="{% url 'cn_dalat' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đà Lạt</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Khách Sạn</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đi phượt</a>
+                            <a href="{% url 'cn_vungtau' %}" class="btn1 btn-sm btn-outline-secondary m-1">Vũng Tàu</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Kinh nghiệm du lịch</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đi chơi</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Tham quan</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Chỗ ở</a>
+                            <a href="{% url 'weather' %}" class="btn1 btn-sm btn-outline-secondary m-1">Thời tiết</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Nhà nghỉ</a>
+                            <button onclick="deadlines()" class="btn1 btn-sm btn-outline-secondary m-1" style="cursor: pointer; outline: none">Deadline</button>
+                            <script>function deadlines() {alert("NAPUN có sẵn khăn giấy đây. KHÓC ĐIIII :))");}</script>
+                        </div>
+                    </div>
+                    <!-- Tags End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid py-3">
+        <div class="container">
+            <img width="50px" height="50px" src="{% static 'img/decor/pen.png' %}" atl="">
+            <div class="d-flex align-items-center bg-light justify-content-between py-2 px-4 mb-3">
+                <p class="h3 m-0 orange" style="font-style: italic; text-align: justify;">Với những kinh nghiệm du lịch Lào Cai tự túc được chia sẻ trong bài viết, hi vọng du khách sẽ có thêm các thông tin tham khảo bổ ích cho chuyến du lịch của mình. Hãy ghé qua những địa điểm nổi tiếng, quán ăn, nhà hàng ngon để thưởng thức trọn vẹn nét đẹp của Lào Cai. Và đừng quên <a href="{% url 'hotel' %}">đặt khách sạn tại NAPUN</a> để có một trải nghiệm thực tế nhé ! <i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% autoescape off %}
+NAPUN - Cẩm nang du lịch và Đặt khách sạn
+Chào {{username}}
+
+Cảm ơn bạn đã đặt khách sạn tại NAPUN.
+Chúc bạn có một chuyến nghĩ dưỡng/công tác an lành.
+
+Kiểm tra tại đây:
+https://{{ domain }}:8000{% url 'history' %}
+{% endautoescape %}

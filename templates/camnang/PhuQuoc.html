@@ -1,0 +1,366 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Cẩm nang du lịch Phú Quốc.{% endblock %}
+{% block content %}
+    <div class="container-fluid py-3">
+        <div class="container">
+            <div>
+                <div class="col-12">
+                    <p id="tieude" class="h3" style="color: #343a40;">Tổng quan du lịch Phú Quốc mới nhất</p>
+                    <div class="d-flex">
+                        <img src="{% static 'img/decor/cat.png' %}" alt='' width="50px" height="50px">
+                        <p style="color: #555; font-weight: bold">Lượt xem: {{vi.view}} </p>
+                        <div class="d-flex">
+                            {% for obj in qs %}
+                            <form action="." method='POST' class="ui form ml-4">
+                                {% csrf_token %}
+                                <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                                {% if user not in obj.liked.all %}
+                                    <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                        <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                        <span style="color: #fff; font-weight: 600">Thích</span>
+                                    </button>
+                                {% else %}
+                                    <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                        <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                        <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                    </button>
+                                {% endif %}
+                            </form>
+                            <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="background-image: url({% static 'img/decor/bg.jpg' %})">
+                <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 5px;">
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 30px;">
+                </div>
+                <div class="col-12">
+                    <p id="tieude"><b>PHÚ QUỐC</b></p>
+                </div>
+                <div class="col-12" style="color: black; ">
+                    <p class="m-0"> Là quần đảo xinh đẹp thuộc tỉnh Kiên Giang, Phú Quốc được đông đảo du khách từ khắp năm châu bốn bể tìm tới đây để lên kế hoạch nghỉ dưỡng cho riêng mình. Với những kinh nghiệm du lịch Phú Quốc giá rẻ sau đây, chắc hẳn bạn sẽ phải rục rịch chuẩn bị hành lý để lên đường ngay và luôn!Thuộc tỉnh Kiên Giang, Phú Quốc là hòn đảo lớn nhất Việt Nam và vịnh Thái Lan. Mọi người thường bảo “lên rừng xuống biển", nhưng chỉ cần đến Phú Quốc bạn sẽ được trải nghiệm hết những điều đó. Phú Quốc có những bãi biển cát trắng nước xanh, có vườn quốc gia với hệ sinh thái đa dạng, có những con suối trong vắt, và cả những hòn đảo xinh đẹp, bình yên.</p> 
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 5px; margin-top: 15px;">
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 20px;">
+                </div>
+            </div>
+            <div class="mb-3 pb-3">
+                <img class="img-fluid w-100" src="{% static 'img/phuquoc/pq1.jpg' %}" alt="">
+                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Những điều cần biết khi du lịch Phú Quốc (Ảnh: ST)</p>
+            </div>
+            <div class="mb-3 pb-3">
+                <a href="{% url 'hotel' %}"><img class="img-fluid w-100" src="{% static 'img/decor/dulich.jpg' %}" alt=""></a>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="col-12">
+                        <div class="single-services section-padding2">
+                            <div class="details-caption" style="color: #343a40">
+                                <h3>1. Du lịch Phú Quốc nên đi vào thời điểm nào?</h3>
+                                <p>Hơi “ngược ngạo" so với các thành phố biển khác, trong khi mùa hè là mùa đẹp nhất cho những chuyến đi bổ sung “vitamin Sea” thì Phú Quốc lại vào mùa mưa. Thời điểm đẹp nhất để đi du lịch Phú Quốc là vào tháng 10 - tháng 4 năm sau vì đây chính là mùa khô của hòn đảo. Lúc này thời tiết không quá nắng, nhiệt độ chỉ khoảng 27 độ C, biển êm, phù hợp cho các hoạt động vui chơi. Đây cũng chính là mùa cao điểm của giá vé máy bay đi Phú Quốc.</p>
+                                <p>Từ tháng 5 - tháng 9 là mùa mưa ở Phú Quốc. Tuy hòn đảo nằm lọt lòng trong vịnh Thái Lan, không trực tiếp đón bão nhưng đây là mùa của những đợt mưa và lụt, có thể hạn chế một số hoạt động như câu mực đêm, lặn ngắm san hô. Nhưng dù sao đây cùng là mùa du lịch tự túc biển hot nhất nên bạn vẫn có thể chọn Phú Quốc cho kì nghỉ hè, chỉ cần sắp xếp lịch trình và theo dõi tình hình thời tiết cho phù hợp.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/phuquoc/pq2.jpg' %}" alt="">
+                                </div>
+
+                                <h3>2. Đi du lịch Phú Quốc nên ở đâu?</h3>
+                                <p>Kinh nghiệm đi du lịch tự túc ở phú quốc chọn khách sạn giá tốt mà bạn nên bỏ túi như sau:</p>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Để lựa chọn được loại hình lưu trú phù hợp nhất cho chuyến đi của mình, bạn cần liệt kê ra một vài tiêu chí về nơi ở theo thứ tự ưu tiên giảm dần, ví dụ như tài chính, yêu cầu về phòng ốc, dịch vụ, không gian…</p></li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Nếu bạn muốn tiết kiệm chi phí, không đặt nhiều yêu cầu về chỗ ở, chấp nhận mọi không gian tối giản về tiện nghi và nội thất thì hoàn toàn có thể lựa chọn các homestay ở trung tâm hoặc xung quanh thị trấn Dương Đông, Phú Quốc để tiện đi lại.</p></li>
+                                </ul>
+                                <p>Trong trường hợp bạn tham gia du lịch cùng công ty, nên lựa chọn đặt phòng tại các khách sạn, resort để được trải nghiệm các dịch vụ tiện ích chất lượng. Một số villa, resort Phú Quốc lại là sự lựa chọn hàng đầu cho những ai không bận tâm về giá cả mà muốn tìm tới tại một nơi yên tĩnh và biệt lập, đảm bảo sự riêng tư.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/phuquoc/pq3.jpg' %}" alt="">
+                                </div>
+                                
+
+                                <h3>3. Chi phí du lịch Phú Quốc</h3>
+                                <p>Theo review Phú Quốc tự túc của nhiều du khách khi đến đây, toàn bộ các khoản chi phí trong chuyến đi bao gồm các khoản chính là: vé máy bay, tiền khách sạn, chi phí ăn uống, phương tiện di chuyển và giá vé của các điểm tham quan...</p>
+                                <p>
+                                    <ul style="padding-left: 30px">
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Vé máy bay: Hà Nội - Phú Quốc khoảng 2.000.000 - 3.000.000 đồng, Sài Gòn - Phú Quốc khoảng 1.000.000 đồng (tùy hãng hàng không và thời gian bay)</p></li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Khách sạn Phú Quốc: từ 1.700.000 - 4.000.000 đồng cho 3 ngày 2 đêm tùy khách sạn bạn lựa chọn. Tham khảo giá phòng khách sạn Phú Quốc mới nhất.</p></li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Ăn uống: khoảng 1.500.000 đồng (có thể nhiều hơn tùy theo nhu cầu của mỗi người).</p></li>
+                                    </ul>
+                                </p>
+                                <p>Tính trung bình, một chuyến đi tự túc trong khoảng thời gian 3 ngày 2 đêm có thể rơi vào khoảng 5.500.000 - 7.000.000 đồng/người chưa bao gồm vé vui chơi, tham quan.</p>
+                                                                
+                                <h3>4. Các phương tiện đi lại tại Phú Quốc</h3>
+                                <p>Việc di chuyển tại Phú Quốc cũng khá dễ dàng. Bạn có thể lựa chọn những phương tiện sau cho chuyến du lịch của mình:</p>
+                                <p>
+                                    <ul style="padding-left: 30px;">
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Thuê xe máy: Khi đã đến Phú Quốc thì phương tiện thuận tiện nhất vẫn là xe máy. Theo các kinh nghiệm du lịch tự túc thì dịch vụ thuê xe máy trên đảo rất đa dạng. Bạn có thể hỏi thuê tại khách sạn hoặc homestay mình ở hoặc liên hệ trực tiếp với các nhà xe.</p></li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Thuê taxi: Nếu đi gia đình hoặc nhóm bạn đông thì xe hơi cũng là một lựa chọn phù hợp. Là thành phố du lịch nên tất nhiên taxi ở Phú Quốc không hề thiếu, giá tương đương với Hà Nội hoặc TP.HCM</p></li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>GRAP: Dịch vụ gọi xe thông minh đã có mặt tại Phú Quốc từ tháng 1.2021 nên bạn cứ yên tâm vi vu. Tuy nhiên, mật độ xe ở sân bay và thị trấn Dương Đông thì nhiều chứ các điểm xa vẫn còn khan hiếm tài xế, bạn nhớ lưu ý để tính toán lịch trình di chuyển của mình. Bạn cũng có thể hỏi giá các tài xế Grab để thuê xe nguyên ngày, tiết kiệm chi phí và lợi thế là được người bản địa chỉ dẫn cho nhiều chỗ ăn chơi độc lạ nữa nha.</p></li>
+                                    </ul>
+                                </p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/phuquoc/pq4.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Phương tiện di chuyển ở Phú Quốc</p>
+                                </div>
+
+                                <h3>5. Ăn gì khi đi du lịch Phú Quốc?</h3>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bánh canh chả cá thu</p>
+                                        <p>Bánh canh chả cá thu Phú Quốc xứng đáng được gọi là “cao lương mỹ vị” với nước lèo thanh ngọt, chả cá dai, được chiên lên ăn kèm mắm mặn, kết hợp bánh canh bột gạo dai dai và thịt ghẹ dai ngọt.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuquoc/pq5.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Bánh canh chả cá thu</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bún quậy</p>
+                                        <p>Là một phiên bản đặc biệt của món bún tôm Bình Định, bún quậy sẽ có hỗn hợp cá, mực, tôm xay nhuyễn; được phết lên tô, khi ăn sẽ được chan nước lèo sôi cho chín. Bún của món bún quậy cũng rất đặc biệt: phải là bún tươi được ép trực tiếp từ ống. Điểm đặc biệt nhất phải là công thức pha nước chấm gia truyền, cho 1 thìa vào tô bún và chấm cùng với hải sản siêu hoà quyện.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuquoc/pq6.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Bún quậy</p>
+                                        </div>
+                                    </li>  
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Tiết canh cua</p>
+                                        <p>Món ăn bạn không thể thử ở đâu khác ngoài Phú Quốc. Để làm được món này thì cua phải chọn loại cua biển, con to, nhiều gạch. Tiết canh cua khi vừa chảy ra sẽ đông lại ngay, khi ăn khá giống rau câu, vị béo, mặn đậm hương biển; kết hợp với rau sống và bánh tráng.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuquoc/pq7.webp' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Tiết canh cua</p>
+                                        </div>
+                                    </li>  
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bún kèn</p>
+                                        <p>Với các thành phần chung là bún gạo, rau sống, dưa leo bào,… ăn cùng với nước lèo được nấu bằng cá nhàu, cá ngân xay nhuyễn và nước cốt dừa.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuquoc/pq8.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Bún kèn</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Gỏi cá trích</p>
+                                        <p>Cá trích được sơ chế thành gỏi, chấm với nước mắm đặc trưng và cuốn chung với rau sống, bánh tráng… mang tới hương vị vô cùng khó quên của đặc sản đảo ngọc.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuquoc/pq9.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Đây được liệt kê là một trong TOP 5 các món nhất định phải thử theo kinh nghiệm du lịch Phú Quốc. Ảnh: Vnexpress</p>
+                                        </div>
+                                    </li> 
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Nhum biển nướng</p>
+                                        <p>Cánh đàn ông tới Phú Quốc sẽ không thể bỏ qua món nhậu tuyệt đỉnh là nhum biển, thường được bổ đôi để nướng hoặc ăn sống tái chanh, chấm với muối tiêu chanh, vừa bùi ngậy vừa bổ dưỡng.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuquoc/pq10.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Nhum biển nướng</p>
+                                        </div>
+                                    </li> 
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Canh nấm tràm đặc sản Phú Quốc</p>
+                                        <p>Những loại nấm mọc trong các rừng tràm, chỉ xuất hiện sau cơn mưa đầu mùa, kéo dài hơn một tháng, được nấu với chả cá viên hoặc hầm súp gà là món ăn vừa bổ dưỡng, vừa ngon miệng.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuquoc/pq11.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Canh nấm tràm</p>
+                                        </div>
+                                    </li> 
+                                </ul>
+                                <h3>6. Du lịch Phú Quốc nên đi đâu chơi?</h3>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bãi Sao</p>
+                                        <p>Nơi đây hấp dẫn mọi du khách từ ánh nhìn đầu tiên dưới làn nước trong veo, bãi cát trải dài trắng mịn, là một trong những bãi biển đẹp nhất Phú Quốc mà ai cũng phải ghé thăm một lần</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuquoc/pq12.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Ai mà không yêu mến làn nước mát lạnh, ánh nắng vàng và tiếng sóng vỗ êm đềm tại Bãi Sao!. Ảnh: Sưu tầm</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Quần đảo An Thới</p>
+                                        <p>Sự yên ả tĩnh lặng của sóng biển, vẻ hoang sơ tự nhiên trên bãi cát chạy dài vẽ nên một cảnh tượng hết sức êm đềm, là một nốt trầm trên bản nhạc du dương mà an bình của quần đảo An Thới.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuquoc/pq13.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh quần đảo An Thới</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Dinh Cậu</p>
+                                        <p>Không chỉ là điểm đến tâm linh, không ít du khách còn tới đây để ngắm nhìn biển khơi và hoàng hôn đẹp tuyệt bên ngọn hải đăng lộng gió.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuquoc/pq14.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Cảnh sắc hoàng hôn nao lòng tại mũi Dinh Cậu. Ảnh: Sưu tầm</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">VinWonders Phú Quốc</p>
+                                        <p>Theo kinh nghiệm du lịch Phú Quốc thì địa điểm vui chơi thả ga, quậy đã đời nhất trên đảo ngọc chính là thiên đường giải trí VinWonders. Nơi đây sở hữu bộ sưu tập lên tới cả trăm trò chơi, khu giải trí ngoài trời và cả công viên nước đầy sắc màu.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuquoc/pq15.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Trải nghiệm vui chơi thả ga tại VinWonders Phú Quốc</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Vinpearl Safari Phú Quốc</p>
+                                        <p>Không chỉ đứng từ xa nhìn ngắm các loài động vật bị nhốt như trong sở thú, đây là một trải nghiệm vô cùng đặc biệt khi bạn đích thân trải nghiệm thế giới tự nhiên hoang dã với các loài động vật quý hiếm tự do đi lại ở khắp nơi.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuquoc/pq16.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Du lịch Phú Quốc nhớ ghé thăm vườn thú bán hoang dã Vinpearl Safari</p>
+                                        </div>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuquoc/pq17.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Trải nghiệm vui chơi “hết nấc” tại tổ hợp thiên đường giải trí bất tận của Vinpearl Phú Quốc</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Grand World Phú Quốc</p>
+                                        <p>Thành phố không ngủ độc nhất vô nhị tại đảo ngọc chắc chắn là điểm đến bạn không thể bỏ qua. Với hàng loạt hoạt động vui chơi, mua sắm, lễ hội sôi động suốt ngày đêm, bạn sẽ được trải nghiệm bất ngờ này đến bất ngờ khác. Ngoài ra, nơi đây cũng là địa điểm tham quan, check-in cực kỳ sống động nhờ kiến trúc tráng lệ, lộng lẫy, những dãy phố sầm uất...</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuquoc/pq18.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Ngồi thuyền gondola xuôi dòng "Venice thu nhỏ" tại Grand World Phú Quốc</p>
+                                        </div>
+                                    </li>   
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Mũi Gành Dầu</p>
+                                        <p>Vách đá được thiên nhiên xếp đặt theo những hình thù khác nhau với dòng nước trong vắt len lỏi dưới chân chính là vị trí độc đáo mà không ít du khách tìm tới để bơi lội và thưởng thức đặc sản của đại dương.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuquoc/pq19.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Địa điểm tắm biển độc đáo mà kinh nghiệm du lịch Phú Quốc không nên bỏ qua. Ảnh: Sưu tầm</p>
+                                        </div>
+                                    </li>    
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Nhà tù Phú Quốc</p>
+                                        <p>Điểm nhấn lịch sử ghi lại dấu ấn của những năm tháng hào hùng nhưng cũng không kém phần đáng sợ trong lịch sử dân tộc với dãy nhà tù tăm tối và vô số hình phạt đáng sợ.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/phuquoc/pq20.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Tham quan, tìm hiểu lịch sử tại nhà tù Phú Quốc (ảnh: sưu tầm)</p>
+                                        </div>
+                                    </li>                                   
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex mt-4">
+                        {% for obj in qs %}
+                        <form action="." method='POST' class="ui form ml-4">
+                            {% csrf_token %}
+                            <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                            {% if user not in obj.liked.all %}
+                                <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Thích</span>
+                                </button>
+                            {% else %}
+                                <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                </button>
+                            {% endif %}
+                        </form>
+                        <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                        {% endfor %}
+                    </div>
+
+                    <section class="comment-area">
+                        <div class="container">
+                            <div class="comment-content">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="comment-details">
+                                            <div class="section-title">
+                                                <h5>Bình luận</h5>
+                                            </div>
+                                            <form action="." method="POST" style="margin-top: 1.3em;">
+                                                {% csrf_token %}
+                                                {% if not comments.all %} 
+                                                <div class="col-lg-12">
+                                                    <center><h6 class="mb-4">Chưa có bình luận nào hết á :((</h6></center>
+                                                </div>
+                                                {% else %}
+                                                    {% for x in comments %}
+                                                    <div class="comment-item">
+                                                        <div class="user-avt">
+                                                            <img src="{% static 'img/decor/cat.png' %}" alt="">
+                                                        </div>
+                                                        <div class="comment-info">
+                                                            <h6>{{ x.user }} - <span>{{ x.created_on }}</span></h6>
+                                                            <p>{{ x.body }}</p>
+                                                        </div>
+                                                    </div>
+                                                    {% endfor %}
+                                                {% endif %}
+                                                <input type="text" name="user" value="{{request.user}}" maxlength="200" required="" id="id_user" style="display: none">
+                                                <input type="text" name="post_id" maxlength="200" value="CN12" required id="id_post_id" style="display: none">
+                                                <div class="comment-body">
+                                                    <textarea placeholder="Nhập bình luận..." name="body" cols="40" rows="10" required id="id_body" style="width: 100%; outline: none; border: 1px solid #e53637; border-radius: 5px; padding: 10px;"></textarea>
+                                                    <button type="submit" class="btn button btn-lg" name="comment_submit"><i class="fa fa-location-arrow"></i> Bình luận</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                
+                <div class="col-lg-4 pt-3 pt-lg-0">
+                    <!-- Popular News Start -->
+                    <div class="pb-3">
+                        <div class="bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0 h3">Nổi bật</h3>
+                        </div>
+                        {% for item in oli %}
+                        <div class="d-flex mb-3 haha">
+                            <a href="{{item.link}}"><img src="/media/{{item.bg}}" style="width: 100px; height: 100px; object-fit: cover;"></a>
+                            <div class="w-100 d-flex flex-column justify-content-center bg-light px-3" style="height: 100px;">
+                                <div class="mb-1" style="font-size: 13px;">
+                                    <span>{{item.date}}</span>
+                                </div>
+                                <a class="h6 m-0" href="{{item.link}}">{{item.camnang_name}}</a>
+                                <div class="mb-2" style="font-size: 14px;">
+                                    <span>
+                                        <i class="far fa-eye"></i>
+                                        <span id="view">{{item.view}}</span> 
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!-- Popular News End -->
+
+                    <!-- Tags Start -->
+                    <div class="pb-3">
+                        <div class="bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0 h3">Từ khóa</h3>
+                        </div>
+                        <div class="d-flex flex-wrap m-n1">
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Cẩm nang</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Du lịch</a>
+                            <a href="{% url 'cn_dalat' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đà Lạt</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Khách Sạn</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đi phượt</a>
+                            <a href="{% url 'cn_vungtau' %}" class="btn1 btn-sm btn-outline-secondary m-1">Vũng Tàu</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Kinh nghiệm du lịch</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đi chơi</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Tham quan</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Chỗ ở</a>
+                            <a href="{% url 'weather' %}" class="btn1 btn-sm btn-outline-secondary m-1">Thời tiết</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Nhà nghỉ</a>
+                            <button onclick="deadlines()" class="btn1 btn-sm btn-outline-secondary m-1" style="cursor: pointer; outline: none">Deadline</button>
+                            <script>function deadlines() {alert("NAPUN có sẵn khăn giấy đây. KHÓC ĐIIII :))");}</script>
+                        </div>
+                    </div>
+                    <!-- Tags End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid py-3">
+        <div class="container">
+            <img width="50px" height="50px" src="{% static 'img/decor/pen.png' %}" atl="">
+            <div class="d-flex align-items-center bg-light justify-content-between py-2 px-4 mb-3">
+                <p class="h3 m-0 orange" style="font-style: italic; text-align: justify;">Với những kinh nghiệm du lịch Phú Quốc tự túc được chia sẻ trong bài viết, hi vọng du khách sẽ có thêm các thông tin tham khảo bổ ích cho chuyến du lịch của mình. Hãy ghé qua những địa điểm nổi tiếng, quán ăn, nhà hàng ngon để thưởng thức trọn vẹn nét đẹp của Phú Quốc. Và đừng quên <a href="{% url 'hotel' %}">đặt khách sạn tại NAPUN</a> để có một trải nghiệm thực tế nhé ! <i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

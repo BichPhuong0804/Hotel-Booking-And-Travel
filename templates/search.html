@@ -1,0 +1,240 @@
+{% extends 'base1.html' %}
+{% load static %}
+{% block title %}NAPUN{% endblock %}
+{% block css %}
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+  <link rel="stylesheet" href="{% static 'fonts/ionicons/css/ionicons.css' %}">
+  <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+  <link rel="stylesheet" href="{% static 'css/hotel.css' %}">
+  <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+{% endblock %}
+
+{% block content %}
+        <div class="slider_area">
+            <div class="slider_active owl-carousel">
+                <div class="single_slider  d-flex align-items-center" style="background-image: url({% static 'img/slider/dulich.jpg' %});">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-xl-12 col-md-12"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="single_slider  d-flex align-items-center" style="background-image: url({% static 'img/slider/vungtau.jpg' %});">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-xl-12 col-md-12">
+                                <div class="slider_text text-center">
+                                    <h3>Vũng Tàu</h3>
+                                    <p>Vũng Tàu mang trong mình đầy đủ cảnh sắc của núi trời, non nước</p>
+                                    <a href="{% url 'cn_vungtau' %}" class="boxed-btn">Khám phá</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="single_slider  d-flex align-items-center" style="background-image: url({% static 'img/slider/hue.jpg' %});">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-xl-12 col-md-12">
+                                <div class="slider_text text-center">
+                                    <h3>Huế</h3>
+                                    <p style="text-align: center !important;">Thành phố Huế mộng, mơ đậm đà bản sắc dân tộc</p>
+                                    <a href="{% url 'cn_hue' %}" class="boxed-btn">Khám phá</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="single_slider  d-flex align-items-center" style="background-image: url({% static 'img/slider/sapa.jpg' %});">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-xl-12 col-md-12">
+                                <div class="slider_text text-center">
+                                    <h3>Lào Cai</h3>
+                                    <p style="text-align: center !important;">Đồi núi cao với những thửa ruộng bậc thang tuyệt đẹp</p>
+                                    <a href="{% url 'cn_laocai' %}" class="boxed-btn">Khám phá</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="single_slider  d-flex align-items-center" style="background-image: url({% static 'img/slider/hanoi.png' %});">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-xl-12 col-md-12">
+                                <div class="slider_text text-center">
+                                    <h3>Hà Nội</h3>
+                                    <p style="text-align: center !important;">Hà Nội, thủ đô của Việt Nam, nổi tiếng với kiến trúc trăm tuổi và nền văn hóa phong phú</p>
+                                    <a href="{% url 'cn_hanoi' %}" class="boxed-btn">Khám phá</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="max-width: 1080px;">
+            <div class="notif">
+                <div class="notif_list">
+                    <span class="text-uppercase notif_title">
+                        <b>NAPUN: </b>
+                    </span>
+                    <span class="notif_content slide100-txt" data-in="fadeInDown" data-out="fadeOutDown">
+                        <span class="notif_conntent_items slide100-txt-item animated visible-false" style="color: #666699;">
+                            Người Việt Nam đi khắp Việt Nam
+                        </span>
+
+                        <span class="notif_conntent_items slide100-txt-item animated visible-false" style="color: #666699;">
+                            Khách sạn muôn nơi, thả ga lựa chọn
+                        </span>
+
+                        <span class="notif_conntent_items slide100-txt-item animated visible-false" style="color: #666699;">
+                            Thỏa sức khám phá chẳng ngại âu lo
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="mb-3 pb-3">
+                            <a href="{% url 'hotel' %}"><img class="img-fluid w-100" src="{% static 'img/decor/dulich.jpg' %}" alt=""></a>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between py-2 px-4 mb-3">
+                            <img src="{% static 'img/decor/search.png' %}" alt="" width="40px" height="40px">
+                            <h3 class="m-0 h3" style=" color: #ff5f13">Kết quả tìm kiếm cho <span style="font-style: italic;">" {{ searched }} "</span></h3>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-12">
+                                <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
+                                    <h3 class="m-0 h3">Cẩm nang du lịch</h3>
+                                    <a class="text-secondary font-weight-medium text-decoration-none" href="{% url 'cn_detail' %}">Xem tất cả</a>
+                                </div>
+                            </div>  
+                        </div>
+                        <div class="row mb-3">
+                            {% if result1 %}
+                                {% for l in result1 %}
+                                    <div class="col-lg-4">
+                                        <div class="position-relative mb-3 haha">
+                                            <a href="{{l.link}}"><img class="img-fluid w-100" src="/media/{{l.bg}}" style="object-fit: cover;"></a>
+                                            <div class="overlay position-relative bg-light">
+                                                <div class="mb-2" style="font-size: 14px;">
+                                                    <span>{{l.date}}</span>
+                                                </div>
+                                                <a class="h4" href="{{l.link}}">{{l.camnang_name}}</a>
+                                                <p class="m-0">{{l.description}}</p>
+                                                <div class="mb-2" style="font-size: 14px;">
+                                                    <span>
+                                                        <i class="far fa-eye"></i>
+                                                        <span id="view">{{l.view}}</span> 
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="col-lg-12">
+                                    <center><h6 style="font-family: Poppins, Arial, sans-serif !important; color: #999">Không tìm thấy kết quả phù hợp :)))</h6></center>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="mb-3 pb-3">
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
+                                        <h3 class="m-0 h3">Khách sạn</h3>
+                                        <a class="text-secondary font-weight-medium text-decoration-none" href="{% url 'hotel' %}">Xem tất cả</a>
+                                    </div>
+                                </div>
+                            </div> 
+
+                            <section class="ftco-section" style="background: none">
+                              <div class="container">
+                                <div class="row">
+                                    {% if result2 %}
+                                        {% for item in result2 %}
+                                        <div class="col-md-4">
+                                            <div class="project-wrap hotel">
+                                              <a href="/hotel/detail/{{item.hotel_id}}" class="img hotel-img"
+                                                style="background-image: url(/media/{{item.image}});">
+                                                <span class="price">{{item.mprice}} VND/ngày</span>
+                                              </a>
+                                              <div class="text p-4">
+                                                <p class="star mb-2">
+                                                    <span class="star1 fa fa-star text-warning"></span>
+                                                </p>
+                                                <span class="area">{{item.location}}</span>
+                                                <h3><a href="/hotel/detail/{{item.hotel_id}}" id="hotel-name">{{item.hotel_name}}</a></h3>
+                                                <p class="location"><span class="fa fa-map-marker"></span> {{item.address}}</p>
+                                                <ul>
+                                                  <li>
+                                                    <span class="flaticon flaticon-route"></span>
+                                                    <span id="nearby">Gần {{item.nearby}}</span>
+                                                  </li>
+                                                </ul>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        <div class="col-lg-12">
+                                            <center><h6>Không tìm thấy kết quả phù hợp :)))</h6></center>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                              </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid py-3">
+            <div class="container">
+                <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
+                    <h3 class="m-0 h3 orange">Khám phá Việt Nam</h3>
+                </div>
+                <div class="position-relative">
+                    <iframe width="100%" height="600px" src="https://www.youtube.com/embed/Au6LqK1UH8g" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        function pstar(){
+            var objects = document.querySelectorAll('.starr')
+            var star=''
+            for (i=0; i < objects.length; i++){
+            var numstar = parseInt(objects[i].querySelector('.numstar').innerHTML)
+            for (j=0; j < numstar; j++){
+                star = star + '<span class="star1 fa fa-star text-warning"></span>'
+            }
+            objects[i].innerHTML = star
+            star =''
+            }
+        }
+    </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <script src="{% static 'js/hotel.js' %}"></script>
+  <script src="{% static 'js/nice-select.js' %}"></script>
+{% endblock %}
+    

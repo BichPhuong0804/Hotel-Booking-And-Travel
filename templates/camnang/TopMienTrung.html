@@ -1,0 +1,274 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Top những địa điểm đáng đến ở Miền Trung.{% endblock %}
+{% block content %}
+    <div class="container-fluid py-3">
+        <div class="container">
+            <div>
+                <div class="col-12">
+                    <p id="tieude" class="h3" style="color: #343a40;">Địa điểm du lịch miền Trung – Thiên đường nổi tiếng thu hút khách</p>
+                    <div class="d-flex">
+                        <img src="{% static 'img/decor/cat.png' %}" alt='' width="50px" height="50px">
+                        <p style="color: #555; font-weight: bold">Lượt xem: {{vi.view}} </p>
+                        <div class="d-flex">
+                            {% for obj in qs %}
+                            <form action="." method='POST' class="ui form ml-4">
+                                {% csrf_token %}
+                                <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                                {% if user not in obj.liked.all %}
+                                    <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                        <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                        <span style="color: #fff; font-weight: 600">Thích</span>
+                                    </button>
+                                {% else %}
+                                    <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                        <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                        <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                    </button>
+                                {% endif %}
+                            </form>
+                            <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="background-image: url({% static 'img/decor/bg.jpg' %})">
+                <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 5px;">
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 30px;">
+                </div>
+                <div class="col-12">
+                    <p id="tieude"><b>MIỀN TRUNG</b></p>
+                </div>
+                <div class="col-12" style="color: black; ">
+                    <p class="m-0">Miền Trung hay còn gọi là Trung Bộ, là vùng đất nằm giữa lãnh thổ của dải đất hình chữ S. Được bao bọc bởi những dãy núi chạy dọc bờ Tây sang phía Đông và đường bờ biển trải dài từ Quảng Bình đến Bình Thuận. Cả miền Trung với hơn mười mấy tỉnh mang trong mình ảnh hưởng của nền văn hóa Champa, Sa Huỳnh. Đây một thời từng là nơi cư trú của người Việt Cổ. Cũng là nơi có liên quan đến người Nhật vượt biển đến Hội An buôn bán, dấu vết của người Pháp lần đầu tiên chin phục Việt Nam tại Đà Nẵng,…  Có thể nói, miền Trung ghi nhận nhiều chứng tích quan trọng, vì thế đã tạo nên nhiều Di sản được UNESCO công nhận.</p>
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 5px; margin-top: 15px;">
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 20px;">
+                </div>
+            </div>
+            <div class="mb-3 pb-3">
+                <img class="img-fluid w-100" src="{% static 'img/topmientrung/mt1.png' %}" alt="">
+                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Top những địa điểm đáng đến khi đi du lịch ở miền Trung (Ảnh: ST)</p>
+            </div>
+            <div class="mb-3 pb-3">
+                <a href="{% url 'hotel' %}"><img class="img-fluid w-100" src="{% static 'img/decor/dulich.jpg' %}" alt=""></a>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="col-12">
+                        <div class="single-services section-padding2">
+                            <div class="details-caption" style="color: #343a40">
+                                <h3>1. Bà Nà Hills (Đà Nẵng)</h3>
+                                <p>Một trong những địa điểm du lịch ở miền Trung nổi tiếng bậc nhất phải nhắc đến là Bà Nà Hills ở xã Hòa Ninh, huyện Hòa Vang, Đà Nẵng. Bà Nà được mệnh danh là “chốn tiên cảnh bồng lai” hay “Châu Âu thu nhỏ giữa lòng thành phố” với những thẳng cảnh tự nhiên độc đáo, những công trình kiến trúc cổ đẹp mê ly, những vườn hoa rực rỡ và cả vô số trò chơi cực kỳ hấp dẫn,… cho du khách thỏa sức vui chơi, chụp ảnh.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmientrung/mt2.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Bà Nà Hills - Thiên đường du lịch hấp dẫn nhất</p>
+                                </div>
+                                <p>Đặc biệt, khu du lịch này còn mang kiểu thời tiết rất đặc trưng, trải qua một ngày ở đây, bạn có thể tận hưởng đủ kiểu khí hậu của bốn mùa (buổi sáng mùa xuân, buổi trưa của mùa hè, buổi chiều của mùa thu và đêm đến là mùa đông). Với tour Bà Nà Hills 1 ngày bạn còn được trải nghiệm tuyến cáp treo giữ nhiều kỷ lục thế giới xuyên qua những đám mây, ngắm nhìn toàn bộ phong cảnh kỳ vĩ và rất nhiều điều thú vị khác.</p>
+                                <p><em>Tham khảo: <a href="{% url 'cn_danang' %}">Cẩm nang du lịch Đà Nẵng</a> để biết thêm chi tiết</em></p>
+                                
+                                <h3>2. Đảo Bình Ba (Nha Trang)</h3>
+                                <p>Nha Trang là một điểm đến mà du khách không thể bỏ qua và một trong những cái tên nổi tiếng không thể không nhắc đến của vùng đất này đó chính là đảo Bình Ba hay còn gọi là đảo Tôm Hùm. Trước kia, hòn đảo này chủ yếu phục vụ mục đích quân sự nên hạn chế người từ ngoài vào. Tuy nhiên, những năm trở lại đây khi, khi luật pháp nởi lỏng mọi người đã có thể đến đây tham quan, khám phá trừ du khách nước ngoài.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmientrung/mt3.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Đảo Bình Ba nơi cho bạn những trải nghiệm thú vị</p>
+                                    <p>Kể từ ngày được đưa vào với vai trò là một điểm du lịch, hòn đảo nhỏ 3m2 này cũng được chú trọng đầu tư nhiều hơn. Dù vậy, khi tới đây du khách vẫn sẽ thấy thiên nhiên trên đảo còn khá hoang sơ, đem lại cảm giác yên bình. Ngoài ngắm cảnh, bạn có thể tham gia các hoạt động như lặn ngắm san hô, lên các bè nuôi tôm bắt và nướng tại chỗ,…</p>
+                                </div>
+
+                                <h3>3. Đại Nội (Kinh thành Huế)</h3>
+                                <p>Nếu ai đang tìm kiếm sự yên bình, thơ mộng thì đặt tour Huế 1 ngày là sự lựa chọn đúng đắn. Cố đô Huế tọa lạc hai bên bờ sông Hương, là di sản văn hóa thế giới của tỉnh Thừa – Thiên Huế. Nơi đây thừa hưởng vẻ đẹp của những di sản dưới triều đại nhà Nguyễn và hội tụ đầy đủ những nét nhẹ nhàng, sâu lắng nhất với nhiều địa điểm hấp dẫn, có thể kể đến là Đại Nội Huế.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmientrung/mt4.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Đại Nội Huế là điểm đến nổi tiếng của vùng đất cố đô</p>
+                                    <p>Đại Nội Huế hay còn gọi là Kinh Thành Huế đã được UNESCO công nhận là di sản văn hóa thế giới năm 1993. Công trình nằm ở bờ Bắc của dòng sông Hương thơ mộng, bao gồm Hoành Thành và Tử Cấm Thành. Đây từng là trung tâm chính trị của triều đình nhà Nguyên và nơi sinh hoạt của giới vua chúa. Đại Nội với nét kiến trúc nghệ thuật độc đáo và nhiều ý nghĩa hẳn sẽ cho bạn những trải nghiệm thú vị.</p>
+                                </div>
+                                <p><em>Tham khảo: <a href="{% url 'cn_hue' %}">Cẩm nang du lịch Huế</a> để biết thêm chi tiết</em></p>
+
+                                <h3>4. Phong Nha Kẻ Bàng (Quảng Bình)</h3>
+                                <p>Vườn Quốc gia Phong Nha Kẻ Bàng từ lâu đã trở thành địa điểm du lịch miền Trung hàng đầu. Quần thể này nằm ở xã Sơn Trạch, huyện Bố Trạch, tỉnh Quảng Bình, cách trung tâm thành phố Đồng Hới khoảng 50 km về phía Tây Bắc. Đặc trưng của nó là những hang động dài và đẹp bậc nhất thế giới. Hơn nữa còn có cả sông, núi với nhiều động thực vật ấn tượng.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmientrung/mt5.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Đây là một di sản văn hóa thế giới</p>
+                                    <p>Với nhiều điều này, danh thắng Phong Nha – Kẻ Bàng trở thành điểm thu hút không chỉ du khách miền Trung mà còn trên cả thế giới. Đến đây, vào sâu bên trong động hẳn bạn sẽ vô cùng ngạc nhiên trước những khối thạch nhũ muôn hình vạn trạng mà tạo hóa đã ban tặng.</p>
+                                </div>
+                                <p><em>Tham khảo: <a href="{% url 'cn_quangbinh' %}">Cẩm nang du lịch Quảng Bình</a> để biết thêm chi tiết</em></p>
+
+                                <h3>5. Đảo Lý Sơn (Quảng Ngãi)</h3>
+                                <p>Thêm một địa điểm du lịch biển miền Trung không thể bỏ qua là đảo Lý Sơn. Là một huyện đảo của tỉnh Quảng Ngãi, nằm cách bờ khoảng 30 km, Lý Sơn gồm có 3 hòn đảo: Đảo Lớn, đảo Bé và Hòn Mù Cu, mang những những nét đẹp độc đáo khác nhau với nhiều địa điểm độc đáo.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmientrung/mt6.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Bình minh trên đảo Lý Sơn tuyệt đẹp</p>
+                                    <p>Không chỉ nổi tiếng với nghề trồng tỏi, hòn đảo được du khách khắp nơi tìm đến bởi vẻ đẹp thiên nhiên trù phú. Tới Lý Sơn bạn sẽ được chiêm ngưỡng cảnh đẹp đúng nghĩa: biến xanh, cát trắng, nắng vàng,… Bạn cũng có thể tham quan chùa Hang, cồng Tò Vò,, hang Câu, đỉnh Thới Lới và thưởng thưởng các món đặc sản thơm ngon.</p>
+                                </div>
+                                
+                                <h3>6. Phố cổ Hội An (Quảng Nam)</h3>
+                                <p>Phố cổ Hội An thuộc tỉnh Quảng Nam, nằm ở hạ lưu sông Thu Bồn, trên con đường si sản nổi tiếng của Việt Nam. Nơi đây lưu giữ nét cổ kính lâu đời, được biết đến những một điểm đến hấp dẫn của miền Trung nói riêng và của Việt Nam nói chung. Đô thị nhỏ này từng là nơi giao thoa của các nền văn hóa Việt – Trung – Nhật – châu Âu về cả kiến trúc, các truyền thống và ẩm thực.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmientrung/mt7.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Phố cổ Hội An vẫn luôn thu hút du khách</p>                                        
+                                </div>
+                                <p>Cùng với đó là phong cảnh thiên nhiên thơ mộng, những con phố cổ nhỏ màu vàng cổ kính, những mái ngói nhuốm màu rêu phong, những phố lồng đèn rực rỡ, lung linh sắc màu và cả những giàn hoa giấy, con sông Hoài thơ mộng,… Tất cả khiến cho người ta luôn có cảm giác thanh bình, thư giãn. Và Hội An xứng đáng để đặt chân đến ít nhất một lần.</p>
+                                <p><em>Tham khảo: <a href="{% url 'cn_quangnam' %}">Cẩm nang du lịch Quảng Nam</a> để biết thêm chi tiết</em></p>
+
+                                <h3>7. Eo Gió</h3>
+                                <p>Đến với Bình Định bạn nên hỏi những người bản xứ nơi đây có cảnh đẹp nào, họ sẽ nói ngay với bạn đó là Eo Gió. Quả thực đây là một điểm đến không thể bỏ lỡ khi tới Bình Định.  Được bao bọc bởi những dãy núi hình cánh cũng khiến khung cảnh nơi đây trở nên kỳ vĩ, hoang sơ đến lạ thường. Đây chỉ là một vùng biển nhỏ, hoang sơ chưa được đưa vào khai thác du lịch nên các dịch vụ ở đây chưa mấy phát triển.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmientrung/mt8.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Eo Gió Bình Định (Ảnh ST)</p>                                        
+                                </div>
+                                
+                                <h3>8. Nhà thờ Mằng Lăng</h3>
+                                <p>Đi từ thành phố Tuy Hòa 35km về phía Bắc bạn sẽ tới với nhà thờ Mằng Lăng. Được xây dựng bởi một vị linh mục người có tên Joseph de La Cassagne  Pháp từ năm 1892. Địa điểm du lịch Miền Trung này có lối kiểu kiến trúc gothique đầy tính nghệ thuật. Trải qua bao thăng trầm thời gian, nhà thờ Mằng Lăng khoác lên mình một vẻ rêu phong cổ kính. Khung cảnh nơi đây như một bức tranh thủy mặc. Nơi đây còn lưu dữ cuốn sách được viết bằng chữ quốc ngữ đầu tiên ở Việt Nam.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmientrung/mt9.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Nhà thờ Mằng Lăng (Ảnh ST)</p>                                        
+                                </div>
+                                <p><em>Tham khảo: <a href="{% url 'cn_phuyen' %}">Cẩm nang du lịch Phú Yên</a> để biết thêm chi tiết</em></p>
+
+                                <h3>9. Tháp Bà Ponagar</h3>
+                                <p>Nha Trang xưa là vùng đất của người Chăm nên giờ đây nơi này còn lưu dữ rất nhiều những công trình kiến trúc của người Chăm cổ. Một trong số đó có thể kể đến đó là Tháp Bà Ponagar đây là điểm du lịch miền Trung cổ kính không thể bỏ qua, tọa lạc trên núi Tháp Bà nằm ngay giữa trung tâm thành phố Nha Trang nên nơi này thu hút được rất nhiều lượt khách thăm quan hàng năm. Được xây dựng từ năm 813 đến 817 thì hoàn thành. Cho đến nay, công trình đã trải qua bao thăng trầm lịch sử nên không còn dữ được nguyên vẹn nét kiến trúc ban đầu nhưng vẫn toát lên được sự uy nghiêm vốn có của nó. Trên thân tháp còn lưu giữ được nhiều tượng và phù điêu bằng đất nung. Tháp có tên như vậy vì ở đây thờ một vị thần có tên Ponagar, thần tượng trưng cho sắc đẹp, nghệ thuật và sự sáng tạo.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmientrung/mt10.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Tháp Bà Ponagar Nha Trang (Ảnh ST)</p>                                        
+                                </div>
+                                <p>Có dịp thì bạn nên tới đây vào những ngày 20-23/3 âm lịch hàng năm để có thể hòa mình vào lễ hội lớn nhất năm tại nơi này. Bên cạnh những hoạt động về tôn giáo, tín ngưỡng, bạn cũng có thể được thưởng thức những tiết mục trình diễn múa lân, múa bóng, hát bộ.</p>
+                                
+                                <h3>10. Thánh địa Mỹ Sơn</h3>
+                                <p>Được phát hiện từ những năm 1885, thánh địa Mỹ Sơn là một trong những di sản của Việt Nam được UNESCO công nhận là Di sản Văn hóa Thế Giới vào năm 1999. Là một quần thể gồm các đền, tháp và có sở những kiến trúc, điêu khắc nghệ thuật mang đậm nét của Vương quốc Chăm cổ. Nơi đây không những là điểm đến du lịch tôn giáo, tín ngưỡng mà nó còn được du khách trong và ngoài nước đến tham quan và khám phá bởi những kiến trúc, điêu khắc đầy nghệ thuật.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmientrung/mt11.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Thánh địa Mỹ Sơn (Ảnh ST)</p>                                        
+                                </div>                                
+                                <p><em>Tham khảo: <a href="{% url 'cn_quangnam' %}">Cẩm nang du lịch Quảng Nam</a> để biết thêm chi tiết</em></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex mt-4">
+                        {% for obj in qs %}
+                        <form action="." method='POST' class="ui form ml-4">
+                            {% csrf_token %}
+                            <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                            {% if user not in obj.liked.all %}
+                                <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Thích</span>
+                                </button>
+                            {% else %}
+                                <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                </button>
+                            {% endif %}
+                        </form>
+                        <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                        {% endfor %}
+                    </div>
+
+                    <section class="comment-area">
+                        <div class="container">
+                            <div class="comment-content">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="comment-details">
+                                            <div class="section-title">
+                                                <h5>Bình luận</h5>
+                                            </div>
+                                            <form action="." method="POST" style="margin-top: 1.3em;">
+                                                {% csrf_token %}
+                                                {% if not comments.all %} 
+                                                <div class="col-lg-12">
+                                                    <center><h6 class="mb-4">Chưa có bình luận nào hết á :((</h6></center>
+                                                </div>
+                                                {% else %}
+                                                    {% for x in comments %}
+                                                    <div class="comment-item">
+                                                        <div class="user-avt">
+                                                            <img src="{% static 'img/decor/cat.png' %}" alt="">
+                                                        </div>
+                                                        <div class="comment-info">
+                                                            <h6>{{ x.user }} - <span>{{ x.created_on }}</span></h6>
+                                                            <p>{{ x.body }}</p>
+                                                        </div>
+                                                    </div>
+                                                    {% endfor %}
+                                                {% endif %}
+                                                <input type="text" name="user" value="{{request.user}}" maxlength="200" required="" id="id_user" style="display: none">
+                                                <input type="text" name="post_id" maxlength="200" value="CN10" required id="id_post_id" style="display: none">
+                                                <div class="comment-body">
+                                                    <textarea placeholder="Nhập bình luận..." name="body" cols="40" rows="10" required id="id_body" style="width: 100%; outline: none; border: 1px solid #e53637; border-radius: 5px; padding: 10px;"></textarea>
+                                                    <button type="submit" class="btn button btn-lg" name="comment_submit"><i class="fa fa-location-arrow"></i> Bình luận</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                                    
+                <div class="col-lg-4 pt-3 pt-lg-0">
+                    <!-- Popular News Start -->
+                    <div class="pb-3">
+                        <div class="bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0 h3">Nổi bật</h3>
+                        </div>
+                        {% for item in oli %}
+                        <div class="d-flex mb-3 haha">
+                            <a href="{{item.link}}"><img src="/media/{{item.bg}}" style="width: 100px; height: 100px; object-fit: cover;"></a>
+                            <div class="w-100 d-flex flex-column justify-content-center bg-light px-3" style="height: 100px;">
+                                <div class="mb-1" style="font-size: 13px;">
+                                    <span>{{item.date}}</span>
+                                </div>
+                                <a class="h6 m-0" href="{{item.link}}">{{item.camnang_name}}</a>
+                                <div class="mb-2" style="font-size: 14px;">
+                                    <span>
+                                        <i class="far fa-eye"></i>
+                                        <span id="view">{{item.view}}</span> 
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!-- Popular News End -->
+
+                    <!-- Tags Start -->
+                    <div class="pb-3">
+                        <div class="bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0 h3">Từ khóa</h3>
+                        </div>
+                        <div class="d-flex flex-wrap m-n1">
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Cẩm nang</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Du lịch</a>
+                            <a href="{% url 'cn_dalat' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đà Lạt</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Khách Sạn</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đi phượt</a>
+                            <a href="{% url 'cn_vungtau' %}" class="btn1 btn-sm btn-outline-secondary m-1">Vũng Tàu</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Kinh nghiệm du lịch</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đi chơi</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Tham quan</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Chỗ ở</a>
+                            <a href="{% url 'weather' %}" class="btn1 btn-sm btn-outline-secondary m-1">Thời tiết</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Nhà nghỉ</a>
+                            <button onclick="deadlines()" class="btn1 btn-sm btn-outline-secondary m-1" style="cursor: pointer; outline: none">Deadline</button>
+                            <script>function deadlines() {alert("NAPUN có sẵn khăn giấy đây. KHÓC ĐIIII :))");}</script>
+                        </div>
+                    </div>
+                    <!-- Tags End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid py-3">
+        <div class="container">
+            <img width="50px" height="50px" src="{% static 'img/decor/pen.png' %}" atl="">
+            <div class="d-flex align-items-center bg-light justify-content-between py-2 px-4 mb-3">
+                <p class="h3 m-0 orange" style="font-style: italic; text-align: justify;">Trên đây là Top những địa điểm du lịch miền Trung mà du khách không nên bỏ qua. Hy vọng sẽ đem đến bạn những lựa chọn phù hợp cho kỳ nghỉ của mình. Còn chần chờ gì nữa, hãy xách balo lên và đi thôi nào. Và đừng quên <a href="{% url 'hotel' %}">đặt khách sạn tại NAPUN</a> để có một trải nghiệm thực tế nhé ! <i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

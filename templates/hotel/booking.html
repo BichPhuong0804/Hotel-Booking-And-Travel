@@ -1,0 +1,260 @@
+{% extends 'base1.html' %}
+{% load static %}
+{% block title %}Đặt khách sạn{% endblock %}
+{% block css %}
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+  <link rel="stylesheet" href="{% static 'fonts/ionicons/css/ionicons.css' %}">
+  <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+  <link rel="stylesheet" href="{% static 'css/hotel.css' %}">
+  <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="slider-area w-100 ">
+    <div class="single-slider hero-overly slider-height2 d-flex align-items-center w-100"
+      style="background-image: url({% static 'img/decor/hotel.jpg' %}); width: 100%">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="hero__caption">
+              <div class="hero-text1">
+              </div>
+              <div class="stock-text" data-animation="fadeInUp" data-delay=".8s">
+                <h2>Đặt khách sạn</h2>
+                <h2>Đặt khách sạn</h2>
+              </div>
+              <div class="hero-text2 mt-110" data-animation="fadeInUp" data-delay=".9s">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="appoinment section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4" style="text-align: center">
+          <div class="mt-3 p-4" style="background: #fff;">
+            <div class="feature-icon mb-3">
+              <i class="fas fa-headset" style="color: #e12454; font-size: 50px"></i>
+            </div>
+            <span class="h3" style="font-weight: bold; font-family: "Exo", sans-serif;">Mọi thắc mắc xin liên hệ!</span>
+            {% for ht in hotel %}
+            <h2 class="text-color mt-3" style="color: #223a66; font-weight: bold">{{ht.phone}}</h2>
+            {% endfor %}
+          </div>
+          <img src="https://static.mservice.io/img/momo-upload-api-211014142646-637698184063006489.jpg" class="img-fluid">
+
+        </div>
+
+        <div class="col-lg-8" style="font-size: 20px">
+          <div class="appoinment-wrap mt-5 mt-lg-0 pl-lg-5">
+            <h2 class="mb-2 title-color" style="color: #223a66; font-weight: 800; font-size: 50px; text-align: center">ĐẶT KHÁCH SẠN</h2>
+            <p class="mb-4">Đặt phòng khách sạn giá rẻ và thanh toán tiện lợi bằng Paypal. Rất nhiều ưu đã cho bạn. Đi khắp nơi chẳng còn lo chốn nghỉ chân chỉ với vài thao tác.</p>
+            
+            <form id="booking" class="appoinment-form" method='POST' action=".">
+              {% csrf_token %} 
+              {% for ht in hotel %}
+              <input type="text" name="user" maxlength="100" required id="id_user" value="{{request.user}}" style="display: none">
+              <input type="text" name="hotel_id" maxlength="200" required id="id_hotel_id" value="{{ht.hotel_id}}" style="display: none">
+              <input type="text" name="room_id" maxlength="500" required id="id_room_id" value="{{request.GET.room_id}}" style="display: none">
+              <input type="text" name="book_day" required id="id_book_day" value="{{time}}" style="display: none">
+
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <label for="id_hname"><b>Tên khách sạn</b></label>
+                  <input type="text" name="hname" maxlength="100" required id="id_hname" value="{{ht.hotel_name}}" class="form-control" readonly>
+                </div>
+              </div>
+
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label for="id_locate"><b>Khu vực</b></label>
+                      <input type="text" name="locate" maxlength="100" required id="id_locate" value="{{ht.location}}" class="form-control" readonly>
+                    </div>
+                  </div>
+                  <div class="col-lg-9">
+                    <div class="form-group">
+                      <label><b>Địa chỉ</b></label>
+                      <input type="text" value="{{ht.address}}" class="form-control" readonly>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+
+              <div class="col-lg-12">
+                <div class="row">
+                  {% for r in booked %}
+                  <div class="col-lg-9">
+                    <div class="form-group">
+                      <label for="id_locate"><b>Tên phòng</b></label>
+                      <input type="text" name="room_type" maxlength="500" required id="id_room_type" value="{{r.room_name}}" class="form-control" readonly>
+                    </div>
+                  </div>
+                  {% endfor %}
+
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label for="id_quanti"><b>Số lượng</b></label>
+                      <input type="number" name="quanti" min="0" required id="id_quanti" value='1' class="form-control" readonly>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label for="id_check_in"><b>Ngày nhận phòng</b></label>
+                      <input type="text" name="check_in" required id="id_check_in" value="{{request.GET.check_in}}" class="form-control" readonly>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label for="id_check_out"><b>Ngày trả phòng</b></label>
+                      <input type="text" name="check_out" required id="id_check_out" value="{{request.GET.check_out}}" class="form-control" readonly>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <label for="id_name"><b>Họ và tên</b></label>
+                  <input type="text" name="name" maxlength="100" required id="id_name" class="form-control" >
+                </div>
+              </div>
+
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <label for="id_phone"><b>Số điện thoại</b></label>
+                  <input type="text" name="phone" maxlength="100" required id="id_phone" class="form-control">
+                </div>
+              </div>
+
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <label for="id_cmnd"><b>CMND/CCCD</b></label>
+                  <input type="text" name="cmnd" maxlength="100" required id="id_cmnd" class="form-control">
+                </div>
+              </div>
+
+              <div class="col-lg-12" style="margin-bottom: 100px">
+                <div class="form-group">
+                  <label for="id_pay"><b>Chọn phương thức thanh toán</b></label>
+                  <select name="pay" maxlength="100" required id="id_pay" onchange='pmethod()'>
+                    <option name="pay" value="Trực tiếp" selected>Trực tiếp</option>
+                    <option name="pay" value="Paypal">PayPal</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-lg-12"><hr></div>
+
+              {% for r in booked %}
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <img src="{% static 'img/decor/dollar.png' %}" width="40px" height="40px">
+                  <label for="id_total_price" style="color: #e12454"><b>THÀNH TIỀN: </b></label>
+                  <span style="font-size: 30px; color: #111; font-weight: bold">$</span>
+                  <input type="text" name="total_price" maxlength="100" required id="id_total_price" value="{{r.price}}" style="width: 100px; font-size: 30px; font-weight: bold; background: none; outline: none; border: none" readonly>
+                </div>
+              </div>
+              {% endfor %}
+
+              <div class="col-lg-12"><hr></div>
+              
+              <div class="col-lg-12" id="pay_method" style="padding-left: 0px !important">
+                  <button class="btn" style="width: 100% !important; font-size: 15px" type="submit" id='submit_button'>Đặt phòng<i class=" ml-2 fas fa-chevron-right ml-2"></i></button>
+              </div>
+
+              <button class="btn" style="width: 100% !important; font-size: 15px; display: none" type="submit" id='submit_button'>Đặt phòng<i class=" ml-2 fas fa-chevron-right ml-2"></i></button>
+
+              <div id='paypal_method' style="display: none;">
+                <div id="paypal-button-container"></div>
+                  <script src="https://www.paypal.com/sdk/js?client-id=AaBQ_dMZ9_nyx43GRhA1cw5HJ7xQuioNDx5VAp7MyoTdE704ZuSy5lm03AT0R8k-KO8GfNzISSG7wMqo&currency=USD"></script>
+                  <script>
+                      paypal.Buttons({
+                          createOrder: function(data, actions) {
+                              return actions.order.create({
+                                  purchase_units: [{
+                                      amount: {
+                                        value: parseFloat($('input#id_total_price').val())
+                                      }
+                                  }]
+                              });
+                          },
+              
+                          onApprove: function(data, actions) {
+                              return actions.order.capture().then(function(orderData) {
+                                  console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                                  var transaction = orderData.purchase_units[0].payments.captures[0];
+                                  document.getElementById('submit_button').click();
+                              });
+                          }
+                      }).render('#paypal-button-container');
+                  </script>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %} 
+
+{% block js %}
+  <script>
+    function pstar(){
+      var price = document.getElementById('id_total_price').value
+      var checkin = document.getElementById('id_check_in').value
+      var checkout =  document.getElementById('id_check_out').value
+      var total_price = 0
+
+      price = parseFloat(price)
+      checkin = parseInt(checkin.slice(8))
+      checkout = parseInt(checkout.slice(8))
+
+      if (checkin == checkout)
+        total_price = price
+      else
+        total_price = price * (checkout - checkin)    
+        
+      document.getElementById('id_total_price').value = total_price;
+    }
+
+    function pmethod(){
+      var show_method = document.getElementById('pay_method')
+      var obj = document.getElementById('id_pay')
+      var value = obj.value
+      var paypal = document.getElementById('paypal_method')
+
+      if (value == 'Trực tiếp') {
+        show_method.innerHTML= `<button class="btn btn-main-2 btn-round-full" style="width: 100% !important" type="submit">Đặt phòng<i class=" ml-2 fas fa-chevron-right ml-2"></i></button>`
+        paypal.style.display="none"
+      }
+      else if (value == 'Paypal') {
+        paypal.style.display="block"
+        show_method.innerHTML=''
+      } 
+    }
+
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <script src="{% static 'js/hotel.js' %}"></script>
+  <script src="{% static 'js/nice-select.js' %}"></script>
+{% endblock %}

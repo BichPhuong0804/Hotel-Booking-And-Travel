@@ -1,0 +1,363 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Cẩm nang du lịch Hải Phòng.{% endblock %}
+{% block content %}
+    <div class="container-fluid py-3">
+        <div class="container">
+            <div>
+                <div class="col-12">
+                    <p id="tieude" class="h3" style="color: #343a40;">Kinh nghiệm du lịch Hải Phòng tự túc chi tiết, tiết kiệm nhất</p>
+                    <div class="d-flex">
+                        <img src="{% static 'img/decor/cat.png' %}" alt='' width="50px" height="50px">
+                        <p style="color: #555; font-weight: bold">Lượt xem: {{vi.view}} </p>
+                        <div class="d-flex">
+                            {% for obj in qs %}
+                            <form action="." method='POST' class="ui form ml-4">
+                                {% csrf_token %}
+                                <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                                {% if user not in obj.liked.all %}
+                                    <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                        <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                        <span style="color: #fff; font-weight: 600">Thích</span>
+                                    </button>
+                                {% else %}
+                                    <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                        <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                        <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                    </button>
+                                {% endif %}
+                            </form>
+                            <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="background-image: url({% static 'img/decor/bg.jpg' %})">
+                <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 5px;">
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 30px;">
+                </div>
+                <div class="col-12">
+                    <p id="tieude"><b>HẢI PHÒNG</b></p>
+                </div>
+                <div class="col-12" style="color: black; ">
+                    <p class="m-0">Hải Phòng – thành phố với cái tên Hoa Phượng Đỏ hay thành phố Cảng không biết từ bao giờ lại trở nên hấp dẫn đến thế. Những tưởng nơi đây chỉ có đảo Cát Bà hay biển Đồ Sơn nhưng nếu ai đã từng một lần đến đây sẽ thấy có bao nhiêu là danh thắng, cảnh đẹp và món ăn đặc sắc,… mọi thứ đều thực sự đáng khám phá. Nếu bạn muốn tìm hiểu rõ hơn về vùng đất này, mình sẽ chia sẻ những kinh nghiệm du lịch Hải Phòng để bạn có một chuyến đi thật vui vẻ, hữu ích.</p>
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 5px; margin-top: 15px;">
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 20px;">
+                </div>
+            </div>
+            <div class="mb-3 pb-3">
+                <img class="img-fluid w-100" src="{% static 'img/haiphong/hp1.png' %}" alt="">
+                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Những điều cần biết khi du lịch Hải Phòng (Ảnh: ST)</p>
+            </div>
+            <div class="mb-3 pb-3">
+                <a href="{% url 'hotel' %}"><img class="img-fluid w-100" src="{% static 'img/decor/dulich.jpg' %}" alt=""></a>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="col-12">
+                        <div class="single-services section-padding2">
+                            <div class="details-caption" style="color: #343a40">
+                                <h3>1. Giới thiệu đôi nét trước khi khám phá</h3>
+                                <p>Hải Phòng là một tỉnh nằm ở phía Bắc Việt Nam, cách Thủ đô Hà Nội khoảng 102 km. Đây là thành phố cảng quan trọng của nước ta, đồng thời cũng được biết đến là trung tâm văn hóa, kinh kế trọng điểm ở vùng Bắc Bộ. Không những vậy, thành phố này đã và đang vươn lên trở thành một trong những điểm du lịch hấp dẫn, thu hút đông đảo du khách gần xa.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/haiphong/hp2.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hải Phòng – Một trong những thành phố du lịch hấp dẫn của miền Bắc.</p>
+                                </div>
+                                <p>Có rất nhiều lý do đáng để đi du lịch Hải Phòng. Đó là lịch sử vinh quang ngàn năm; là nơi hội tụ đầy đủ vẻ đẹp của sông núi, biển cả; nơi có tình người thân thiện và cả nền ẩm thực đặc sắc, hấp dẫn. Ghé thăm vùng đất này bạn sẽ được khám phá những di tích lịch sử, danh lam thắng cảnh, những khu du lịch nghỉ mát, giải trí đạt chuẩn quốc tế, được trải nghiệm các lễ hội lớn, thỏa sức đắm mình trong biển và thưởng thức những món ăn ngon,…</p>
+
+                                <h3>2. Kinh nghiệm du lịch Hải Phòng tự túc: Đi mùa nào đẹp?</h3>
+                                <p>Bạn có thể du lịch Hải Phòng bất kỳ mùa nào trong năm. Mỗi mùa, thời gian khác nhau sẽ đem đến cho bạn những trải nghiệm, cảm nhận riêng về vẻ đẹp Hải Phòng.</p>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p>Du lịch Hải Phòng từ tháng 4 - tháng 10: Là thời điểm du lịch Hải Phòng lý tưởng nhất bởi lúc này thời tiết khô ráo, không mưa, mát mẻ, dễ chịu. Theo kinh nghiệm du lịch tự túc, khi du lịch vào thời gian này, du khách có thể thỏa sức khám phá những địa điểm nổi tiếng, đắm chìm trong làn nước mát tại bãi biển Đồ Sơn, Cát Bà.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/haiphong/hp3.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Theo kinh nghiệm du lịch Hải phòng tự túc, tháng 4 - 10 là thời điểm du lịch Hải Phòng lý tưởng nhất (Nguồn: Sưu tầm)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Du lịch Hải Phòng từ tháng 1 - tháng 3: Theo kinh nghiệm du lịch Hải Phòng tự túc thì thời gian này có rất nhiều lễ hội nổi tiếng như: Lễ hội núi Đối, lễ hội Voi, đền Trạng Trình,… để du khách vui chơi giải trí. </p></li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Du lịch Hải Phòng vào mùa đông: Bạn có thể dạo quanh những con phố trung tâm sầm uất, chụp ảnh check-in tại những địa điểm ăn chơi Hải Phòng nổi tiếng mà không sợ đông người. Hoặc lên kế hoạch cho một chuyến foodtour Hải Phòng cũng là một ý tưởng tuyệt vời. </p></li>
+                                </ul>
+                                                                    
+                                <h3>3. Kinh nghiệm đi lại khi đi du lịch Hải Phòng</h3>
+                                <p>Cách di chuyển đến Hải Phòng thuận tiện với nhiều phương thức để bạn lựa chọn:</p>
+                                <p>
+                                    <ul style="padding-left: 30px;">
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Phương tiện cá nhân: Đường từ Hà Nội lên Hải Phòng tương đối dễ đi, bạn chỉ cần chạy dọc qua Quốc lộ 5 qua Hải Dương là có thể đến được Hải Phòng. Trước khi đi đừng quên kiểm tra xe cẩn thận, chuẩn bị một chiếc smartphone có kết nối internet/3G và một bình xăng đầy nhé!</p></li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                            <p>Tàu hỏa: Là phương tiện được nhiều du khách yêu thích chọn lựa. Giá vé tàu di chuyển từ Hà Nội - Hải Phòng rất rẻ chỉ từ 70.000 đồng dành cho sinh viên, 100.000 đồng dành cho người lớn. Di chuyển bằng tàu hỏa sẽ giúp bạn ngắm nhìn trọn vẹn cảnh đẹp Hải Phòng.</p>
+                                            <div class="mb-3">
+                                                <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/haiphong/hp4.jpg' %}" alt="">
+                                                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Tàu hỏa thường được nhiều du khách chọn lựa (Nguồn: Sưu tầm)</p>
+                                            </div>
+                                        </li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Xe khách: Lựa chọn di chuyển bằng xe khách sẽ tiết kiệm thời gian hơn đi bằng tàu hỏa. Chỉ mất khoảng 1 tiếng là bạn đã có mặt tại Hải Phòng rồi. Từ Hà Nội, bạn có thể bắt xe tại bến xe Nước Ngầm, Giáp Bát.</p></li>
+                                    </ul>
+                                </p>
+                                
+                                <p>Phương tiện đi lại tại Hải Phòng</p>
+                                <p>
+                                    <ul style="padding-left: 30px;">
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                            <p>Thuê xe máy: Là sự lựa chọn hợp lý nếu bạn muốn khám phá Hải Phòng theo cách riêng của mình. Xe máy sẽ giúp bạn chủ động về thời gian, khai phá những cung đường mới và có nhiều trải nghiệm lý thú. Giá thuê xe máy dao động từ 80.000 - 150.000 đồng/xe/ngày.</p>
+                                            <div class="mb-3">
+                                                <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/haiphong/hp5.jpg' %}" alt="">
+                                                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Khám phá Hải Phòng bằng xe máy là tuyệt vời nhất theo kinh nghiệm du lịch Hải Phòng tự túc (Nguồn: Pinterest)</p>
+                                            </div>
+                                        </li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Taxi: Rất phù hợp cho những gia đình có người già và trẻ nhỏ. Bởi di chuyển bằng taxi sẽ nhanh hơn, thoải mái mà không bị phụ thuộc vào thời tiết. Giá taxi Hải Phòng khoảng 10.000 đồng/km đầu tiên/ xe 4 chỗ và 15.000 đồng/ km đầu tiên/ xe 7 chỗ. </p></li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Xe bus: Có giá thành rẻ, chỉ từ 7.000 đồng/ vé mà thôi. Mặc dù hơi mất thời gian di chuyển nhưng đây cũng sẽ là trải nghiệm thú vị dành cho các du khách nếu có nhiều thời gian. </p></li>
+                                    </ul>
+                                </p>
+                                
+                                <h3>3. Những địa điểm du lịch Hải Phòng ấn tượng, nổi tiếng</h3>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Biển Đồ Sơn</p>
+                                        <p>Biển Đồ Sơn là một trong những địa điểm du lịch nổi tiếng nhất tại Hải Phòng. Nơi đây chỉ cách trung tâm thành phố khoảng 20km, đường đi dễ dàng. Vào mỗi mùa hè, khu du lịch Hải Phòng này thường rất đông các du khách đổ về để được đắm chìm trong làn nước trong xanh mát lành và thưởng thức hải sản tươi ngon ngay cạnh biển.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/haiphong/hp6.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Check-in ngay tại bãi biển Đồ Sơn (Nguồn: Zing News)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Đảo Cát Bà</p>
+                                        <p>Nếu được hỏi du lịch Hải Phòng có gì chơi ngoài biển Đồ Sơn? Câu trả lời chắc chắn là đảo Cát Bà. Sở hữu khung cảnh đẹp tựa tranh vẽ với những bãi biển trải dài vô tận, bờ cát trắng nhấp nhô cùng với nhiều con thuyền neo đậu gần bờ thực sự cảnh quan nơi đây đã khiến biết bao du khách phải mê mẩn. Theo kinh nghiệm du lịch Hải Phòng tự túc, du khách nên đến đây vào tháng 6 - 7 là lý tưởng nhất. </p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/haiphong/hp7.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Đảo Cát Bà có vẻ đẹp thơ mộng (Nguồn: Sưu tầm)</p>
+                                        </div>
+                                    </li>  
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Vịnh Lan Hạ</p>
+                                        <p>Được mệnh danh là “đảo ngọc thiên đường”, vịnh Lan Hạ thu hút du khách bởi làn nước trong xanh cùng cảnh vật thiên nhiên hoang sơ. Với 400 hòn đảo lớn nhỏ, tất cả đều được phủ cây xanh mát lành nên khi du lịch tại đây bạn sẽ cảm thấy như lạc vào “thiên đường” trong xanh, mát lành.Vịnh Lan Hạ thực sự là một không gian tuyệt vời cho bạn và gia đình thư giãn.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/haiphong/hp8.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Vịnh Lan Hạ cũng sở hữu vẻ đẹp ngất ngây không kém (Nguồn: Sưu tầm)</p>
+                                        </div>
+                                    </li>  
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Đảo Bạch Long Vĩ</p>
+                                        <p>Là hòn đảo xa bờ nhất Vịnh Bắc Bộ, đảo Bạch Long Vĩ hiện nay vẫn còn giữ được nét đẹp hoang sơ và thu hút đông đảo du khách ghé thăm. Nơi đây có khí hậu trong lành, mát mẻ và luôn sôi động với những đoàn thuyền đánh cá mỗi ngày. Nếu bạn đang tìm địa điểm du lịch Hải Phòng bình yên, vắng vẻ thì hãy tới đảo vào chiều tối, vừa ngắm hoàng hôn và hít hà không khí trong lành.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/haiphong/hp9.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Đảo Bạch Long Vĩ khiến du khách phải choáng ngợp (Nguồn: Sưu tầm)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Đảo Hòn Dấu</p>
+                                        <p>Khu du lịch Hòn Dấu thu hút rất nhiều du khách bởi khung cảnh thiên nhiên hoang sơ tuyệt đẹp cùng nhiều khu vui chơi giải trí hấp dẫn, được đầu tư quy mô lớn. Nơi đây còn được rất nhiều du khách ví von là “Đà Lạt thu nhỏ” của thành phố Hải Phòng bởi hình ảnh hàng thông xanh rì rào. Theo kinh nghiệm du lịch Hòn Dấu Hải Phòng, bạn nên trải nghiệm cả bãi biển tự nhiên, bãi biển nhân tạo kết hợp với khu resort nghỉ dưỡng và khu vui chơi hiện đại.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/haiphong/hp10.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Đảo Hòn Dấu là địa điểm “must-go” theo kinh nghiệm du lịch Hải Phòng tự túc (nguồn: Zing News)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bến tàu không số</p>
+                                        <p>Bến tàu K15 hay còn gọi là bến Nghiêng là một địa điểm du lịch Hải Phòng đang được đất nước gìn giữ. Đây là di tích quốc gia, đánh dấu mốc trong cuộc kháng chiến chống Mỹ cứu nước. Bến tàu không số còn là khởi đầu cho con đường Hồ Chí Minh trên biển ghi dấu những chiến công chói lọi, đánh dấu trang sử hào hùng của quân đội ta. Giờ đây, nơi này không chỉ là di tích lịch sử mà còn là một điểm không thể thiếu trong những tour du lịch Hải Phòng, thu hút đông đảo du khách tới tham quan và tìm hiểu.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/haiphong/hp11.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Di tích lịch sử bến tàu không số (Nguồn: Sưu tầm) </p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Quần thể Núi Voi</p>
+                                        <p>Quần thể Núi Voi bao gồm các hang động tuyệt đẹp như: hang Voi, hang Chiêng, hang Cá Chép, hang Bể... Nơi đây rất thích hợp cho những chuyến du lịch Hải Phòng 1 ngày hoặc du khách yêu thích khám phá nét đẹp hoang sơ, tự nhiên của các hang động. </p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/haiphong/hp12.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Quần thể núi voi Hải Phòng (Nguồn: Sưu tầm)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Khu di tích lịch sử văn hóa tháp Tường Long</p>
+                                        <p>Tháp Tường Long là di tích lịch sử văn hóa đã hơn một nghìn năm tuổi tọa lạc trên đỉnh Long Sơn. Vào năm 1058 vua Lý Thái Tông đã cho xây dựng tháp và sau đó nằm mơ thấy rồng vàng nên liền đặt tên ngọn tháp là: Tháp Tường Long nghĩa là “thấy Rồng vàng hiện lên”. Khi đứng trên tháp, du khách sẽ chiêm ngưỡng được toàn cảnh vẻ đẹp Đồ Sơn cũng như cuộc sống giản dị của những người dân chài lưới nơi đây. </p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/haiphong/hp13.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Khu di tích lịch sử văn hóa Tháp Tường Long (Nguồn: VTV6)</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <h3>4. Các món ăn đặc sản Hải Phòng nổi tiếng tiếc hùi hụi nếu bỏ qua</h3>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Lẩu cua đồng</p>
+                                        <p>Nếu chưa biết đến Hải Phòng ăn gì thì theo kinh nghiệm du lịch Hải Phòng tự túc, du khách nên thưởng thức món lẩu cua đồng. Món lẩu này đặc trưng bởi nước dùng ngọt được ninh từ xương, gạch cua rất nhiều, đậu phụ non, các loại rau ăn kèm và thịt nhúng đều rất hấp dẫn. Đặc biệt nhất phải kể đến phần nước lẩu sánh mịn chưa từng thấy ở bất kỳ tỉnh thành nào. </p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/haiphong/hp14.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Bún cá cay trứ danh đất Cảng (Nguồn: Yan)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bún cá cay</p>
+                                        <p>Nhắc tới đặc sản Hải Phòng không thể bỏ qua món bún cá cay trứ danh. Hương vị cay nồng từ ớt trưng hòa quyện với các topping hấp dẫn như rau cải, chả, cá chiên giòn, lòng thực sự sẽ khiến bạn phải xuýt xoa, không tiếc lời khen tặng. Du khách có thể lựa chọn giữa bún hoặc bánh đa đỏ tùy theo sở thích.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/haiphong/hp15.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Bún cá cay trứ danh đất Cảng (Nguồn: Yan)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Nem cua bể</p>
+                                        <p>Khác với nem truyền thống, món ăn này có thành phần nguyên liệu chính là cua bể Hải Phòng. Lớp vỏ giòn rụm bên ngoài kết hợp với phần nhân béo ngậy, ngập thịt cua bể chắc chắn sẽ chinh phục được vị giác của bạn. Những ai là fan của hải sản thì chắc chắn sẽ thích mê món này khi du lịch Hải Phòng. </p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/haiphong/hp16.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Nem cua bể quán Bà Cụ (Nguồn: VnExpress)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bánh đa cua</p>
+                                        <p>Nếu du khách đã có kinh nghiệm du lịch Hải Phòng tự túc thì trong foodtour của mình, bánh đa cua sẽ là món ăn “must-try” không thể bỏ lỡ. Bánh đa cua Hải Phòng có rất nhiều topping như bề bề, cua, chả lá lốt, thịt lợn... khiến cho thực khách không có cảm giác nhàm chán khi ăn. Món ăn này cũng có giá rất rẻ chỉ từ 30.000 đồng/ 1 tô mà thôi. </p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/haiphong/hp17.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Bát bánh đa cua full topping (Nguồn: Wiki Travel)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Ốc các loại</p>
+                                        <p>Theo kinh nghiệm du lịch Hải Phòng tự túc, ốc cũng là một món ăn rất đặc sắc tại đây. Với cách chế biến đa dạng, nhiều loại sốt như trứng muối, me cay, sốt Thái... các quán ốc nơi đây đã thực sự rất biết cách lấy lòng các du khách. Bạn nên ghé các quán ốc Hải Phòng vào buổi tối, bởi không khí lúc này mát mẻ, có thể ăn uống thoải mái. </p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/haiphong/hp18.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Ốc được chế biến thành nhiều món hấp dẫn (Nguồn: Foody)</p>
+                                        </div>
+                                    </li> 
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Cua rang muối</p>
+                                        <p>Kết thúc food tour Hải Phòng, du khách có thể lựa chọn món cua rang muối. Hương vị đậm đà từ gia vị được nêm sẽ thấm vào từng thớ thịt cua rất hấp dẫn. Nhâm nhi món cua rang muối này với một cốc bia hoặc nước ngọt thì thực sự còn tuyệt vời hơn nữa. </p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/haiphong/hp19.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Cua rang muối hấp dẫn (Nguồn: Sưu tầm)</p>
+                                        </div>
+                                    </li>                                
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex mt-4">
+                        {% for obj in qs %}
+                        <form action="." method='POST' class="ui form ml-4">
+                            {% csrf_token %}
+                            <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                            {% if user not in obj.liked.all %}
+                                <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Thích</span>
+                                </button>
+                            {% else %}
+                                <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                </button>
+                            {% endif %}
+                        </form>
+                        <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                        {% endfor %}
+                    </div>
+
+                    <section class="comment-area">
+                        <div class="container">
+                            <div class="comment-content">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="comment-details">
+                                            <div class="section-title">
+                                                <h5>Bình luận</h5>
+                                            </div>
+                                            <form action="." method="POST" style="margin-top: 1.3em;">
+                                                {% csrf_token %}
+                                                {% if not comments.all %} 
+                                                <div class="col-lg-12">
+                                                    <center><h6 class="mb-4">Chưa có bình luận nào hết á :((</h6></center>
+                                                </div>
+                                                {% else %}
+                                                    {% for x in comments %}
+                                                    <div class="comment-item">
+                                                        <div class="user-avt">
+                                                            <img src="{% static 'img/decor/cat.png' %}" alt="">
+                                                        </div>
+                                                        <div class="comment-info">
+                                                            <h6>{{ x.user }} - <span>{{ x.created_on }}</span></h6>
+                                                            <p>{{ x.body }}</p>
+                                                        </div>
+                                                    </div>
+                                                    {% endfor %}
+                                                {% endif %}
+                                                <input type="text" name="user" value="{{request.user}}" maxlength="200" required="" id="id_user" style="display: none">
+                                                <input type="text" name="post_id" maxlength="200" value="CN01" required id="id_post_id" style="display: none">
+                                                <div class="comment-body">
+                                                    <textarea placeholder="Nhập bình luận..." name="body" cols="40" rows="10" required id="id_body" style="width: 100%; outline: none; border: 1px solid #e53637; border-radius: 5px; padding: 10px;"></textarea>
+                                                    <button type="submit" class="btn button btn-lg" name="comment_submit"><i class="fa fa-location-arrow"></i> Bình luận</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                                    
+                <div class="col-lg-4 pt-3 pt-lg-0">
+                    <!-- Popular News Start -->
+                    <div class="pb-3">
+                        <div class="bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0 h3">Nổi bật</h3>
+                        </div>
+                        {% for item in oli %}
+                        <div class="d-flex mb-3 haha">
+                            <a href="{{item.link}}"><img src="/media/{{item.bg}}" style="width: 100px; height: 100px; object-fit: cover;"></a>
+                            <div class="w-100 d-flex flex-column justify-content-center bg-light px-3" style="height: 100px;">
+                                <div class="mb-1" style="font-size: 13px;">
+                                    <span>{{item.date}}</span>
+                                </div>
+                                <a class="h6 m-0" href="{{item.link}}">{{item.camnang_name}}</a>
+                                <div class="mb-2" style="font-size: 14px;">
+                                    <span>
+                                        <i class="far fa-eye"></i>
+                                        <span id="view">{{item.view}}</span> 
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!-- Popular News End -->
+
+                    <!-- Tags Start -->
+                    <div class="pb-3">
+                        <div class="bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0 h3">Từ khóa</h3>
+                        </div>
+                        <div class="d-flex flex-wrap m-n1">
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Cẩm nang</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Du lịch</a>
+                            <a href="{% url 'cn_dalat' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đà Lạt</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Khách Sạn</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đi phượt</a>
+                            <a href="{% url 'cn_vungtau' %}" class="btn1 btn-sm btn-outline-secondary m-1">Vũng Tàu</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Kinh nghiệm du lịch</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đi chơi</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Tham quan</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Chỗ ở</a>
+                            <a href="{% url 'weather' %}" class="btn1 btn-sm btn-outline-secondary m-1">Thời tiết</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Nhà nghỉ</a>
+                            <button onclick="deadlines()" class="btn1 btn-sm btn-outline-secondary m-1" style="cursor: pointer; outline: none">Deadline</button>
+                            <script>function deadlines() {alert("NAPUN có sẵn khăn giấy đây. KHÓC ĐIIII :))");}</script>
+                        </div>
+                    </div>
+                    <!-- Tags End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid py-3">
+        <div class="container">
+            <img width="50px" height="50px" src="{% static 'img/decor/pen.png' %}" atl="">
+            <div class="d-flex align-items-center bg-light justify-content-between py-2 px-4 mb-3">
+                <p class="h3 m-0 orange" style="font-style: italic; text-align: justify;">Với những kinh nghiệm du lịch Hải Phòng tự túc được chia sẻ trong bài viết, hi vọng du khách sẽ có thêm các thông tin tham khảo bổ ích cho chuyến du lịch của mình. Hãy ghé qua những địa điểm nổi tiếng, quán ăn, nhà hàng ngon để thưởng thức trọn vẹn nét đẹp của Hải Phòng. Và đừng quên <a href="{% url 'hotel' %}">đặt khách sạn tại NAPUN</a> để có một trải nghiệm thực tế nhé ! <i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

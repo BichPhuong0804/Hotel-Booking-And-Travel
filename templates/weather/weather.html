@@ -1,0 +1,70 @@
+{% extends 'base1.html' %}
+{% load static %}
+{% block title %}Thời tiết{% endblock %}
+{% block css %}
+    <style>
+      button:hover {
+        background: #FF4A52;
+      }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="slider-area w-100 ">
+      <div class="single-slider hero-overly slider-height2 d-flex align-items-center w-100" style="background-image: url({% static 'img/decor/weather.jpg' %}); width: 100%">
+          <div class="container">
+              <div class="row">
+                  <div class="col-lg-12">
+                      <div class="hero__caption">
+                          <div class="hero-text1">
+                          </div>
+                          <div class="stock-text" data-animation="fadeInUp" data-delay=".8s">
+                              <h2>Thời tiết</h2>
+                              <h2>Thời tiết</h2>
+                          </div>
+                          <div class="hero-text2 mt-110" data-animation="fadeInUp" data-delay=".9s">
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <div style="width: 100%; heigh: auto; background-image: url(https://static.fptplay.net/static/img/share/video/01_09_2020/weathering-with-you-5dbe4431298da01-09-2020_14g13-47.jpg)">
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background: #0b1c39">
+        <form method="post" class="col-md">
+            {% csrf_token %}
+            <div class="input-group">
+            <input type="text" class="form-control" name="city" placeholder="Nhập tỉnh/thành phố">
+            <div class="input-group-btn">
+                <button type="submit" class="btn">Xem</button>
+            </div>
+            </div>
+            <form>
+        </nav>
+        <br><br>
+        <div class="row" style="margin: 0; padding: 0;">
+            {% if country_code and coordinate and temp and pressure and humidity %}
+            <div class="d-flex align-items-center justify-content-between py-2 px-4 mb-3 bg-dark">
+                <img src="{% static 'img/decor/search.png' %}" alt="" width="40px" height="40px">
+                <h3 class="m-0 h3" style=" color: #fff">Kết quả tra thời tiết cho <span style="font-style: italic;">" {{ city }} "</span></h3>
+            </div>
+            <div class="col-lg-12 d-flex justify-content-center">
+                <div class=" card text-white mb-6" style="background-color: rgba(162, 155, 164, 0.3);">
+                    <div class="card-body p-3">
+                        <h4 style="color: #040E27; font-size: 30px;"><span class="badge" style="background: #ff5f13; color: #fff;">Mã quốc gia :</span> {{country_code}}</h4>
+                        <h4 style="color: #040E27; font-size: 30px;"><span class="badge" style="background: #ff5f13; color: #fff;" >Hệ tọa độ [X,Y] :</span> {{coordinate}}</h4>
+                        <h4 style="color: #040E27; font-size: 30px;"><span class="badge" style="background: #ff5f13; color: #fff;">Nhiệt độ :</span> {{temp}}</h4>
+                        <h4 style="color: #040E27; font-size: 30px;"><span class="badge" style="background: #ff5f13; color: #fff;">Áp suất :</span> {{pressure}} </h4>
+                        <h4 style="color: #040E27; font-size: 30px;"><span class="badge" style="background: #ff5f13; color: #fff;">Độ ẩm : </span> {{humidity}}</h4>
+                        <h4 style="color: #040E27; font-size: 30px;"><span class="badge" style="background: #ff5f13; color: #fff;">Thời tiết : </span> {{main}}
+                        <img src="http://openweathermap.org/img/w/{{icon}}.png" alt="Image" style="width:70px"></h4>
+                        <h4 style="color: #040E27; font-size: 30px;"><span class="badge" style="background: #ff5f13; color: #fff;">Miêu tả : </span> {{description}}</h4>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+{% endblock %}
+    </div>

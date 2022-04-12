@@ -1,0 +1,373 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Cẩm nang du lịch Hà Nội.{% endblock %}
+{% block content %}
+    <div class="container-fluid py-3">
+        <div class="container">
+            <div>
+                <div class="col-12">
+                    <p id="tieude" class="h3" style="color: #343a40;">Kinh nghiệm du lịch Hà Nội tự túc chi tiết nhất</p>
+                    <div class="d-flex">
+                        <img src="{% static 'img/decor/cat.png' %}" alt='' width="50px" height="50px">
+                        <p style="color: #555; font-weight: bold">Lượt xem: {{vi.view}} </p>
+                        <div class="d-flex">
+                            {% for obj in qs %}
+                            <form action="." method='POST' class="ui form ml-4">
+                                {% csrf_token %}
+                                <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                                {% if user not in obj.liked.all %}
+                                    <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                        <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                        <span style="color: #fff; font-weight: 600">Thích</span>
+                                    </button>
+                                {% else %}
+                                    <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                        <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                        <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                    </button>
+                                {% endif %}
+                            </form>
+                            <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="background-image: url({% static 'img/decor/bg.jpg' %})">
+                <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 5px;">
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 30px;">
+                </div>
+                <div class="col-12">
+                        <p id="tieude"><b>HÀ NỘI</b><p>
+                </div>
+                <div class="col-12" style="color: black; ">
+                        <p class="m-0">Hà Nội “băm sáu” phố phường, Hà Nội trà chanh chém gió, Hà Nội trà đá vỉa hè… Dường như những câu miêu tả đơn giản này lại có thể gom hết những điều bình dị nhất của mảnh đất thủ đô. Cùng với lịch sử “nghìn năm văn hiến”, Hà Nội luôn thu hút du khách với một màu sắc đặc trưng, một nét văn hóa đậm đà bản sắc, và một lối sống riêng chẳng thể lẫn với bất kỳ nơi nào khác. Nếu tò mò về “màu sắc” ấy, hãy lưu lại những kinh nghiệm du lịch Hà Nội dưới đây và lên lịch cho chuyến khám phá thủ đô thôi nào!</p> 
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 5px; margin-top: 15px;">
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 20px;">
+                </div>
+            </div>
+            <div class="mb-3 pb-3">
+                <img class="img-fluid w-100" src="{% static 'img/hanoi/hn1.png' %}" alt="">
+                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Những điều cần biết khi du lịch Hà Nội (Ảnh: ST)</p>
+            </div>
+            <div class="mb-3 pb-3">
+                <a href="{% url 'hotel' %}"><img class="img-fluid w-100" src="{% static 'img/decor/dulich.jpg' %}" alt=""></a>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="col-12">
+                        <div class="single-services section-padding2">
+                            <div class="details-caption" style="color: #343a40">
+                                <h3>1. Du lịch Hà Nội nên đi thời điểm nào?</h3>
+                                <p>Khí hậu Hà Nội còn được chia thành bốn mùa khá rõ rệt, mỗi mùa lại có một vẻ đẹp riêng nên bạn có thể du lịch đến đây vào bất kỳ thời điểm nào trong năm. Tuy nhiên, theo các kinh nghiệm du lịch Hà Nội thì thành phố nổi tiếng nhất là vào các mùa hoa và đặc biệt là mùa thu Hà Nội.</p>
+                                <p style="margin-top: 0px;">
+                                    <ul style="padding-left: 30px">
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Mùa hoa: Hà Nội quanh năm ngập tràn trong các mùa hoa như hoa đào (tháng 1), hoa ban (tháng 2), hoa sưa (tháng 3), hoa sen (mùa hè), hoa sữa (tháng 9 – 10), cúc họa mi (tháng 10 – 12)…</p></li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Mùa thu - đầu đông:Luôn được đi vào thơ ca với biết bao lãng mạn, Hà Nội lúc thu về cho đến đầu đông là thời gian đẹp nhất của thành phố. Tiết trời lúc này đã bớt nóng, nắng nhẹ, trong cái se lạnh, có thêm hương hoa sữa trải rộng khắp các con phố.</p></li>
+                                    </ul>
+                                </p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/hanoi/hn2.png' %}" alt="">
+                                </div>
+
+                                <h3>2. Đến Hà Nội bằng cách nào?</h3>
+                                <p>Đến Hà Nội tiện lợi nhất hẳn là bằng máy bay. Một ngày có rất nhiều chuyến bay đến Hà Nội từ khắp cách tỉnh thành cho bạn dễ dàng lựa chọn khung giờ phù hợp nhất.</p>
+                                <p style="margin-top: 0px;">
+                                    <ul style="padding-left: 30px">
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Chuyến bay TP.HCM – Hà Nội có giá 500.000 – 3.000.000 VND/ chiều, bay trong khoảng 2 giờ</p></li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Chuyến bay Đà Nẵng – Hà Nội có giá 300.000 – 1.500.000 VND/ chiều, thời gian bay khoảng 1 giờ 20 phút</p></li>
+                                    </ul>
+                                </p>
+                                <p>Những phương tiện di chuyển khác:</p>
+                                <p style="margin-top: 0px;">
+                                    <ul style="padding-left: 30px">
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Taxi: Có giá dao động 350.000 – 450.000 VND/ chuyến. Bạn cũng có thể bắt Grab hay Uber để có mức giá rẻ hơn.</p></li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Xe buýt: Từ sân bay, có 4 chuyến xe buýt chạy vào thành phố. Tuyến số 7 (Ga T1 – Cầu Giấy), tuyến 17 (Ga T1 – Long Biên), tuyến 90 (Kim Mã – Ga T1 – Ga T2), và tuyến 86 (Ga Hà Nội – Ga T1 – Ga T2). Ba tuyến đầu có giá vé từ 8.000 – 9.000 VND/ lượt, tuyến số 86 có giá 30.000 VND/ lượt.</p></li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Dịch vụ xe đưa đón sân bay Traveloka giá dao động 200.000 - 300.000 VND/ chuyến. Tài xế sẽ đón bạn ngay khi hạ cánh</p></li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Xe trung chuyển: Các hãng hàng không nội địa đều có xe trung chuyển hành khách vào trung tâm với mức giá 40.000 VND/ người (không nhất thiết phải đi chuyến bay của hãng).</p></li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Bằng tàu hỏa: Ga tàu hỏa Hà Nội nằm ngay trung tâm nên sẽ thuận tiện cho những ai chọn hình thức này để du lịch Hà Nội.</p></li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Bằng xe khách: Xe khách cũng là một hình thức di chuyển tiết kiệm cho những du khách ở các tỉnh lân cận. Hà Nội có 4 bến xe là Mỹ Đình, Giáp Bát, Nước Ngầm và Gia Lâm để phục vụ cho nhu cầu di chuyển của hành khách đến thủ đô.</p></li>
+                                    </ul>
+                                </p>
+                                <div class="mb-3 pb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/hanoi/hn3.png' %}" alt="">
+                                </div>
+
+                                <h3>3. Phương tiện di chuyển ở Hà Nội</h3>
+                                <p>Xe máy: Thuê xe máy tại Hà Nội rất đơn giản. Bạn có thể liên hệ với khách sạn hoặc gọi trực tiếp dịch vụ cho thuê xe. Giá một chiếc xe khoảng 100.000 – 150.000 VND/ ngày.</p>
+                                <p>Taxi: Cho một chuyến du lịch thoải mái, bạn có thể chọn di chuyển bằng taxi. Các hãng taxi phổ biến ở Hà Nội là Mai Linh (SĐT: 024.38.222.666), Taxi Group (SĐT: 024.38.26.26.26), V20 (SĐT: 024.38.20.20.20)</p>
+                                <p>Xích lô: Một hình ảnh đặc trưng của phố cổ chính là chiếc xích lô vẫn còn được giữ lại để phục vụ du lịch. Bạn có thể dễ dàng bắt xích lô khi ở phố cổ, dạo vòng quanh những con phố nhỏ trong lúc nghe những câu chuyện thú vị từ bác xích lô.</p>
+                                <p>Xe điện: Một hình thức thú vị để tham qua phố cổ khác là xe điện. Vé xe được bán tại khu vực bờ hồ Hoàn Kiếm với giá 15.000 VND/ chuyến 15 phút.</p>
+                                                                    
+                                <h3>4. Ẩm thực Hà Nội</h3>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Phở Hà Nội</p>
+                                        <p>Phở được nhắc đến như là cái hồn của ẩm thực thủ đô vậy, đi du lịch Hà Nội mà chưa ăn phở thì chưa gọi là đủ. Đến đây, bạn sẽ biết được là ngoài phở bò thì còn có phở gà, phở trộn, phở áp chảo, mỗi loại phở lại mang môt hương vị riêng, ngon đến khó tả. Đến Hà Nội thì những gánh hàng rong cũng có món phở đặc sản, còn nếu mà nói món phở có vị ngon, được nhiều người biết đến thì có:</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hanoi/hn4.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Đến Hà Nội mà không ăn phở thì quá là đáng tiếc. Ảnh: @halonngcruisecabin</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bún chả</p>
+                                        <p>Món chả được làm từ thịt nạc xay nhỏ rồi tẩm ướp gia vị, sau đó người ta nặn thành những miếng tròn và cho lên vỉ nướng trên than hồng cho đến khi miếng chả vàng rộm và dậy mùi thơm là được. Nước chấm bún chả Hà Nội là nước mắm chua ngọt với giấm, tỏi, ớt, hạt tiêu trộn với đu đủ xanh cắt miếng mỏng chua ngọt. Món này ăn kèm bún và rau sống cùng lá tía tô. </p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hanoi/hn5.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Bún chả Hà Nội. Ảnh: @bachuaviahe</p>
+                                        </div>
+                                    </li>  
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Chả cá Lã Võng</p>
+                                        <p>Chả cá Lã Vọng là món đặc sản nổi tiếng của Hà Nội, có mặt ở hầu hết mọi nơi từ những quán ăn nhỏ đến những nhà hàng khách sạn cao cấp. Món ăn này được chế biến như sau: Cá được chiên trong chảo dầu nhỏ. Ăn kèm với bánh đa nướng, bún rỗi, kèm lạc rang, rau mùi, rau húng láng, thì là, hành tươi chẻ nhỏ chấm với mắm tôm. </p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hanoi/hn6.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Chả cá Lã Vọng – đặc sản nức tiếng Hà Nội. Ảnh: @hedinguyen1710</p>
+                                        </div>
+                                        <p>Mắm được pha chế với nước cốt chanh, ớt cắt sợi, tinh dầu cà cuống, vài giọt rượu trắng, một thìa mỡ và đường sau đó đánh cho rủi bọt lên. Món ăn này có vị ngọt, bùi và beo béo.</p>
+                                        <p>Để thưởng thức chả cá Lã Vọng đúng “chuẩn vị” nhất thì bạn nên tới số 14 Chả Cá, Hoàn Kiếm.</p>
+                                    </li>  
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bún Thang</p>
+                                        <p>Bún thang là món ăn chứa đựng nhiều nét tinh túy của ẩm thực Hà thành. Nguyên liệu để làm bún thang gồm thịt gà xé phay, trứng gà chiên, giò lụa thái sợi. Nước dùng được nấu từ xương, tôm he. Nồi nước dùng ngon nước phải trong, có mùi thơm nhè nhẹ, dậy mùi mắm tôm.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hanoi/hn7.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Bún Thang chỉ có thể tìm thấy ở Hà Nội. Ảnh: @andreannguyen88</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bánh cốm</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hanoi/hn8.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Bánh cốm Hàng Than. ( nguồn sưu tầm)</p>
+                                        </div>
+                                        <p>Cho đến nay chỉ có duy nhất hàng Nguyên Ninh tại số nhà 11 Hàng Than là vẫn còn giữ được cách làm bánh cốm thủ công truyền thống. Những chiếc bánh cốm có màu xanh bên trong cùng là trong cùng là lớp nhân đậu xanh màu vàng, bánh có mùi ngầy ngậy của dừa và đậu xanh. Và đến Hà Nội bạn nhớ mua bánh cốm về làm quà nhé.</p>
+                                    </li> 
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bánh cuốn</p>
+                                        <p>Bánh cuốn là món ăn dân dã của người Hà thành. Nguyên liệu để làm bánh cuốn là loại gạo ngon được xay thành bột, sau đó pha với nước rồi tráng trên bếp thành những miếng bánh mỏng dính. Nhân bánh được làm từ thịt heo, nấm hương, khi bánh được cuộn lại bên trên rắc thêm một ruốc tôm. Món này ăn kèm với nước mắm, cà cuống và chả quế.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hanoi/hn9.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Bánh cuốn là món ăn sáng Hà Nội không thể thiếu. Ảnh: @foodlifewitt</p>
+                                        </div>
+                                    </li> 
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bún đậu mắm tôm</p>
+                                        <p>Là món ăn mà ai đến Hà Nội cũng muốn được thưởng thức một lần. Bún đậu mắm tôm này ngon nhất là ở cách pha chế mắm tôm, người đầu bếp phải lựa chọn được loại mắm ngon, rưới thêm một chút mỡ nóng, thêm ớt, vắt quất vào và đánh đều cho đến khi mắm bông lên. Chén mắm tôm đậm đà hương vị chấm với miếng đậu vừa chiên nóng thờm lừng, miếng chả cốm béo ngậy hay miếng thịt ba chỉ nóng hổi sẽ làm tan chảy vị giác của bạn.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hanoi/hn10.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Đến Hà Nội nhất định bạn phải thử bún đậu mắm tôm.</p>
+                                        </div>
+                                    </li> 
+                                </ul>
+                                <h3>5. Hà Nội có gì: Các địa điểm tham quan du lịch Hà Nội nổi tiếng</h3>
+                                <p>Nếu như có một ai hỏi rằng Hà Nội có gì đẹp thì thật dễ dàng để trả lời: Hà Nội đẹp bởi có tháp Rùa cổ kính, có những mái nhà rêu phong nơi phố cổ, có lăng Bác uy nghi, có hồ Tây lộng gió… Giờ hãy cùng Vntrip.vn review ngay những địa điểm tuyệt đẹp không thể bỏ lỡ khi du lịch thủ đô Hà Nội nào:</p>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Hồ Hoàn Kiếm</p>
+                                        <p>Hồ Hoàn Kiếm là thắng cảnh nổi tiếng ở Hà Nội, có vị trí kết nối giữa khu phố cổ gồm các phố Hàng Ngang, Hàng Đào, Cầu Gỗ, Lương Văn Can, Lò Sũ… với khu phố Tây do người Pháp quy hoạch cách đây hơn một thế kỷ là Bảo Khánh, Nhà thờ, Tràng Thi, Hàng Bài, Đinh Tiên Hoàng, Tràng Tiền, Hàng Khay, Bà Triệu. Hồ Hoàn Kiếm là khu vực trung tâm của thủ đô Hà Nội, vì vậy các bạn có thể đến đây dễ dàng bằng phương tiện cá nhân hay phương tiện công cộng.</p>
+                                        <p>Được mệnh danh là trái tim của thủ đô Hà Nội, dưới thời vua Lê, hồ Hoàn Kiếm có tên là hồ Thủy Quân. Theo truyền thuyết kể lại tại hồ Thủy Quân, vua Lê đã trao trả kiếm rùa vàng, nên hồ Hoàn Kiếm có tên từ đó.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hanoi/hn11.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hồ Hoàn Kiếm là nơi lưu giữ nhiều câu chuyện lịch sử lâu đời của đất nước. Ảnh: @meimeiontour</p>
+                                        </div>
+                                        <p>Giữa lòng hồ là Tháp Rùa cổ kính, xung quanh là những di sản có ý nghĩa văn hóa- lịch sử lâu đời như Tháp Bút, đền Ngọc Sơn, cầu Thê Húc dẫn vào lầu Đắc Nguyệt, Đài Nghiên…  Đó là những biểu tượng làm nên nét đẹp của thủ đô ngàn năm văn hiến. Với không gian tháng đãng, trong lành, nơi đây là điểm được đông đáo giới trẻ ưa thích, được các cặp đôi chọn làm nơi chụp ảnh cưới. Không chỉ thế hồ Hoàn Kiếm là một trong những điểm hấp dẫn khách du lịch trong và ngoài nước. </p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hanoi/hn12.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Buổi sáng Hồ Gươm thường có rất đông người đến tập thể dục, trò chuyện, đọc báo như một nét văn hoá riêng của thủ đô. Ảnh: Tuấn Đinh Văn</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Lăng Bác</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hanoi/hn13.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Lăng Bác phía bên ngoài ( nguồn sưu tầm)</p>
+                                        </div>
+                                        <p>Ra Hà Nội nên đi đâu? Lăng Bác chắc chắn sẽ là điểm đến mà bạn không thể bỏ qua. Nằm trên đường Hùng Vương – Điện Biên, đây là nơi lưu giữ thi hài của Chủ tịch Hồ Chí Minh. Đến Hà Nội ai cũng muốn được vào lăng viếng Bác một lần. Ngoài ra ở đây còn có khu Quảng trường Ba Đình là nơi Bác Hồ đã đọc tuyên ngôn độc lập khai sinh ra nước Cộng Hòa Xã Hội Chủ Nghĩa Việt Nam. </p>  
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Chùa Trấn Quốc</p>
+                                        <p>Chùa Trấn Quốc nằm trên một bán đảo nhỏ phía đông của Hồ Tây. Ngôi chùa 1.500 năm tuổi được coi là cổ nhất Hà Nội mới đây đã lọt vào danh sách 16 ngôi chùa đẹp nhất thế giới do báo Daily Mail (Anh) bình chọn. Chùa là nơi lưu giữ những giá trị tôn giáo và lịch sử thu hút nhiều Phật tử và khách du lịch tới tham quan.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hanoi/hn14.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Chùa Trấn Quốc – ngôi chùa cổ đẹp nhất Việt Nam</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Nhà thờ Lớn Hà Nội</p>
+                                        <p>Nhà thờ Lớn nằm ở 40 phố Nhà Chung, Hàng Trống, Hoàn Kiếm, Hà Nội. Về tổng thể, công trình mang phong cách kiến trúc Gothic châu Âu, nhưng vẫn có sự kết hợp với kiến trúc bản địa được thể hiện ở hệ thống mái ngói đất nung, cách trang trí nội thất đậm chất truyền thống Việt Nam. Vì thế nó chính là sản phẩm của sự giao lưu văn hóa Đông Tây hết sức đặc sắc.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hanoi/hn15.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Nhà thờ lớn Hà Nội – uy nghiêm và cổ kính. Ảnh: @tinhvo97</p>
+                                        </div>
+                                        <p>Nhà thờ Lớn Hà Nội được xem là kiến trúc nhà thờ tiêu biểu và là một trong những nhà thờ Công giáo đẹp nhất của thủ đô và cả nước. Đi du lịch Hà Nội chắc chắn du khách sẽ không thể bỏ qua địa điểm hấp dẫn này.</p>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Văn miếu Quốc Tử Giám</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hanoi/hn16.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Văn Miếu nhìn từ bên ngoài. Ảnh: ST</p>
+                                        </div>
+                                        <p>Được mệnh danh là ngôi trường đại học đầu tiên của Việt Nam, Văn Miếu Quốc Tử Giám không chỉ là di tích lịch sử Hà Nội nổi tiếng mà còn là nơi chứa đựng những tinh hoa của những giai đoạn lịch sử phong kiến trước kia và lưu giữ những giá trị truyền thống của đất Việt.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hanoi/hn17.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Vào mỗi dịp Tết nguyên đán hoặc các kỳ thi quan trọng thường rất đông khách đến đây xin chữ cầu may. Ảnh: @maianhdinh</p>
+                                        </div>
+                                        <p>Ngày nay, Văn Miếu – Quốc Tử Giám còn là nơi tổ chức hội thơ, là nơi khen tặng những học sinh ưu tú, xuất sắc và là địa điểm tham quan nổi tiếng thu hút đông đảo du khách trong nước và quốc tế. Đồng thời, đây cũng là điểm hẹn “xin chữ” của người dân Hà thành trong những ngày tết truyền thống với ước mong năm mới an lành hay trong những mùa thi quan trọng của đất nước với niềm tin đỗ đạt của các “sĩ tử”.</p>
+
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Hồ Tây</p>
+                                        <p>Hồ Tây nằm ở phía Tây Bắc nội thành Hà Nội với diện tích khoảng 500ha, đường vòng quanh hồ dài gần 20km. Nơi đây là góc lãng mạn nhất trong bức tranh Hà Nội đa màu, là thế giới của những làn gió trong trẻo, sự phóng khoáng và giàu chất thơ. Hồ Tây không chỉ là địa điểm vui chơi ở Hà Nội hấp dẫn du khách mà nó còn chứa đựng những giá trị văn hóa dân tộc. </p>
+                                        <p>Quanh hồ hiện có hơn 20 ngôi đình, đền, chùa đã được xếp hạng với nhiều di tích nổi tiếng với nhiều văn vật giá trị như hơn 100 bia đá, 165 câu đối, 140 hoành phi, gần 20 quả chuông cổ, 60 sắc phong thần, trên 300 pho tượng bằng đồng, gỗ, đá.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hanoi/hn18.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hồ Tây nhìn từ trên cao xuống ( nguồn sưu tầm)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Phố cổ Hà Nội</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hanoi/hn19.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Ô Quan Chưởng – Hàng Chiếu ( nguồn sưu tầm)</p>
+                                        </div>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hanoi/hn20.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Khách du lịch tham quan phố cổ bằng xích lô ( nguồn sưu tầm)</p>
+                                        </div>
+                                        <p>Phố cổ là những con đường, ngôi nhà, góc phố mang đậm phong cách kiến trúc của người Pháp ở thế kỷ XIX. Trải qua biết bao thăng trầm của lịch sử và biến đổi của thời gian, nơi đây vẫn còn giữ được nguyên vẹn kiến trúc như thuở ban đầu. Có thể nói phố cổ là linh hồn, là nét đặc trưng riêng của Hà Nội.</p>
+                                        <p>Đặc biệt tại Phố cổ Hà Nội bạn có thể đi dạo cả ngày lẫn đêm để trải nghiệm hết văn hóa con người nơi đây, có những món ăn ngon đặc trưng hương vị phố cổ Hà Nội.</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex mt-4">
+                        {% for obj in qs %}
+                        <form action="." method='POST' class="ui form ml-4">
+                            {% csrf_token %}
+                            <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                            {% if user not in obj.liked.all %}
+                                <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Thích</span>
+                                </button>
+                            {% else %}
+                                <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                </button>
+                            {% endif %}
+                        </form>
+                        <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                        {% endfor %}
+                    </div>
+
+                    <section class="comment-area">
+                        <div class="container">
+                            <div class="comment-content">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="comment-details">
+                                            <div class="section-title">
+                                                <h5>Bình luận</h5>
+                                            </div>
+                                            <form action="." method="POST" style="margin-top: 1.3em;">
+                                                {% csrf_token %}
+                                                {% if not comments.all %} 
+                                                <div class="col-lg-12">
+                                                    <center><h6 class="mb-4">Chưa có bình luận nào hết á :((</h6></center>
+                                                </div>
+                                                {% else %}
+                                                    {% for x in comments %}
+                                                    <div class="comment-item">
+                                                        <div class="user-avt">
+                                                            <img src="{% static 'img/decor/cat.png' %}" alt="">
+                                                        </div>
+                                                        <div class="comment-info">
+                                                            <h6>{{ x.user }} - <span>{{ x.created_on }}</span></h6>
+                                                            <p>{{ x.body }}</p>
+                                                        </div>
+                                                    </div>
+                                                    {% endfor %}
+                                                {% endif %}
+                                                <input type="text" name="user" value="{{request.user}}" maxlength="200" required="" id="id_user" style="display: none">
+                                                <input type="text" name="post_id" maxlength="200" value="CN07" required id="id_post_id" style="display: none">
+                                                <div class="comment-body">
+                                                    <textarea placeholder="Nhập bình luận..." name="body" cols="40" rows="10" required id="id_body" style="width: 100%; outline: none; border: 1px solid #e53637; border-radius: 5px; padding: 10px;"></textarea>
+                                                    <button type="submit" class="btn button btn-lg" name="comment_submit"><i class="fa fa-location-arrow"></i> Bình luận</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                
+                <div class="col-lg-4 pt-3 pt-lg-0">
+                    <!-- Popular News Start -->
+                    <div class="pb-3">
+                        <div class="bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0 h3">Nổi bật</h3>
+                        </div>
+                        {% for item in oli %}
+                        <div class="d-flex mb-3 haha">
+                            <a href="{{item.link}}"><img src="/media/{{item.bg}}" style="width: 100px; height: 100px; object-fit: cover;"></a>
+                            <div class="w-100 d-flex flex-column justify-content-center bg-light px-3" style="height: 100px;">
+                                <div class="mb-1" style="font-size: 13px;">
+                                    <span>{{item.date}}</span>
+                                </div>
+                                <a class="h6 m-0" href="{{item.link}}">{{item.camnang_name}}</a>
+                                <div class="mb-2" style="font-size: 14px;">
+                                    <span>
+                                        <i class="far fa-eye"></i>
+                                        <span id="view">{{item.view}}</span> 
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!-- Popular News End -->
+
+                    <!-- Tags Start -->
+                    <div class="pb-3">
+                        <div class="bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0 h3">Từ khóa</h3>
+                        </div>
+                        <div class="d-flex flex-wrap m-n1">
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Cẩm nang</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Du lịch</a>
+                            <a href="{% url 'cn_dalat' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đà Lạt</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Khách Sạn</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đi phượt</a>
+                            <a href="{% url 'cn_vungtau' %}" class="btn1 btn-sm btn-outline-secondary m-1">Vũng Tàu</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Kinh nghiệm du lịch</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đi chơi</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Tham quan</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Chỗ ở</a>
+                            <a href="{% url 'weather' %}" class="btn1 btn-sm btn-outline-secondary m-1">Thời tiết</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Nhà nghỉ</a>
+                            <button onclick="deadlines()" class="btn1 btn-sm btn-outline-secondary m-1" style="cursor: pointer; outline: none">Deadline</button>
+                            <script>function deadlines() {alert("NAPUN có sẵn khăn giấy đây. KHÓC ĐIIII :))");}</script>
+                        </div>
+                    </div>
+                    <!-- Tags End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid py-3">
+        <div class="container">
+            <img width="50px" height="50px" src="{% static 'img/decor/pen.png' %}" atl="">
+            <div class="d-flex align-items-center bg-light justify-content-between py-2 px-4 mb-3">
+                <p class="h3 m-0 orange" style="font-style: italic; text-align: justify;">Với những kinh nghiệm du lịch Hà Nội tự túc được chia sẻ trong bài viết, hi vọng du khách sẽ có thêm các thông tin tham khảo bổ ích cho chuyến du lịch của mình. Hãy ghé qua những địa điểm nổi tiếng, quán ăn, nhà hàng ngon để thưởng thức trọn vẹn nét đẹp của Hà Nội. Và đừng quên <a href="{% url 'hotel' %}">đặt khách sạn tại NAPUN</a> để có một trải nghiệm thực tế nhé ! <i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

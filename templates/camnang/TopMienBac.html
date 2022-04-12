@@ -1,0 +1,274 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Top những địa điểm đáng đến ở Miền Bắc.{% endblock %}
+{% block content %}
+    <div class="container-fluid py-3">
+        <div class="container">
+            <div class="col-12">
+                <p id="tieude" class="h3" style="color: #343a40;">Top những địa điểm du lịch miền Bắc giá rẻ không thể bỏ qua</p>
+                <div class="d-flex mb-2" style="flex-wrap: wrap">
+                    <img src="{% static 'img/decor/cat.png' %}" alt='' width="50px" height="50px">
+                    <p style="color: #555; font-weight: bold">Lượt xem: {{vi.view}} </p>
+                    <div class="d-flex">
+                        {% for obj in qs %}
+                        <form action="." method='POST' class="ui form ml-4">
+                            {% csrf_token %}
+                            <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                            {% if user not in obj.liked.all %}
+                                <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Thích</span>
+                                </button>
+                            {% else %}
+                                <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                </button>
+                            {% endif %}
+                        </form>
+                        <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                        {% endfor %}
+                    </div>
+                </div>                        
+            </div>
+            
+            <div style="background-image: url({% static 'img/decor/bg.jpg' %})">
+                <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 5px;">
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 30px;">
+                </div>
+                <div class="col-12">
+                    <p id="tieude"><b>MIỀN BẮC</b></p>
+                </div>
+                <div class="col-12" style="color: black; ">
+                    <p class="m-0">Miền Bắc Việt Nam - cái nôi của văn hóa lịch sử, là nơi khởi nguồn của đất nước ngàn năm văn hiến với những thắng cảnh thiên nhiên đẹp mê hồn cùng những công trình kiến trúc ấn tượng, độc đáo. Du lịch miền Bắc luôn là điểm hẹn hấp dẫn cho bất kỳ ai thích khám phá và trải nghiệm những vùng đất mới. Cùng NAPUN điểm danh Top những địa điểm du lịch miền Bắc không thể bỏ qua để cùng gia đình, bạn bè bắt đầu kế hoạch du lịch ngay nhé !</p>
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 5px; margin-top: 15px;">
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 20px;">
+                </div>
+            </div>
+            <div class="mb-3 pb-3">
+                <img class="img-fluid w-100" src="{% static 'img/topmienbac/mb1.jpg' %}" alt="">
+                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Top những địa điểm đáng đến khi đi du lịch ở miền Bắc (Ảnh: ST)</p>
+            </div>
+            <div class="mb-3 pb-3">
+                <a href="{% url 'hotel' %}"><img class="img-fluid w-100" src="{% static 'img/decor/dulich.jpg' %}" alt=""></a>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="col-12">
+                        <div class="single-services section-padding2">
+                            <div class="details-caption" style="color: #343a40">
+                                <h3>1. Du lịch Hà Nội - Khám phá 36 phố phường ngàn năm văn hiến</h3>
+                                <p>Điểm đến đầu tiên trong Top những địa điểm du lịch miền Bắc giá rẻ không thể bỏ qua NAPUN muốn gửi đến bạn không đâu khác chính là Hà Nội 36 phố phường. Hà Nội là thủ đô nghìn năm văn hiến với nhiều khu phố cổ đặc trưng, lưu giữ nét kiến trúc lâu đời với những du tích cổ xưa… Đến Hà Nội du lịch, dạo quanh hồ Hoàn Kiếm, tham quan đền Ngọc Sơn và cầu Thê Húc, đến thăm các khu di tích, danh lam thắng cảnh đẹp cổ kính là những trải nghiệm khó quên trong lòng du khách.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmienbac/mb2.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Mùa thu Hà Nội với nét đẹp dịu dàng, làm xao xuyến lòng bao du khách</p>
+                                </div>
+                                <p>Hà Nội mang những dấu ấn riêng mà không đâu có được. Tiếng gánh hàng rong vào mỗi buổi sáng hay nổi lên đơn giản chỉ là những quán trà đá vỉa hè quen thuộc. Hà Nội đẹp nhất vào mùa thu, những gánh hoa nở rộ khắp các nẻo đường đã tạo nên một bức tranh sinh động nơi phồn hoa đô thị.</p>
+                                <p>Ngoài những địa danh nổi tiếng, Hà Nội còn được biết đến với nét văn hóa ẩm thực độc đáo. Những món ăn ngon Hà Nội bạn không thể bỏ lỡ khi đến đây như bún chả, bún thang, phở bò gia truyền, bánh cốm, bún hải sản, bún đậu, bún ốc, nem rán, bún ngan, sữa chua mít … Vậy bạn còn đắn đo có nên lựa chọn Hà Nội là một điểm đến của du lịch miền Bắc?</p>
+                                <p><em>Tham khảo: <a href="{% url 'cn_hanoi' %}">Cẩm nang du lịch Hà Nội</a> để biết thêm chi tiết</em></p>
+                                
+                                <h3>2. Du lịch Vịnh Hạ Long - Di sản thiên nhiên Thế giới</h3>
+                                <p>Với không gian thiên nhiên thơ mộng, huyền ảo như chốn tiên cảnh nơi trần gian, Vịnh Hạ Long luôn là địa điểm du lịch có sức hút lớn với du khách cả trong và ngoài nước. Du khách đến đây sẽ được chiêm ngưỡng những hòn đảo tự nhiên nổi trên mặt nước, các hang động huyền bí, đắm mình trong những bãi tắm thơ mộng hay những trải nghiệm lý thú khi đến thăm những làng chài địa phương. Động Thiên Cung, hang Đầu Gỗ, làng chài Ba Hang, bãi tắm Soi Sim, đảo Ti Tốp, hang Sửng Sốt, động Mê Cung, hang Luồn, hang Tiên Ông, hồ Ba Hầm... là những điểm đến không thể bỏ qua khi tham quan vịnh Hạ Long.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmienbac/mb3.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Vịnh Hạ Long - Bức tranh tuyệt đẹp của Việt Nam</p>
+                                    <p>Đối với du khách trong nước, thường đi du lịch Hạ Long nhiều vào mùa hè, thời gian từ tháng 5 đến tháng 7. Đây cũng là khoảng thời gian học sinh được nghỉ hè, nên sẽ đi cùng gia đình hoặc bạn bè tụ tập cùng nhau đi du lịch. Khám cảnh đẹp của kỳ quan thiên nhiên thế giới, thưởng thức các món ẩm thực vô cùng phong phú đa dạng và tham gia các hoạt động sôi nổi trên biển, chắc chắc những trải nghiệm nơi đây sẽ khiến bạn không thể nào quên.</p>
+                                </div>
+
+                                <h3>3. Du lịch Sapa Lào Cai - Thị trấn mờ sương giữa núi rừng Tây Bắc</h3>
+                                <p>Nằm ở phía Tây Bắc của Tổ quốc, Sapa thuộc tỉnh Lào Cai, được biết đến là xứ sở sương mù với phong cảnh mộng mơ, ẩn chứa bao điều kỳ diệu của cảnh sắc thiên nhiên, con người. Đến Sapa du lịch, để chiêm ngưỡng vẻ đẹp hoang sơ của núi non hùng vĩ, những thửa ruộng bậc thang tầng tầng lớp lớp, tận hưởng bầu không khí trong lành và cảm nhận sự bình yên, giản dị của những bản làng ẩn hiện trong sương. Hay là đến với đỉnh Fansipan được mệnh là Nóc nhà Đông Dương, điểm hẹn của những người thích leo núi, mạo hiểm - nơi để thử thách chính bản thân mình.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmienbac/mb4.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Đến Fansipan để thể hiện khát khao chinh phục của tuổi trẻ</p>
+                                    <p>Đi Sapa mùa nào đẹp? Đến du lịch Sapa tùy theo mùa bạn sẽ được thấy những cảnh đẹp hùng vĩ khác nhau mà không bất cứ nơi nào có được như là những cánh đồng lúa chín bậc thang, những mùa hoa ban trắng núi rừng, hay hoa đỗ quyên thơm ngát cả không gian. Du khách tới đây để tận hưởng bầu không khí trong lành, mát mẻ của mùa hè hay có cơ hội “săn tuyết” cực kỳ thú vị vào mùa đông và tận hưởng trọn vẹn kỳ nghỉ của mình khi đặt phòng ở những khách sạn Sapa view đẹp. Sapa là một trong những điểm đến ấn tượng nức lòng du khách.</p>
+                                </div>
+                                <p><em>Tham khảo: <a href="{% url 'cn_laocai' %}">Cẩm nang du lịch Lào Cai</a> để biết thêm chi tiết</em></p>
+
+                                <h3>4. Du lịch Ninh Bình - Du ngoạn mảnh đất Cố đô</h3>
+                                <p>Với thiên nhiên hoang sơ, phong cảnh non nước hữu tình Ninh Bình đang là một điểm du lịch nổi tiếng ở miền Bắc chỉ cách Hà Nội tầm 100km . Đặc biệt là tham quan cố đô Hoa Lư nơi gắn với nhiều di tích lịch sử huyền bí. Ngoài ra có các điểm đến đặc biệt như: Bái Đính, Tràng An, Tam Cốc Bích Động... thu hút hàng ngàn khách du lịch tới đây hàng năm.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmienbac/mb5.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Quần thể danh thắng Tràng An với không gian huyền ảo, trữ tình</p>
+                                    <p>Bạn có thể đi du lịch Ninh Bình vào bất cứ thời điểm nào trong năm. Nhưng đẹp nhất có lẽ là từ tháng 1 đến tháng 3 âm lịch, thời tiết không quá lạnh hoặc quá nóng, du khách đến Ninh Bình du lịch và kết hợp vãn cảnh chùa chiền đầu năm. Ngoài ra, nếu đến đây tầm tháng 4, tháng 5 có thể săn mùa bướm rừng quốc gia Cúc Phương, hoặc cuối tháng 5, tháng 6 để mê mẩn trong những cánh đồng lúa vàng ươm, hay đầm sen rộng bạt ngàn chen giữa đá núi. Nhưng dù là đến đây mùa nào thì Ninh Bình vẫn khoác lên mình một vẻ đẹp bình dị, huyền bí đến lạ thường!</p>
+                                </div>
+
+                                <h3>5. Du lịch Cát Bà Hải Phòng - Viên ngọc quý của Vịnh Bắc Bộ</h3>
+                                <p>Quần đảo Cát Bà là quần thể bao gồm 367 đảo nằm ở phía nam Vịnh Hạ Long, ngoài khơi thành phố Hải Phòng và tỉnh Quảng Ninh. Cụm đảo cách trung tâm thành phố Hải Phòng khoảng 30 km, cách thành phố Hạ Long khoảng 25 km. Về hành chính, quần đảo Cát Bà thuộc huyện Cát Hải, tỉnh Hải Phòng, Việt Nam.</p>
+                                <p>Đảo Cát Bà là nơi giao hòa giữa vẻ đẹp của rừng và biển, tới đây du khách sẽ vừa được khám phá cánh rừng nguyên sinh với nhiều loài động thực vật phong phú, vừa được tắm mát ở những bãi biển đẹp với làn nước xanh mát. Đến với đảo Cát Bà, du khách không chỉ chiêm ngưỡng sự tuyệt vời của vịnh Lan Hạ, đảo còn nhiều điểm đến hấp dẫn không thể bỏ qua: Vịnh Lan Hạ, Đảo Khỉ, Vườn quốc gia Cát Bà, làng Việt Hải…</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmienbac/mb6.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Vịnh Lan Hạ - "tòa ngọc bích" đắm mình trong sóng nước xanh biếc</p>
+                                    <p>Du khách có thể đi du lịch Cát Bà vào bất cứ thời gian nào trong năm, nhưng thích hợp nhất vẫn là vào khoảng tháng 5, 6, 7 – thời điểm lý tưởng cho các chuyến nghỉ mát, trốn chạy cái nóng bức, oi ả của mùa hè.</p>
+                                </div>
+                                <p><em>Tham khảo: <a href="{% url 'cn_haiphong' %}">Cẩm nang du lịch Hải Phòng</a> để biết thêm chi tiết</em></p>
+                                
+                                <h3>6. Du lịch đảo Cô Tô Quảng Ninh - Hòn ngọn xanh giữa biển Đông</h3>
+                                <p>Đảo Cô Tô ở Quảng Ninh cũng là một địa điểm lý tưởng cho câu hỏi du lịch miền Bắc nên đi đâu. Cô Tô được nhiều người xem là hòn đảo xinh đẹp nhất nhì ở Bắc bộ với những bãi biển hoang sơ, bờ cát dài trắng mịn cùng làn nước trong xanh. Bởi thế mà Cô Tô không chỉ là điểm đến hấp dẫn với du khách trong nước mà còn với cả các du khách nước ngoài.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmienbac/mb7.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Du lịch đảo Cô Tô chiêm ngưỡng vẻ đẹp của biển</p>                                        
+                                </div>
+                                <p>Bạn có thể tới Cô Tô bất cứ thời điểm nào trong năm. Tuy nhiên đi vào mùa hè luôn là lựa chọn hàng đầu của du khách. Nếu có kế hoạch đi hãy xem dự báo thời tiết để tránh những ngày mưa hay giông bão nếu không muốn bị mắc lại ở đảo thêm mấy ngày. Ở đây có đảo Cô Tô lớn, đảo Cô Tô nhỏ, đảo Thanh Lâm, đảo Trần và vô số hòn đảo nhỏ khác...</p>
+                                <p>Ngoài tắm biển, du khách còn có thể tham quan rừng tự nhiên, hải đăng, cầu cảng, làng đánh cá, các vịnh biển, bãi đá tự nhiên... </p>
+                                
+                                <h3>7. Du lịch Mai Châu Hòa Bình - Thung lũng nhỏ xinh, thơ mộng</h3>
+                                <p>Mai Châu là điểm du lịch hấp dẫn của vùng Tây Bắc, không chỉ thu hút khách du lịch bởi cảnh quan núi rừng, mà còn níu chân mỗi người khi đến đây bởi sự thân thiện, ấm áp của tình người. Đến đây, du khách sẽ được đắm mình trong những cánh rừng bát ngát hoa đào, hoa mận trắng tinh khôi hay những cánh rừng hoa ban đẹp mộng mơ và tận hưởng bầu không khí trong lành, thơ mộng cùng những khoảng khắc thư giãn khó quên.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmienbac/mb8.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Mai Châu là điểm đến hàng đầu được nhiều bạn trẻ yêu thích</p>                                        
+                                </div>
+                                <p>Những địa điểm hấp dẫn không thể bỏ qua khi du lịch Mai Châu: Đèo Thung Khe, Bản Lác, Bản Pom Coọng, Hang Mỏ Luông, Hang Chiều, Chợ phiên Pà Cò... Nhìn chung Mai Châu là vùng đồi núi thấp nên có khí hậu ôn hòa mát mẻ quanh năm nên du lịch Mai Châu Hòa Bình vào thời điểm nào cũng đều thích hợp. Tùy vào sở thích và thời gian của từng người để có sự lựa chọn hợp lý nhất. Cách di chuyển tiết kiệm nhất khi đến Mai Châu là ô tô hoặc xe máy, thế nên mỗi dịp cuối tuần hay nghỉ lễ, Mai Châu yên bình như thức giấc, rộn ràng với những đoàn khách tấp nập kéo về.</p>
+                                
+                                <h3>8. Du lịch Chùa Hương - Chốn linh thiêng non nước hữu tình</h3>
+                                <p>Chùa Hương Sơn hay còn được gọi là Chùa Hương, là một quần thể chùa nằm tại xã Hương Sơn, huyện Mỹ Đức, thành phố Hà Nội. Đây là một ngôi chùa nổi tiếng của miền Bắc bởi chùa vừa linh thiêng lại tọa lạc ở một nơi non nước hữu tình, cảnh sắc sắc thiên nhiên tuyệt đẹp.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmienbac/mb9.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Chùa Hương - Điểm du lịch tâm linh được nhiều người lựa chọn, đặc biệt là thời điểm đầu xuân năm mới</p>                                        
+                                </div>
+                                <p>Du lịch chùa Hương không chỉ để cầu an, tham quan vãn cảnh chùa mà còn được thưởng thức nhiều đặc sản đặc sắc thú vị. Lễ hội chùa Hương thường diễn ra từ tháng 1-3 (âm lịch) hàng năm. Tại đây, có rất nhiều ngôi chùa thờ Phật, đền thờ thần,....nổi bật nhất đó chính động Hương Tích. Chùa Hương cũng là địa điểm du lịch miền Bắc giá rẻ mà bạn không nên bỏ lỡ. </p>
+
+                                <h3>9. Du lịch Mù Cang Chải Yên Bái - Biển vàng mùa lúa chín</h3>
+                                <p>Điểm đến tiếp theo, chúng ta cùng đi Mù Cang Chải ... Mù Cang Chải là một thị trấn miền núi nhỏ thuộc phía Tây, tỉnh Yên Bái cách Hà Nội khoảng 300km. Đến đây, du khách có cơ hội tham quan thị trấn Tú Lệ, đèo Khau Phạ, Ruộng bậc thang La Pán Tẩn, Bản Lìm Mông, Bản Thái...</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmienbac/mb10.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Tuyệt tác ruộng bậc thang mùa lúa chín của đồng bào ở Mù Cang Chải </p>                                        
+                                </div>
+                                <p>Mù Cang Chải có 2 mùa khá đẹp mà bạn có thể sắp xếp thời gian để đến, những mùa khác đến Mù Cang Chải không có gì đặc sắc nhưng vẫn có thể ghé qua. Khoảng giữa tháng 9 đến tháng 10 là mùa lúa chín, lúc này toàn bộ Mù Cang Chải sẽ vàng rực một màu lúa, thời tiết đẹp, thuận lợi để đến thăm nơi đây. Du khách sẽ được đắm chìm trong cảnh sắc vàng của nắng và lúa, ngắm nhìn một “biển vàng” đang cuồn cuộn tỏa hương giữa đất trời bao la.</p>
+                                <p>Còn thời gian từ tháng 5 đến tháng 6 là Mùa Cang Chải mùa nước đổ, có những cơn mưa mùa hè bắt đầu trút xuống nước được dẫn từ trên núi vào các ruộng bậc thang. Nước tràn vào các thửa ruộng làm cho đất trở nên mềm hơn để cấy lúa, lúc này Mù Cang Chải với những thửa ruộng mùa nước đổ sẽ là những tuyệt phẩm cho các tay thợ “săn ảnh”. Chỉ với chi phí rất rẻ bạn cũng có thể tới thăm nơi này.</p>
+                                
+                                <h3>10. Du lịch đảo Quan Lạn - Bãi biển đẹp hoang sơ nhất miền Bắc</h3>
+                                <p>Đảo Quan Lạn nằm trên vịnh Bái Tử Long, bao gồm xã Quan Lạn và xã Minh Châu thuộc huyện Vân Đồn, tỉnh Quảng Ninh. Quan Lạn là hòn đảo xinh đẹp nổi tiếng, đi Quan Lạn các bạn sẽ được đắm mình trong khung cảnh thiên nhiên hoang sơ, trong lành với những bãi cát trắng trải dài, bãi biển xanh trong vắt cùng nhiều di tích lịch sử văn hóa cực kỳ thích hợp cho việc ngắm cảnh cũng như tắm biển, dời xa những ồn ào xô bồ của chốn thị thành.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/topmienbac/mb11.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Biển Quan Lạn với làn nước xanh thẳm, bờ cát trắng mịn dài</p>                                        
+                                </div>
+                                <p>Cát tại đây được ví “ Trắng như Tuyết, mượt như Nhung”, có bãi biển dài đến nhiều km, sóng to và rất trong lành mang đến nhiều điều hấp dẫn du khách yêu thích tắm biển, vận động và tham gia cắm trại, hội hè … Vẻ đẹp hoang sơ và môi trường sinh thái trong lành ở đây tạo nên sự hấp dẫn du khách đến với bãi tắm Quan Lạn. Nơi đây cũng được coi là địa điểm du lịch miền Bắc tuyệt vời.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex mt-4">
+                        {% for obj in qs %}
+                        <form action="." method='POST' class="ui form ml-4">
+                            {% csrf_token %}
+                            <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                            {% if user not in obj.liked.all %}
+                                <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Thích</span>
+                                </button>
+                            {% else %}
+                                <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                </button>
+                            {% endif %}
+                        </form>
+                        <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                        {% endfor %}
+                    </div>
+
+                    <section class="comment-area">
+                        <div class="container">
+                            <div class="comment-content">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="comment-details">
+                                            <div class="section-title">
+                                                <h5>Bình luận</h5>
+                                            </div>
+                                            <form action="." method="POST" style="margin-top: 1.3em;">
+                                                {% csrf_token %}
+                                                {% if not comments.all %} 
+                                                <div class="col-lg-12">
+                                                    <center><h6 class="mb-4">Chưa có bình luận nào hết á :((</h6></center>
+                                                </div>
+                                                {% else %}
+                                                    {% for x in comments %}
+                                                    <div class="comment-item">
+                                                        <div class="user-avt">
+                                                            <img src="{% static 'img/decor/cat.png' %}" alt="">
+                                                        </div>
+                                                        <div class="comment-info">
+                                                            <h6>{{ x.user }} - <span>{{ x.created_on }}</span></h6>
+                                                            <p>{{ x.body }}</p>
+                                                        </div>
+                                                    </div>
+                                                    {% endfor %}
+                                                {% endif %}
+                                                <input type="text" name="user" value="{{request.user}}" maxlength="200" required="" id="id_user" style="display: none">
+                                                <input type="text" name="post_id" maxlength="200" value="CN05" required id="id_post_id" style="display: none">
+                                                <div class="comment-body">
+                                                    <textarea placeholder="Nhập bình luận..." name="body" cols="40" rows="10" required id="id_body" style="width: 100%; outline: none; border: 1px solid #e53637; border-radius: 5px; padding: 10px;"></textarea>
+                                                    <button type="submit" class="btn button btn-lg" name="comment_submit"><i class="fa fa-location-arrow"></i> Bình luận</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="col-lg-4 pt-3 pt-lg-0">
+                    <div class="pb-3">
+                        <div class="bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0 h3">Nổi bật</h3>
+                        </div>
+                        {% for item in oli %}
+                        <div class="d-flex mb-3 haha">
+                            <a href="{{item.link}}"><img src="/media/{{item.bg}}" style="width: 100px; height: 100px; object-fit: cover;"></a>
+                            <div class="w-100 d-flex flex-column justify-content-center bg-light px-3" style="height: 100px;">
+                                <div class="mb-1" style="font-size: 13px;">
+                                    <span>{{item.date}}</span>
+                                </div>
+                                <a class="h6 m-0" href="{{item.link}}">{{item.camnang_name}}</a>
+                                <div class="mb-2" style="font-size: 14px;">
+                                    <span>
+                                        <i class="far fa-eye"></i>
+                                        <span id="view">{{item.view}}</span> 
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="pb-3">
+                        <div class="bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0 h3">Từ khóa</h3>
+                        </div>
+                        <div class="d-flex flex-wrap m-n1">
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Cẩm nang</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Du lịch</a>
+                            <a href="{% url 'cn_dalat' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đà Lạt</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Khách Sạn</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đi phượt</a>
+                            <a href="{% url 'cn_vungtau' %}" class="btn1 btn-sm btn-outline-secondary m-1">Vũng Tàu</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Kinh nghiệm du lịch</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đi chơi</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Tham quan</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Chỗ ở</a>
+                            <a href="{% url 'weather' %}" class="btn1 btn-sm btn-outline-secondary m-1">Thời tiết</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Nhà nghỉ</a>
+                            <button onclick="deadlines()" class="btn1 btn-sm btn-outline-secondary m-1" style="cursor: pointer; outline: none">Deadline</button>
+                            <script>function deadlines() {alert("NAPUN có sẵn khăn giấy đây. KHÓC ĐIIII :))");}</script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid py-3">
+        <div class="container">
+            <img width="50px" height="50px" src="https://cdn-icons-png.flaticon.com/512/1645/1645943.png" atl="">
+            <div class="d-flex align-items-center bg-light justify-content-between py-2 px-4 mb-3">
+                <p class="h3 m-0 orange" style="font-style: italic; text-align: justify;">Trên đây là Top những địa điểm du lịch miền Bắc mà du khách không nên bỏ qua. Hy vọng sẽ đem đến bạn những lựa chọn phù hợp cho kỳ nghỉ của mình. Còn chần chờ gì nữa, hãy xách balo lên và đi thôi nào. Và đừng quên <a href="{% url 'hotel' %}">đặt khách sạn tại NAPUN</a> để có một trải nghiệm thực tế nhé ! <i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,346 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Cẩm nang du lịch Đà Nẵng.{% endblock %}
+{% block content %}
+    <div class="container-fluid py-3">
+        <div class="container">
+            <div>
+                <div class="col-12">
+                    <p id="tieude" class="h3" style="color: #343a40;">Du lịch Đà Nẵng: Thành phố đáng đến nhất Việt Nam</p>
+                    <div class="d-flex">
+                        <img src="{% static 'img/decor/cat.png' %}" alt='' width="50px" height="50px">
+                        <p style="color: #555; font-weight: bold">Lượt xem: {{vi.view}} </p>
+                        <div class="d-flex">
+                            {% for obj in qs %}
+                            <form action="." method='POST' class="ui form ml-4">
+                                {% csrf_token %}
+                                <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                                {% if user not in obj.liked.all %}
+                                    <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                        <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                        <span style="color: #fff; font-weight: 600">Thích</span>
+                                    </button>
+                                {% else %}
+                                    <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                        <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                        <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                    </button>
+                                {% endif %}
+                            </form>
+                            <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="background-image: url({% static 'img/decor/bg.jpg' %})">
+                <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 5px;">
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 30px;">
+                </div>
+                <div class="col-12">
+                    <p id="tieude"><b>ĐÀ NẴNG</b></p>
+                </div>
+                <div class="col-12" style="color: black; ">
+                    <p class="m-0">Du lịch Đà Nẵng – nơi được mệnh danh là “thành phố đáng đến nhất Việt Nam” – nơi đây đang dần trở thành điểm sáng của cả nước trong lĩnh vực du lịch, thu hút hàng triệu lượt du khách mỗi năm bởi vẻ trẻ trung, văn minh, và hiện đại.</p> 
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 5px; margin-top: 15px;">
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 20px;">
+                </div>
+            </div>
+            <div class="mb-3 pb-3">
+                <a><img class="img-fluid w-100" src="{% static 'img/danang/dn1.jpg' %}" alt=""></a>
+                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Những điều cần biết khi du lịch Đà Nẵng (Ảnh: ST)</p>
+            </div>
+            <div class="mb-3 pb-3">
+                <a href="{% url 'hotel' %}"><img class="img-fluid w-100" src="{% static 'img/decor/dulich.jpg' %}" alt=""></a>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="col-12">
+                        <div class="single-services section-padding2">
+                            <div class="details-caption" style="color: #343a40">
+                                <h3>1. Tổng quan về du lịch Đà Nẵng</h3>
+                                <p>Nằm cách Hà Nội 776 km về phía Bắc, cách TP.HCM 961 km về phía Nam và tiếp giáp với cố đô Huế, Đà Nẵng có trục giao thông Bắc – Nam với cả đường bộ, đường sắt và đường biển cắt qua, đồng thời là cửa ngõ giao lưu với các tỉnh thuộc khu vực Tây Nguyên. Không chỉ có vậy, Đà Nẵng là trung tâm được bao quanh bởi ba di sản nổi tiếng thế giới như: Cố đô Huế, Thánh địa Mỹ Sơn và Phố cổ Hội An. Ngoài ra, vùng biển của thành phố này bao gồm cả huyện đảo Hoàng Sa. Do đó, Đà Nẵng là thành phố có vị trí đắc địa và vô cùng quan trọng cả về du lịch, giao lưu kinh tế, giao thương buôn bán và quân sự quốc phòng.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/sidebar/danang.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;"> Đà Nẵng - Thành phố đáng sống nhất Việt Nam(Ảnh: ST)</p>
+                                </div>
+                                <p>Đà Nẵng là vùng mang kiểu khí hậu nhiệt đới gió mùa điển hình với nền  nhiệt chung khá cao và ít có sự biến động. Đà Nẵng có sự giao thoa giữa hai kiểu khí hậu  cận nhiệt đới ở miền Bắc và nhiệt đới xa van miền Nam nhưng ảnh hưởng nhiều hơn bởi khí hậu nhiệt đới ở phía nam. Do đó nơi đây cũng có hai mùa rõ rệt là mùa mưa (tháng 8 – tháng 9- tháng 10- tháng 11- tháng 12) và mùa khô ( tháng 1 – tháng 2 – tháng 3 – tháng 4 – tháng 5 – tháng 6- tháng 7).</p>
+
+                                <h3>2. Đến Đà Nẵng du lịch đi bằng phương tiện gì?</h3>
+                                <p>Nếu có nhiều thời gian, bạn có thể kết hợp du lịch Huế - Đà Nẵng hoặc nếu không thì chọn tour du lịch Đà Nẵng. Dù bạn chọn lựa như thế nào thì cách thức di chuyển cũng tương tự nhau. Bạn có thể sử dụng những phương tiện sau:</p>
+                                <p>
+                                    <ul style="padding-left: 30px;">
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Máy bay: Đây là phương tiện di chuyển thuận tiện và nhanh nhất để du khách từ các tỉnh thành khác đến khu du lịch Huế. Hầu hết các hãng hàng không nội địa hiện nay đều có đường bay thẳng đến Huế. Bạn cần cập nhật thường xuyên để có thể săn được những tấm vé với giá cực kì rẻ.</p></li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Xe khách: Từ Hà Nội hay Sài Gòn để đi Đà Nẵng cũng có rất nhiều tuyến xe khách với giá vé khoảng từ 250.000 – 400.000 đồng cho xe giường nằm, nếu muốn khỏe hơn khi di chuyển bạn có thể chọn các loại xe Vip limousine đi cho khỏe.</p></li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Tàu hỏa: Đà Nẵng có tuyến đường sắt Bắc – Nam cắt qua nên đây cũng là phương tiện được nhiều người lựa chọn khi di chuyển đến Đà Nẵng bởi giá cả hợp lý, lại vừa được nhìn ngắm cảnh quan bên ngoài suốt một hành trình dài. Giá vé cho một chuyến đi như vậy khá rẻ, với nhiều mức tùy thuộc vào loại vé như giường nằm hay ghế ngồi mà dao động trung bình từ 300.000 – 1.200.000 đồng. Có một điều thuận lợi là khi xuống ga Đà Nẵng bạn đã ở ngay trung tâm thành phố nên việc di chuyển từ đây đến các thành phố khác khá thuận tiện.</p></li>
+                                    </ul>
+                                </p>
+                                
+                                <h3>3. Ẩm thực Đà Nẵng</h3>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Gỏi cá Nam Ô</p>
+                                        <p>Đây là một đặc sản nổi tiếng chỉ có ở làng Nam Ô khi du lịch Đà Nẵng. Món ăn này chủ yếu ngon ở thịt cá được đánh bắt trực tiếp từ biển nên rất ngọt và tươi, qua khâu chế biến kỹ càng thì lại càng có hương vị đặc biệt, lạ miệng mà lại không tanh chút nào. Gỏi cá Nam Ô ngon nhất nếu được chế biến từ cá trích.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/danang/dn2.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Gỏi cá Nam Ô hấp dẫn thực khách (Ảnh ST)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Cơm gà Đà Nẵng</p>
+                                        <p>Từ lâu cơm gà đã trở thành một món ăn đặc trưng ở Đà Nẵng, đặc biệt miếng gà chiên giòn rụm thêm chút cay cay của tương ớt cùng cơm mềm dẻo nóng hổi, khi ăn kèm với kim chi hoặc dưa leo có vị rất riêng biệt tạo nết sự hấp dẫn riêng cho dĩa cơm gà.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/danang/dn3.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Cơm gà nổi tiếng ở Đà Nẵng (Ảnh ST)</p>
+                                        </div>
+                                    </li>  
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bún chả cá</p>
+                                        <p>Có thể rất nhiều người đã ăn món bún chả cá rồi nhưng nếu muốn thử một hương vị thật đặc biệt thì đừng nên bỏ qua món này ở Đà Nẵng. Hương thơm ngào ngạt cùng nước lèo ngọt mát, đậm đà từ rau củ quả, thêm chút ngọt ủa hành hương và vị cay của ớt làm nên một tô bún ngon không thể cưỡng lại được.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/danang/dn4.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Bún chả cá Đà Nẵng (Ảnh ST)</p>
+                                        </div>
+                                    </li>  
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bánh xèo</p>
+                                        <p>Là một món ăn dân gian và xuất hiện nhiều trong danh sách ẩm thực đường phố nên bánh xèo trở nên quen thuộc với rất nhiều người. Bánh xèo được cuốn trong lớp bánh tráng mỏng, ăn kèm rau sống và chấm với nước mắm chua ngọt, ăn vào thấy vừa giòn của lớp vỏ bánh và giá đỗ cùng béo ngậy của thịt và tôm.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/danang/dn5.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Bánh xèo nức tiếng của Đà Nẵng (Ảnh ST)</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <h3>4. Mua gì làm quà khi ghé thăm Đà Nẵng</h3>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Đá mỹ nghệ non nước</p>
+                                        <p>Đá mỹ nghệ từ làng nghề ở Ngũ Hành Sơn chế tác tạo thành rất nhiều đồ lưu  niệm, vật dụng, trang sức. Với kỹ thuật truyền thống lâu năm, quá trình mài giũa tỉ mỉ đã cho ra đời nhiều món đồ tinh xảo, đẹp mắt. Du khách đến đây tham quan có thể mua về làm quà lưu niệm tặng cho bạn bè, người thân đều rất thích hợp.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/danang/dn6.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Đá mỹ nghệ non nước ở Ngũ Hành Sơn (Ảnh ST)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Rong biển Mỹ Khê</p>
+                                        <p>Rong biển được làm thành từng miếng dài, thường dùng để chế biến các món như canh, xào, gỏi, nộm,… Với nhiều người rong biển là món khó ăn vì có vị tanh nhưng rong biển có tác dụng làm đẹp da, chống lão hóa và cung cấp vitamin bổ dưỡng cho cơ thể.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/danang/dn7.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Rong biển Mỹ Khê – đặc sản làm quà Đà Nẵng (Ảnh ST)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Chả bò Đà Nẵng</p>
+                                        <p>Được chế biến hoàn toàn từ thịt đùi bò tươi, được tẩm ướp theo phương pháp truyền thống rất đậm đà. Chả bò Đà Nẵng hoàn toàn chế biến nguyên chất không pha trộn các loại thịt khác. Mọi người có thể ăn kèm món này với dưa chua, dưa kiệu hoặc cuốn trong bánh tráng. Đừng quên mua làm quà mang về khi đến du lịch Đà Nẵng bạn nhé!</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/danang/dn8.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Chả bò Đà Nẵng (Ảnh ST)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Mực khô một nắng</p>
+                                        <p>Mực khô ở đây vẫn mang hương vị mặn mòi của muối biển, của nắng và của gió ngấm trong từng thớ mực. Đến với Đà Nẵng hầu hết các du khách đều mua món này về.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/danang/dni9.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Mực khô một nắng (Ảnh ST)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Nem tré Đà Nẵng</p>
+                                        <p>Tré trông rất giống các loại nem như nem chua, nem thính, nem nướng ở Thanh Hóa nhưng có mùi vị khác biệt và đặc trưng không lẫn vào đâu được so với những loại nem ấy. Tré được làm từ thịt ba chỉ, thịt mông, thịt nạc và bì heo, kết hợp với gia vị chính là củ riềng và gói trong lá chuối. Đây là món ăn mà bất cứ ai ghé thăm Đà Nẵng hay miền Trung đều bị cuốn hút bởi độ sần sật, bùi bùi và vị chua đặc trưng.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/danang/dn10.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Nem tré Đà Nẵng (Ảnh ST)</p>
+                                        </div>
+                                    </li>                                       
+                                </ul>
+
+                                <h3>4. Những địa điểm du lịch Đà Nẵng</h3>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bãi biển Mỹ Khê</p>
+                                        <p>Từng được được bình chọn là bãi biển xinh đẹp quyến rũ nhất hành tinh bởi tạp chí Forbes của Mỹ. Chỉ cách trung tâm thành phố Đà Nẵng khoảng 3 km, nhìn từ trên cao xuống, biển Mỹ Khê là một dải màu xanh mênh mông và khi đến nơi mới thấy vẻ đẹp bùng lên rực rỡ.</p>
+                                        <p>Bãi biển Mỹ Khê thu hút rất nhiều du khách bởi vẻ hoang sơ, bờ cát trắng mịn, sóng vỗ hiền hòa trong bầu không khí rất dịu mát và trong lành. Đến với Đà Nẵng du khách nên một lần đến đây để trải nghiệm một buổi sớm bình minh lấp lánh như, tỏa ra từ chân trời như một vùng hào quang và đắm mình trong dòng nước mát lạnh.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/danang/dn11.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Bãi cát trắng mịn dưới ánh mặt trời rực rỡ tại Bãi Biển Mỹ Khê Đà Nẵng (Ảnh ST)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bán đảo Sơn Trà</p>
+                                        <p>Là tổng hòa của hệ sinh thái rừng tự nhiên gắn biển duy nhất tại Việt Nam, bán đảo Sơn Trà cách trung tâm thành phố 10 km với 3 mặt giáp biển. Khí hậu ở đây rất trong lành và sạch sẽ, theo nghiên cứu của giới khoa học, mỗi ngày rừng ở đây tái tạo ra được lượng khí oxy đủ để cung cấp cho 4 triêu người, một lá phổi xanh khổng lồ của thành phố. Đây còn là nơi mái nhà của nhiều loài động vật với 22 loài quý hiếm có tên trong sách đỏ, nổi bật nhất là quần thể linh trưởng với số lượng khoảng 300 – 400 cá thể.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/danang/dn12.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Bán đảo Sơn Trà Đà Nẵng (Ảnh ST)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Ngũ Hành Sơn</p>
+                                        <p>Là một danh thắng còn được biết đến với tên gọi khác là núi Non Nước, bao gồm 5 ngọn núi đá vôi trên bãi cát ven biển. Nơi này nổi tiếng với làng nghề mỹ nghệ Non Nước, nơi sản xuất ra nhiều đồ mỹ nghệ bằng đá cẩm thạch vang danh khắp trong và ngoài nước. Những dấu tích lịch sử còn lưu lại cho biết rằng trước khi có người Việt đến đây thì người Chăm đã thờ cúng các vị thần của họ trong các hang động, đền miếu. Sự di cư của người Việt đến vùng này mang theo văn hóa, tín ngưỡng Phật giáo, lập thêm nhiều chùa chiền, am, thất khiến địa danh này rất đa dạng, hài hòa về bản sắc.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/danang/dn13.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Quang cảnh núi Ngũ Hành Sơn từ trên cao (Ảnh ST)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bà Nà Hill</p>
+                                        <p>Cách trung tâm thành phố khá xa, khoảng 40 km về phía Tây Nam nên cảnh sắc khá tự nhiên. Đặc biệt thời tiết khu vực này rất dễ chịu do địa hình cao (1 487 km so với mực nước biển), du khách sẽ có cảm giác của bốn mùa trong một ngày, thích hợp cho hoạt động nghỉ dưỡng. Bên trong khu du lịch Đà Nẵng Bà nà Hill này có rất nhiều tụ điểm vui chơi giải trí. Vì đường đi dù đẹp nhưng khá dài, thêm vào đó có nhiều quanh co rất nguy hiểm nên du khách lưu ý cẩn thận nếu đi bằng xe máy. Hiện nay đến với Bà Nà đã thuận tiện hơn vì có xe buýt với giá vé là 136 000 đồng một người cho cả hai chiều đi và về.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/danang/dn14.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Khu giải trí nhân tạo hoành tráng là điểm đến thu hút rất nhiều du khách (Ảnh ST)</p>
+                                        </div>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/danang/dn15.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Cáp treo Bà Nà Hills Đà Nẵng (Ảnh ST)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Cầu Tình Yêu</p>
+                                        <p>Đây là cây cầu mô phỏng theo những cây cầu tình yêu nổi tiếng ở Pháp và các nước Châu Âu. Cầu nằm ở phía đường Trần Hưng Đạo, ngay gần đầu cầu Rồng và tượng Cá chép hoá rồng. Địa điểm này được mở cửa miễn phí cho du khách thăm quan. Cầu tình yêu Đà Nẵng có hình vòng cung dài chừng 70 m, rộng 6 m, hướng về giữa sông và có nhiều không gian để ngắm vẻ đẹp đôi bờ sông Hàn. Buổi tối, hàng trăm chiếc đèn lồng đỏ hình trái tim được thắp sáng và trở nên lung linh, huyền ảo. Theo truyền thuyết cầu tình yêu là nơi mà nhiều đôi tình nhân có thể “khóa” tình yêu của mình để thể hiện sự vĩnh cửu, thủy chung.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/danang/dn16.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Cầu Tình Yêu ở Đà Nẵng (Ảnh ST)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Cầu Rồng Đà Nẵng</p>
+                                        <p>Mặc dù không nổi tiếng bằng Bà Nà Hill, Ngũ Hành Sơn hay Cầu Sông Hàn, Cầu Rồng vẫn được coi là cây cầu có một không hai tại thành phố xinh đẹp này. Cầu Rồng được xem là cây cầu nặng nhất Việt Nam với cấu tạo mái vòm chắc chắn, thân cầu được thiết kế đặc biệt sử dụng tổng hợp 5 ống thép để trang trí vảy rồng. Cầu còn được xây dựng khá công phu khi trang bị một hệ thống chiếu sáng gồm tổng cộng 15.000 bóng đèn LED.</p>
+                                        <p>Điều cuốn hút khách du lịch nhất ở cầu Rồng là khả năng phun được cả nước lẫn lửa. Tuy nhiên, cầu chỉ phục vụ những màn phun nước, phun lửa vào vào những ngày cuối tuần, tối thứ 7 với chủ nhật hoặc các dịp lễ lớn trong năm. Thời gian phun lửa là 21 giờ tối, sau đó sẽ là màn phun nước; trong đó số lần phun lửa là 9 lần, mỗi lần kéo dài 2 phút, còn phun nước thì chỉ có 3 lần nhưng lại có thời gian kéo dài hơn là 3 phút/lần.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/danang/dn17.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Cầu Rồng phun nước về đêm (Ảnh: ST)</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex mt-4">
+                        {% for obj in qs %}
+                        <form action="." method='POST' class="ui form ml-4">
+                            {% csrf_token %}
+                            <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                            {% if user not in obj.liked.all %}
+                                <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Thích</span>
+                                </button>
+                            {% else %}
+                                <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                </button>
+                            {% endif %}
+                        </form>
+                        <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                        {% endfor %}
+                    </div>
+
+                    <section class="comment-area">
+                        <div class="container">
+                            <div class="comment-content">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="comment-details">
+                                            <div class="section-title">
+                                                <h5>Bình luận</h5>
+                                            </div>
+                                            <form action="." method="POST" style="margin-top: 1.3em;">
+                                                {% csrf_token %}
+                                                {% if not comments.all %} 
+                                                <div class="col-lg-12">
+                                                    <center><h6 class="mb-4">Chưa có bình luận nào hết á :((</h6></center>
+                                                </div>
+                                                {% else %}
+                                                    {% for x in comments %}
+                                                    <div class="comment-item">
+                                                        <div class="user-avt">
+                                                            <img src="{% static 'img/decor/cat.png' %}" alt="">
+                                                        </div>
+                                                        <div class="comment-info">
+                                                            <h6>{{ x.user }} - <span>{{ x.created_on }}</span></h6>
+                                                            <p>{{ x.body }}</p>
+                                                        </div>
+                                                    </div>
+                                                    {% endfor %}
+                                                {% endif %}
+                                                <input type="text" name="user" value="{{request.user}}" maxlength="200" required="" id="id_user" style="display: none">
+                                                <input type="text" name="post_id" maxlength="200" value="CN02" required id="id_post_id" style="display: none">
+                                                <div class="comment-body">
+                                                    <textarea placeholder="Nhập bình luận..." name="body" cols="40" rows="10" required id="id_body" style="width: 100%; outline: none; border: 1px solid #e53637; border-radius: 5px; padding: 10px;"></textarea>
+                                                    <button type="submit" class="btn button btn-lg" name="comment_submit"><i class="fa fa-location-arrow"></i> Bình luận</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                
+                <div class="col-lg-4 pt-3 pt-lg-0">
+                    <!-- Popular News Start -->
+                    <div class="pb-3">
+                        <div class="bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0 h3">Nổi bật</h3>
+                        </div>
+                        {% for item in oli %}
+                        <div class="d-flex mb-3 haha">
+                            <a href="{{item.link}}"><img src="/media/{{item.bg}}" style="width: 100px; height: 100px; object-fit: cover;"></a>
+                            <div class="w-100 d-flex flex-column justify-content-center bg-light px-3" style="height: 100px;">
+                                <div class="mb-1" style="font-size: 13px;">
+                                    <span>{{item.date}}</span>
+                                </div>
+                                <a class="h6 m-0" href="{{item.link}}">{{item.camnang_name}}</a>
+                                <div class="mb-2" style="font-size: 14px;">
+                                    <span>
+                                        <i class="far fa-eye"></i>
+                                        <span id="view">{{item.view}}</span> 
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!-- Popular News End -->
+
+                    <!-- Tags Start -->
+                    <div class="pb-3">
+                        <div class="bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0 h3">Từ khóa</h3>
+                        </div>
+                        <div class="d-flex flex-wrap m-n1">
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Cẩm nang</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Du lịch</a>
+                            <a href="{% url 'cn_dalat' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đà Lạt</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Khách Sạn</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đi phượt</a>
+                            <a href="{% url 'cn_vungtau' %}" class="btn1 btn-sm btn-outline-secondary m-1">Vũng Tàu</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Kinh nghiệm du lịch</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đi chơi</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Tham quan</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Chỗ ở</a>
+                            <a href="{% url 'weather' %}" class="btn1 btn-sm btn-outline-secondary m-1">Thời tiết</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Nhà nghỉ</a>
+                            <button onclick="deadlines()" class="btn1 btn-sm btn-outline-secondary m-1" style="cursor: pointer; outline: none">Deadline</button>
+                            <script>function deadlines() {alert("NAPUN có sẵn khăn giấy đây. KHÓC ĐIIII :))");}</script>
+                        </div>
+                    </div>
+                    <!-- Tags End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid py-3">
+        <div class="container">
+            <img width="50px" height="50px" src="{% static 'img/decor/pen.png' %}" atl="">
+            <div class="d-flex align-items-center bg-light justify-content-between py-2 px-4 mb-3">
+                <p class="h3 m-0 orange" style="font-style: italic; text-align: justify;">Với những kinh nghiệm du lịch Đà Nẵng tự túc được chia sẻ trong bài viết, hi vọng du khách sẽ có thêm các thông tin tham khảo bổ ích cho chuyến du lịch của mình. Hãy ghé qua những địa điểm nổi tiếng, quán ăn, nhà hàng ngon để thưởng thức trọn vẹn nét đẹp của Đà Nẵng. Và đừng quên <a href="{% url 'hotel' %}">đặt khách sạn tại NAPUN</a> để có một trải nghiệm thực tế nhé ! <i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

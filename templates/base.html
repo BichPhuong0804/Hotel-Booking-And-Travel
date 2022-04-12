@@ -1,0 +1,268 @@
+{% load static %}
+<!doctype html>
+<html lang="vi">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <meta name="description" content="du lịch, khách sạn, đặt khách sạn, cẩm nang du lịch, nhà nghỉ, du lịch Việt Nam, vẻ đẹp Việt Nam">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/logo/logo-icon.png' %}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.carousel.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.css">
+        <link rel="stylesheet" href="{% static 'css/slicknav.css' %}">
+        <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <script src="https://kit.fontawesome.com/1fda624724.js"></script>
+
+        <style>
+            .user:hover {
+                cursor: pointer;
+            }
+        </style>
+   </head>
+   
+   <script type="text/javascript">
+    var txt="{% block title %}{% endblock %}"
+    var espera=200;
+    var refresco=null;
+
+    function rotulo_title() {
+        document.title=txt;
+        txt=txt.substring(1,txt.length)+txt.charAt(0);
+        refresco=setTimeout("rotulo_title()",espera);
+    }
+    
+    rotulo_title();
+    </script>
+
+    <body>
+        <header>
+            <div class="header-area">
+                    <div class="main-header ">
+                        <div class="header-top d-none d-lg-block">
+                        <div class="container-fluid">
+                            <div class="col-xl-12">
+                                    <div class="row d-flex justify-content-between align-items-center">
+                                        <div class="header-info-left">
+                                            <ul>     
+                                                <li>
+                                                    <i class="fas fa-phone" style="color: #ff5f13;"></i>
+                                                    +(84) 1234-567-8901</li>
+                                                <li>
+                                                    <i class="fas fa-envelope" style="color: #ff5f13;"></i>
+                                                    napun28@gmail.com</li>
+                                            </ul>
+                                        </div>
+                                        <div class="header-info-right">
+                                            <ul class="header-social">    
+                                                <li><a href="https://www.facebook.com/napun28"><i class="fab fa-facebook-f"></i></a></li>
+                                            <li> <a href="#"><i class="fab fa-instagram"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        </div>
+                    <div class="header-bottom  header-sticky">
+                        <div class="container-fluid">
+                            <div class="row align-items-center">
+                                <!-- Logo -->
+                                <div class="col-xl-1 col-lg-1 col-md-1">
+                                    <div class="logo">
+                                        <a href="{% url 'trangchu' %}" class="small-logo"><img src="{% static 'img/logo/logo.png' %}" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-xl-11 col-lg-11 col-md-11">
+                                    <!-- Main-menu -->
+                                    <div class="main-menu f-right d-none d-lg-block">
+                                        <nav> 
+                                            <ul id="navigation">                                                                                                                   
+                                                <li><a href="{% url 'trangchu' %}">Trang chủ</a></li>
+                                                <li><a href="{% url 'cn_detail' %}">Cẩm nang du lịch</a>
+                                                    <ul class="submenu">
+                                                        <li>
+                                                            <a href="{% url 'cn_mienbac' %}">Miền Bắc</a>
+                                                            <ul class="submenu sub">
+                                                                <li><a href="{% url 'cn_laocai' %}">Lào Cai</a></li>
+                                                                <li><a href="{% url 'cn_hanoi' %}">Hà Nội</a></li>
+                                                                <li><a href="{% url 'cn_haiphong' %}">Hải Phòng</a></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li>
+                                                            <a href="{% url 'cn_mientrung' %}">Miền Trung</a>
+                                                            <ul class="submenu sub">
+                                                                <li><a href="{% url 'cn_hue' %}">Huế</a></li>
+                                                                <li><a href="{% url 'cn_quangnam' %}">Quảng Nam</a></li>
+                                                                <li><a href="{% url 'cn_phuyen' %}">Phú Yên</a></li>
+                                                                <li><a href="{% url 'cn_danang' %}">Đà Nẵng</a></li>
+                                                                <li><a href="{% url 'cn_quangbinh' %}">Quảng Bình</a></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li>
+                                                            <a href="{% url 'cn_miennam' %}">Miền Nam</a>
+                                                            <ul class="submenu sub">
+                                                                <li><a href="{% url 'cn_vungtau' %}">Vũng Tàu</a></li>
+                                                                <li><a href="{% url 'cn_dalat' %}">Đà Lạt</a></li>
+                                                                <li><a href="{% url 'cn_phuquoc' %}">Phú Quốc</a></li>
+                                                                <li><a href="{% url 'cn_angiang' %}">An Giang</a></li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="{% url 'hotel' %}">Đặt khách sạn</a></li>
+                                                <li><a href="{% url 'weather' %}">Thời tiết</a></li>
+                                                <li><a href="{% url 'contact' %}">Liên hệ</a></li>
+                                                <li> 
+                                                    <form method='POST' class="search-box">
+                                                        {% csrf_token %}
+                                                        <div class ="input-box">
+                                                            <input type="text" name="search" placeholder="Tìm kiếm...">
+                                                        </div>
+                                                        <div class="search-button" type="submit">
+                                                            <i class="fas fa-search"></i>
+                                                        </div>
+                                                    </form>
+                                                </li>
+                                                <li>
+                                                    {% if request.user.is_active %}
+                                                    <a href="{% url 'profile' %}">
+                                                        <div class="user" style="padding: 5px;">
+                                                            <img id="user-avt" src="{% static 'img/decor/avt.jpg' %}" alt="" width="30px" height="30px" style="border-radius: 50%;">
+                                                            &ensp;<span id="username" style="cursor: pointer; font-weight: 500; text-transform: none;">{{request.user}}</span>
+                                                        </div>
+                                                    </a>
+                                                    {% else %}
+                                                    <a href="{% url 'login' %}">
+                                                        <div class="user">
+                                                            <i class="fas fa-user"></i>
+                                                            &ensp;<span style="cursor: pointer; font-weight: 500;">Đăng nhập</span>
+                                                        </div>
+                                                    </a>
+                                                    {% endif %}
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>             
+                                <div class="col-12">
+                                    <div class="mobile_menu d-block d-lg-none"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="slider-area w-100 ">
+            <div class="single-slider hero-overly slider-height2 d-flex align-items-center w-100" style="background-image: url({% static 'img/decor/travel.jpg' %}); width: 100%">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="hero__caption">
+                                <div class="hero-text1">
+                                </div>
+                                <div class="stock-text" data-animation="fadeInUp" data-delay=".8s">
+                                    <h2>Cẩm nang du lịch</h2>
+                                    <h2>Cẩm nang du lịch</h2>
+                                </div>
+                                <div class="hero-text2 mt-110" data-animation="fadeInUp" data-delay=".9s">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% block content %}{% endblock %}
+
+        <div class="container-fluid py-3">
+            <div class="container">
+                <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
+                    <h3 class="m-0 h3 orange">Khám phá Việt Nam</h3>
+                </div>
+                <div class="position-relative">
+                    <iframe width="100%" height="600px" src="https://www.youtube.com/embed/Au6LqK1UH8g" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+            <br><br><br><br><br><br>
+
+        <footer>
+            <div class="footer-main" style="max-width: 1600px;">
+                <div class="footer-area footer-padding">
+                    <div class="container">
+                        <div class="row  justify-content-between">
+                            <div class="col-lg-5 col-md-4 col-sm-8">
+                                <div class="single-footer-caption mb-30">
+                                    <!-- logo -->
+                                    <div class="footer-logo">
+                                        <a href="{% url 'trangchu' %}"><img src="{% static 'img/logo/logo.png' %}" alt=""></a>
+                                    </div>
+                                    <div class="footer-tittle">
+                                        <div class="footer-pera">
+                                            <p class="info">Chúng ta bắt đầu biết đi ngay từ khi còn bé. Vậy nên không có lý do gì khi đôi chân đang khỏe mà bạn lại phải ngồi im.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-5">
+                                <div class="single-footer-caption mb-50">
+                                    <div class="footer-tittle">
+                                        <h4>Truy cập nhanh</h4>
+                                        <ul>
+                                            <li><a href="{% url 'cn_detail' %}" class="a">Cẩm nang du lịch</a></li>
+                                            <li><a href="{% url 'hotel' %}" class="a">Đặt Khách sạn</a></li>
+                                            <li><a href="{% url 'weather' %}" class="a">Thời tiết</a></li>
+                                            <li><a href="{% url 'contact' %}" class="a">Liên hệ</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-7">
+                                <div class="single-footer-caption mb-50">
+                                    <div class="footer-tittle">
+                                        <h4>Liên hệ với chúng tôi</h4>
+                                        <div class="footer-pera">
+                                            <p class="info">1111 Kha Vạn Cân, Linh Trung, Thủ Đức, TP.HCM</p>
+                                        </div>
+                                        <ul>
+                                            <li>Email: napun28@gmail.com</li>
+                                            <li>Phone: +(84) 1234-567-8901</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- Copy-Right -->
+                        <div class="row align-items-center">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                <div class="footer-copy-right">
+                                    <p>
+                                        Copyright &copy;
+                                        <script>
+                                            document.write(new Date().getFullYear());
+                                        </script>
+                                        | NAPUN - Cẩm nang du lịch và Đặt khách sạn <i class="fa fa-heart" aria-hidden="true"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollup/2.4.1/jquery.scrollUp.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/jquery.slicknav.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/js/animsition.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/js/animsition.min.js"></script>
+        <!-- Main Jquery -->	
+        <script src="{% static 'js/main.js' %}"></script>
+        </body>
+        </html>
+    </body>
+

@@ -1,0 +1,387 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Cẩm nang du lịch Quảng Bình.{% endblock %}
+{% block content %}
+    <div class="container-fluid py-3">
+        <div class="container">
+            <div>
+                <div class="col-12">
+                    <p id="tieude" class="h3" style="color: #343a40;">Du lịch Quảng Bình - Cẩm nang du lịch chi tiết từ A đến Z</p>
+                    <div class="d-flex">
+                        <img src="{% static 'img/decor/cat.png' %}" alt='' width="50px" height="50px">
+                        <p style="color: #555; font-weight: bold">Lượt xem: {{vi.view}} </p>
+                        <div class="d-flex">
+                            {% for obj in qs %}
+                            <form action="." method='POST' class="ui form ml-4">
+                                {% csrf_token %}
+                                <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                                {% if user not in obj.liked.all %}
+                                    <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                        <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                        <span style="color: #fff; font-weight: 600">Thích</span>
+                                    </button>
+                                {% else %}
+                                    <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                        <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                        <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                    </button>
+                                {% endif %}
+                            </form>
+                            <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="background-image: url({% static 'img/decor/bg.jpg' %})">
+                <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 5px;">
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 30px;">
+                </div>
+                <div class="col-12">
+                    <p id="tieude"><b>QUẢNG BÌNH</b></p>
+                </div>
+                <div class="col-12" style="color: black; ">
+                    <p class="m-0">Sau khi bộ phim “ăn khách” “Kong: Skull Island” được công chiếu, Quảng Bình không chỉ thu hút khách du lịch trong nước mà còn hấp dẫn du khách nước ngoài đến để khám phá và trải nghiệm. Du lịch Quảng Bình là lựa chọn lý tưởng để du khách khám phá các thắng cảnh thiên nhiên tuyệt đẹp, thử thách với các hoạt động giải trí thú vị có một không hai và thưởng thức ẩm thực đỉnh cao của xứ Quảng. Tham khảo review du lịch Quảng Bình chi tiết dưới đây và lên kế hoạch du lịch ngay thôi!</p>
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 5px; margin-top: 15px;">
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 20px;">
+                </div>
+            </div>
+            <div class="mb-3 pb-3">
+                <img class="img-fluid w-100" src="{% static 'img/quangbinh/qb1.jpg' %}" alt="">
+                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Những điều cần biết khi du lịch Quảng Bình (Ảnh: ST)</p>
+            </div>
+            <div class="mb-3 pb-3">
+                <a href="{% url 'hotel' %}"><img class="img-fluid w-100" src="{% static 'img/decor/dulich.jpg' %}" alt=""></a>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="col-12">
+                        <div class="single-services section-padding2">
+                            <div class="details-caption" style="color: #343a40">
+                                <h3>1. Giới thiệu về Quảng Bình</h3>
+                                <p>Du lịch Quảng Bình là cơ hội để khám phá vùng đất mới, con người mới, trải nghiệm mới. Quảng Bình nằm ở vùng duyên hải miền Trung Việt Nam, phía Nam giáp với Quảng Trị, phía Bắc giáp Hà Tĩnh, phía Đông giáp Biển Đông. </p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/quangbinh/qb2.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Du lịch Quảng Bình - điểm du lịch hấp dẫn tại miền Trung (Nguồn: sưu tầm)</p>
+                                </div>
+                                <p>Phải dùng một từ quá tuyệt vời, quá đẹp về du lịch Phú Yên… Nơi có tiềm năng lớn để phát triển du lịch, với rất nhiều thứ mà các tỉnh thành khác phải ao ước có được, từ những danh thắng có một không hai như Gành Đá Đĩa, bãi Xép, những con đường chạy dọc biển siêu đẹp, đến những món ăn ngon, bổ và SIÊU RẺ… Chúng tạo nên một Phú Yên khác, rất khác so với các tỉnh thành khác. Cô bạn mình có bảo, nếu mà mình ở Phú Yên một tháng chắc sẽ “lăn” về Sài Gòn mất.hi.</p>
+                                <p>Tuy diện tích không quá lớn (chỉ hơn 8000 km2), song Quảng Bình lại là vùng đất tập trung nhiều thắng cảnh đẹp nổi tiếng trong và ngoài nước. Trong đó phải kể đến “vương quốc hang động” gồm 404 hang động lớn nhỏ, những bài biển hoang sơ tuyệt đẹp và những điểm đến tâm linh hấp dẫn.</p>
+                                
+                                <h3>2. Nên đi du lịch Quảng Bình tháng mấy?</h3>
+                                <p>Thời tiết Quảng Bình được phân theo hai mùa: màu mưa và mùa nóng. Thời tiết ổn định nhất vào khoảng tháng 3 đến tháng 9, đây cũng được xem là thời điểm thích hợp nhất để lên kế hoạch du lịch Quảng Bình.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/quangbinh/qb3.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Du lịch Quảng Bình đẹp nhất vào tháng 3 đến tháng 9 (Nguồn: sưu tầm)</p>
+                                </div>
+                                                                    
+                                <h3>3. Phương tiện di chuyển đến Quảng Bình</h3>
+                                <p>Đến du lịch Quảng Bình, bạn có thể lựa chọn phương tiện di chuyển tàu hỏa, ô tô hoặc máy bay.</p>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p>Tàu hỏa: Bạn có thể lựa chọn những chuyến bay của những hãng hàng không Vietnam Airlines, Vietjet Air, Jetstar làm phương tiện di chuyển tới Phú Yên. Có hai tuyến bay tới Phú Yên là Hà Nội – Phú Yên và Sài Gòn – Phú Yên với mức giá vé dao động 1.500.000 – 1.900.000 đồng. Nếu săn được vé rẻ đến Phú Yên thì mức giá vé chỉ khoảng hơn 600.000đ/chiều. Phú Yên có sân bay Tuy Hòa cách trung tâm thành phố 10km nên bạn phải thuê xe ôm hoặc taxi để có thể di chuyển vào trong trung tâm thành phố. </p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/quangbinh/qb4.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Sân bay Tuy Hòa cách trung tâm thành phố 10km (Ảnh: sưu tầm)</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <ul style="padding-left: 30px;">
+                                            <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Đi du lịch Quảng Bình bằng tàu hỏa: Nếu bạn đi từ Hà Nội, Đà Nẵng, Huế hay Sài Gòn có thể mua vé tàu hỏa để đến du lịch Quảng Bình.</p>
+                                                <p style="padding-left: 10px;">- Đi từ Hà Nội: Tàu đi từ Hà Nội - Quảng Bình mất khoảng 10 tiếng. Giá vé ngồi khoảng 300.000 nghìn, vé giường nằm khoảng từ 500.000 - 700.000 nghìn tùy theo từng tầng. Các bạn đi từ Vinh, Thanh Hóa cũng có thể sử dụng các chuyến tàu</p>
+                                                <p style="padding-left: 10px;">- Đi từ Đà Nẵng, Huế: Huế cách Quảng Bình 160km, di chuyển bằng tàu hỏa mất khoảng 3 tiếng. Khoảng cách từ Đà Nẵng đến Quảng Bình xa hơn (khoảng 270km), đi tàu mất khoảng 6 tiếng.</p>
+                                                <p style="padding-left: 10px;">- Đi từ Sài Gòn: Từ Sài Gòn bạn có thể đặt vé tàu hỏa đến ga Đồng Hới - Quảng Bình. Giá vé thấp nhất khoảng 400.000 đồng và có thể lên đến 1.300.000 đồng/ vé nếu bạn chọn loại có dịch vụ chất lượng hơn.</p>
+                                            </li>
+                                        </ul>   
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/quangbinh/qb5.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Du lịch Quảng Bình bằng tàu hỏa (Nguồn: sưu tầm)</p>
+                                        </div>
+                                        <ul style="padding-left: 30px;">
+                                            <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Đi du lịch Quảng Bình bằng xe khách: Đi du lịch Quảng Bình, ngoài tàu hỏa bạn có thể chọn di chuyển bằng xe khách.</p>
+                                                <p style="padding-left: 10px;">- Đi từ Hà Nội: Xe du lịch Quảng Bình đi từ Hà Nội mất khoảng 10 - 12 tiếng với giá 200.000 - 250.000 đồng tùy từng thời điểm. Thường xe từ Hà Nội xuất phát từ tối khoảng 19 giờ và đến Quảng Bình vào khoảng 6 giờ sáng.</p>
+                                                <p style="padding-left: 10px;">- Đi từ Đà Nẵng: Xe đi Đà Nẵng - Quảng Bình mất khoảng 5 tiếng, giờ nào cũng có. Giá vé tham khảo: 150.000 đồng.</p>
+                                                <p style="padding-left: 10px;">- Đi từ Sài Gòn: Bạn có thể bắt xe tại bến xe miền Đông với giá khoảng 500.000 - 600.000 đồng. Tuy nhiên lưu ý vì đường xa, nếu chọn đi xe khách sẽ khá vất vả và tốn nhiều thời gian.</p>
+                                            </li>
+                                        </ul>                                         
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/quangbinh/qb6.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Đi xe khách đến Quảng Bình (Nguồn: sưu tầm)</p>
+                                        </div>
+                                        <ul style="padding-left: 30px;">
+                                            <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Đi du lịch Quảng Bình bằng máy bay: Đi du lịch Quảng Bình, ngoài tàu hỏa bạn có thể chọn di chuyển bằng xe khách.</p>
+                                                <p style="padding-left: 10px;">- Đi từ Hà Nội: từ Hà Nội đi du lịch Quảng Bình bạn có thể mua vé máy bay với thời gian bay khoảng 1 tiếng. </p>
+                                                <p style="padding-left: 10px;">- Đi từ Sài Gòn: từ Sài Gòn đi Quảng Bình bằng máy bay, lời khuyên cho bạn là nên tham khảo và đặt vé sớm để book được vé rẻ.</p>
+                                            </li>
+                                        </ul>                                         
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/quangbinh/qb7.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Đi máy bay đến Quảng Bình (Nguồn: sưu tầm)</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                                
+                                <h3>4. Đi lại bằng gì ở Quảng Bình?</h3>
+                                <p>Đến tham quan và khám phá Quảng Bình, bạn có thể thuê xe máy, xe điện hoặc bắt taxi để di chuyển.</p>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p>Đi bằng xe máy: Nếu bạn đi du lịch Quảng Bình tự túc là người thích tự mình tìm tòi, khám phá và có những trải nghiệm mới lạ thì xe máy là phương tiện lý tưởng cho bạn khi du lịch Quảng Bình.Giá thuê xe máy tại Quảng Bình thường là 130.000 đồng ngày/ xe số, 150.000 đồng ngày/ xe ga, 450.000 đồng ngày/ xe côn. Bạn nên tham khảo trước các địa điểm thuê xe uy tín và trao đổi giá tiền chi tiết trước khi đặt cọc thuê xe.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/quangbinh/qb8.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Du lịch Quảng Bình tự túc bằng xe máy (Nguồn: sưu tầm)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Đi bằng ô tô/ taxi/ xe điện: theo kinh nghiệm du lịch Quảng Bình cho gia đình thì di chuyển bằng ô tô hoặc taxi phù hợp, nhất là với đoàn đông người, hoặc khi có người lớn tuổi hoặc trẻ nhỏ. Hình thức này giúp tiết kiệm chi phí hơn và thoải mái hơn khi di chuyển đến các địa điểm khác nhau.</p></li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Xe taxi: Bạn có thể gọi các hãng taxi tại Quảng Bình để chủ động di chuyển và được đưa đón tận nơi. </p></li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Xe điện: thường đỗ dọc khách sạn Trương Pháp, có thể thuê để dạo phố với giá 200.000 - 250.000 đồng/ 2 - 3 người</p></li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p>Ô tô, xe buýt: di chuyển đến các điểm du lịch tại Quảng Bình, bạn có thể thuê ô tô có người lái hoặc không người lái tùy theo nhu cầu. Hoặc bạn có thể di chuyển bằng xe buýt để đảm bảo an toàn và tiết kiệm chi phí. Tham khảo các tuyến Đồng Hới - Phong Nha, Đồng Hới - Kiến Giang, Đồng Hới - Ba Đồn.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/quangbinh/qb9.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Du lịch Quảng Bình bằng ô tô (Nguồn: sưu tầm)</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                                
+                                <h3>5. Những điểm du lịch Quảng Bình không nên bỏ lỡ</h3>
+                                <p>Đến khám phá khu du lịch Quảng Bình không thể bỏ lỡ các điểm du lịch hấp dẫn dưới đây!</p>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Khu du lịch Ozo Quảng Bình</p>
+                                        <p>Nằm giữa rừng xanh, khu du lịch Ozo Quảng Bình quanh năm mát mẻ và dễ chịu. Tới đây du khách được tham quan rừng nguyên sinh trên bậc thang gỗ 999m, khám phá về các loại động, thực vật và tham gia nhiều hoạt động thú vị như: vượt dây rừng trên không, đi bộ trên cáo, đi bộ trên vòm, đu zipline, chèo thuyền kayak, trượt ván trên không,...</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/quangbinh/qb10.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Khu du lịch Ozo Quảng Bình (Nguồn: sưu tầm)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Biển Nhật Lệ</p>
+                                        <p>Đây là bãi biển nổi tiếng thu hút nhiều khách du lịch nhất tại Quảng Bình. Bãi biển mang vẻ đẹp nên thơ với sự kết hợp hài hòa giữa biển xanh, cát trắng, nắng vàng. Biển nằm ở khu trung tâm Đồng Hới nên dịch vụ ăn uống và hoạt động du lịch khá phát triển. </p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/quangbinh/qb11.png' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Biển Nhật Lệ - top bãi biển đẹp nhất Việt Nam (Nguồn: sưu tầm)</p>
+                                        </div>
+                                    </li>  
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bãi Đá Nhảy</p>
+                                        <p>Được xem là danh lam thắng cảnh độc đáo tại Quảng Bình, bãi Đá Nhảy nổi tiếng bởi sở hữu nhiều hòn đá vươn mình ra biển khơi. Thả dáng trên những mỏm đá dưới làn nước biển trong xanh là cơ hội để bạn có những tấm ảnh “nghìn like”.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/quangbinh/qb12.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Check-in bãi Đá Nhảy tại Quảng Bình (Nguồn: sưu tầm)</p>
+                                        </div>
+                                    </li>  
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Cồn cát Quang Phú</p>
+                                        <p>Cồn cát Quang Phú cách trung tâm Đồng Hới khoảng 10km. Từ Đồng Hới bạn đi theo đường Trần Hưng Đạo, rẽ vào Nguyễn Du rồi băng qua đường Trường Pháp sau đó rẽ trái là tới. Cồn cát là địa điểm check-in cực hot với giới trẻ, cũng là nơi du khách được trải nghiệm bộ môn trượt cát trên ván.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/quangbinh/qb13.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Check-in cồn cát Quang Phú - Quảng Bình (Nguồn: sưu tầm)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Chợ Đồng Hới</p>
+                                        <p>Chợ Đồng Hới về tối và đêm thu hút đông đảo du khách ghé thăm bởi lúc này du khách không chỉ được ngắm nhìn không gian thơ mộng khi lên đèn của thành phố bên dòng Nhật Lệ mà còn được thưởng thức nhiều món ăn đặc sản dân dã của của quê hương Quảng Bình.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/quangbinh/qb14.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Chợ đêm Đồng Hới tại Quảng Bình (Nguồn: sưu tầm)</p>
+                                        </div>
+                                    </li>      
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Di tích Tượng đài Mẹ Suốt</p>
+                                        <p>Tượng đài được xây dựng để vinh danh người anh hùng - Mẹ Suốt năm xưa đã đưa đò tiếp tế vũ khí, lương thực phục vụ kháng chiến chống Pháp. Nơi đặt tượng đài cũng là nơi diễn ra các hoạt động sinh hoạt văn hóa của người dân bản địa, các sự kiện vui chơi cho các em nhỏ.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/quangbinh/qb15.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Bến đò & tượng đài Mẹ Suốt - Quảng Bình (Nguồn: sưu tầm)</p>
+                                        </div>
+                                    </li>                                   
+                                </ul>
+                                <h3>6. Ăn gì khi đi du lịch Quảng Bình?</h3>
+                                <p>Bên cạnh những điểm du lịch nổi tiếng thì ẩm thực Quảng Bình cũng là một trong các yếu tố hấp dẫn nhất với khách du lịch.</p>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Hải sản tươi sống</p>
+                                        <p>Du lịch Quảng Bình không thể bỏ lỡ cơ hội thưởng thức các loại hải sản tươi sống thơm ngon như ngao, cá, tôm, sò huyết, ốc... Đặc biệt, món mực ở đây được du khách rất yêu thích bởi mực dày và ngọt, dù được chế biến theo cách nào cũng vô cùng hấp dẫn.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/quangbinh/qb16.png' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hải sản Quảng Bình tươi ngon, hấp dẫn mọi du khách (Nguồn: sưu tầm)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Cháo bánh canh</p>
+                                        <p>Cháo bánh canh mang hương vị đậm đà từ thịt, cá, tôm,...  trong đó cá lóc là nguyên liệu không thể thiếu trong bát cháo bánh canh. Một bát cháo bánh canh là sự kết hợp hài hòa giữa màu trắng của sợi bột, màu vàng của miếng cá lóc, màu hồng của tôm, màu xanh của hành lá,... và mang hương vị đặc trưng chỉ có riêng tại đất Quảng Bình.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/quangbinh/qb17.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Cháo bánh canh nức tiếng tại Quảng Bình (Nguồn: sưu tầm)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bánh nậm</p>
+                                        <p>Bánh làm từ bột gạo trắng mịn, phủ lên trên là lớp nhân thơm ngậy. Nhân gồm tôm, thịt lợn, mộc nhĩ băm nhỏ rồi xào thơm cùng hành, tỏi cho đến khi vàng ruộm. Bánh nóng hổi gói trong lá chuối, chấm với nước mắm đậm chất Quảng Bình.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/quangbinh/qb18.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Bánh nậm nóng hổi gói trong lá chuối, chấm với nước mắm đậm chất Quảng Bình (Nguồn: sưu tầm)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Cháo lươn đồng</p>
+                                        <p>Đây là món ăn đồng quê gây nhớ thương với du khách khi đến du lịch Quảng Bình. Những miếng lươn tươi được xào săn thịt trước đó cho thấm gia vị, cay tê tê, thơm mùi tiêu làm bát cháo thêm đậm đà. Bát cháo lươn nóng hổi, thơm lừng, từng miếng lươn ngon ngọt, đậm vị cùng rau răm và hành thái nhỏ.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/quangbinh/qb19.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Bát cháo lươn nóng hổi, đậm vị ăn cùng rau răm và hành thái nhỏ (Nguồn: sưu tầm)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bánh khoái</p>
+                                        <p>Có vẻ ngoài khá giống bánh xèo (miền Nam) & bánh gối (miền Bắc) song hương vị đặc trưng của bánh khoái vẫn đem lại cảm giác vô cùng khác biệt. Vỏ bánh được làm từ bột gạo xay nhuyễn, trộn thêm bột nghệ và trứng gà để có màu vàng đẹp mắt. Nhân bánh gồm giá đỗ, thịt, tôm. Bánh khi ăn sẽ ăn kèm với rau thơm, rau xà lách, chuối xanh, khế chua chấm cùng nước chấm đậm vị thêm chút đậu lạc bùi bùi.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/quangbinh/qb20.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Bánh khoái giòn rụm, nhân thịt tôm đầy đặn nổi tiếng Quảng Bình (Nguồn: sưu tầm)</p>
+                                        </div>
+                                    </li> 
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Cháo hàu</p>
+                                        <p>Hàu tươi sau khi làm sạch được xào cho ngấm gia vị, thơm mùi hành và hơi cay vị tiêu và ớt. Khách gọi đến đâu, chủ quán mới lấy cho hàu vào cháo gạo nấu sẵn rồi đun nóng, cho thêm rau thơm và hành lá cắt nhỏ. Cháo hàu béo ngậy, ngon ngọt đầy dinh dưỡng.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/quangbinh/qb21.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Cháo hàu béo ngậy, ngon ngọt đầy dinh dưỡng (Nguồn: sưu tầm)</p>
+                                        </div>
+                                    </li>   
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bánh bèo</p>
+                                        <p>Món ăn bình dị quá đỗi quen thuộc với người Quảng Bình nên rất dễ để tìm gặp một quán bánh bèo ở khắp nơi. Bánh bèo tôm chấy nay trở thành đặc sản hấp dẫn du khách. Những chiếc bánh mỏng, nhỏ xinh, thơm mùi gạo còn đọng hương lúa mới, mềm dẻo, bên trên rắc đẫy tôm chấy vàng ruộm, đậm đà gia vị và thêm ít tóp mỡ giòn tan. Chấm (chan) cùng nước mắm cay ngọt, tất cả hương vị của bánh quyện lại khiến thực khách sẽ nhớ mãi.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/quangbinh/qb22.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Bánh bèo Quảng Bình mỏng, nhỏ xinh, thơm mùi gạo vô cùng hấp dẫn (Nguồn: sưu tầm)</p>
+                                        </div>
+                                    </li>                              
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex mt-4">
+                        {% for obj in qs %}
+                        <form action="." method='POST' class="ui form ml-4">
+                            {% csrf_token %}
+                            <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                            {% if user not in obj.liked.all %}
+                                <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Thích</span>
+                                </button>
+                            {% else %}
+                                <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                </button>
+                            {% endif %}
+                        </form>
+                        <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                        {% endfor %}
+                    </div>
+
+                    <section class="comment-area">
+                        <div class="container">
+                            <div class="comment-content">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="comment-details">
+                                            <div class="section-title">
+                                                <h5>Bình luận</h5>
+                                            </div>
+                                            <form action="." method="POST" style="margin-top: 1.3em;">
+                                                {% csrf_token %}
+                                                {% if not comments.all %} 
+                                                <div class="col-lg-12">
+                                                    <center><h6 class="mb-4">Chưa có bình luận nào hết á :((</h6></center>
+                                                </div>
+                                                {% else %}
+                                                    {% for x in comments %}
+                                                    <div class="comment-item">
+                                                        <div class="user-avt">
+                                                            <img src="img/anime/review-1.jpg" alt="">
+                                                        </div>
+                                                        <div class="comment-info">
+                                                            <h6>{{ x.user }} - <span>{{ x.created_on }}</span></h6>
+                                                            <p>{{ x.body }}</p>
+                                                        </div>
+                                                    </div>
+                                                    {% endfor %}
+                                                {% endif %}
+                                                <input type="text" name="user" value="{{request.user}}" maxlength="200" required="" id="id_user" style="display: none">
+                                                <input type="text" name="post_id" maxlength="200" value="CN08" required id="id_post_id" style="display: none">
+                                                <div class="comment-body">
+                                                    <textarea placeholder="Nhập bình luận..." name="body" cols="40" rows="10" required id="id_body" style="width: 100%; outline: none; border: 1px solid #e53637; border-radius: 5px; padding: 10px;"></textarea>
+                                                    <button type="submit" class="btn button btn-lg" name="comment_submit"><i class="fa fa-location-arrow"></i> Bình luận</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                            
+                <div class="col-lg-4 pt-3 pt-lg-0">
+                    <div class="pb-3">
+                        <div class="bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0 h3">Nổi bật</h3>
+                        </div>
+                        {% for item in oli %}
+                        <div class="d-flex mb-3 haha">
+                            <a href="{{item.link}}"><img src="/media/{{item.bg}}" style="width: 100px; height: 100px; object-fit: cover;"></a>
+                            <div class="w-100 d-flex flex-column justify-content-center bg-light px-3" style="height: 100px;">
+                                <div class="mb-1" style="font-size: 13px;">
+                                    <span>{{item.date}}</span>
+                                </div>
+                                <a class="h6 m-0" href="{{item.link}}">{{item.camnang_name}}</a>
+                                <div class="mb-2" style="font-size: 14px;">
+                                    <span>
+                                        <i class="far fa-eye"></i>
+                                        <span id="view">{{item.view}}</span> 
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!-- Popular News End -->
+
+                    <!-- Tags Start -->
+                    <div class="pb-3">
+                        <div class="bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0 h3">Từ khóa</h3>
+                        </div>
+                        <div class="d-flex flex-wrap m-n1">
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Cẩm nang</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Du lịch</a>
+                            <a href="{% url 'cn_dalat' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đà Lạt</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Khách Sạn</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đi phượt</a>
+                            <a href="{% url 'cn_vungtau' %}" class="btn1 btn-sm btn-outline-secondary m-1">Vũng Tàu</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Kinh nghiệm du lịch</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đi chơi</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Tham quan</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Chỗ ở</a>
+                            <a href="{% url 'weather' %}" class="btn1 btn-sm btn-outline-secondary m-1">Thời tiết</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Nhà nghỉ</a>
+                            <button onclick="deadlines()" class="btn1 btn-sm btn-outline-secondary m-1" style="cursor: pointer; outline: none">Deadline</button>
+                            <script>function deadlines() {alert("NAPUN có sẵn khăn giấy đây. KHÓC ĐIIII :))");}</script>
+                        </div>
+                    </div>
+                    <!-- Tags End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid py-3">
+        <div class="container">
+            <img width="50px" height="50px" src="{% static 'img/decor/pen.png' %}" atl="">
+            <div class="d-flex align-items-center bg-light justify-content-between py-2 px-4 mb-3">
+                <p class="h3 m-0 orange" style="font-style: italic; text-align: justify;">Với những kinh nghiệm du lịch Quảng Bình tự túc được chia sẻ trong bài viết, hi vọng du khách sẽ có thêm các thông tin tham khảo bổ ích cho chuyến du lịch của mình. Hãy ghé qua những địa điểm nổi tiếng, quán ăn, nhà hàng ngon để thưởng thức trọn vẹn nét đẹp của Quảng Bình. Và đừng quên <a href="{% url 'hotel' %}">đặt khách sạn tại NAPUN</a> để có một trải nghiệm thực tế nhé ! <i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

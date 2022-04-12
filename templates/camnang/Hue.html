@@ -1,0 +1,366 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Cẩm nang du lịch Huế.{% endblock %}
+{% block content %}
+        <div class="container-fluid py-3">
+            <div class="container">
+                <div>
+                    <div class="col-12">
+                        <p id="tieude" class="h3" style="color: #343a40;">Bỏ túi kinh nghiệm du lịch Huế để có thể trải nghiệm trọn vẹn vùng đất Cố Đô</p>
+                        <div class="d-flex">
+                            <img src="{% static 'img/decor/cat.png' %}" alt='' width="50px" height="50px">
+                            <p style="color: #555; font-weight: bold">Lượt xem: {{vi.view}} </p>
+                            <div class="d-flex">
+                                {% for obj in qs %}
+                                <form action="." method='POST' class="ui form ml-4">
+                                    {% csrf_token %}
+                                    <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                                    {% if user not in obj.liked.all %}
+                                        <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                            <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                            <span style="color: #fff; font-weight: 600">Thích</span>
+                                        </button>
+                                    {% else %}
+                                        <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                            <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                            <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                        </button>
+                                    {% endif %}
+                                </form>
+                                <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="background-image: url({% static 'img/decor/bg.jpg' %}">
+                    <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 5px;">
+                    </div>
+                    <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 30px;">
+                    </div>
+                    <div class="col-12">
+                        <p id="tieude"><b>HUẾ</b></p>
+                    </div>
+                    <div class="col-12" style="color: black; ">
+                            <p class="m-0">Nằm bên bờ Sông Hương, Huế là thủ phủ của tỉnh Thừa Thiên Huế ở miền Trung Việt Nam. Cách Hà Nội 700 km về phía nam, cách thành phố Hồ Chí Minh 1100 km về phía bắc. Huế không chỉ hấp dẫn du khách bởi nét đẹp văn hóa, lịch sử mà còn hấp dẫn du khách bởi những con người thân thiện nơi đây. Huế quá đỗi tuyệt vời với nhiều công trình kiến ​​trúc lâu đời. Nơi đây là địa điểm lý tưởng cho kỳ nghỉ ngắm cảnh lãng mạn với không khí trong lành, xinh đẹp cố đô. Vẻ đẹp của Huế khiến du khách luôn nhớ mãi. Đến với Huế như đến với vùng đất xinh đẹp thơ mộng với bao điều kỳ thú cần khám phá.</p> 
+                    </div>
+                    <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 5px; margin-top: 15px;">
+                    </div>
+                    <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 20px;">
+                    </div>
+                </div>
+                <div class="mb-3 pb-3">
+                    <img class="img-fluid w-100" src="{% static 'img/hue/hue1.jpg' %}" alt="">
+                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Những điều cần biết khi du lịch Huế (Ảnh: ST)</p>
+                </div>
+                <div class="mb-3 pb-3">
+                    <a href="{% url 'hotel' %}"><img class="img-fluid w-100" src="{% static 'img/decor/dulich.jpg' %}" alt=""></a>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="col-12">
+                            <div class="single-services section-padding2">
+                                <div class="details-caption" style="color: #343a40">
+                                    <h3>1. Đôi nét về du lịch Huế - vùng đất cố đô</h3>
+                                    <p>Huế là một tỉnh thuộc duyên hải miền Trung, có đường biên giới với Lào, giáp biển Đông, Quảng Nam, Đà Nẵng và Quảng Trị. Huế nổi tiếng với cái đẹp thơ mộng, êm đềm mà dịu dàng. Nét duyên dáng ấy khiến bất cứ ai cũng muốn du lịch Huế một lần trong đời.</p>
+                                    <div class="mb-3">
+                                        <img class="img-fluid w-100" src="{% static 'img/sidebar/hue.jpg' %}" alt="">
+                                        <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Huế - Thành phố của những sắc hoa</p>
+                                    </div>
+                                    <p>Về miền đất cố đô, du khách được chiêm ngưỡng những cung điện vàng son, những lăng tẩm uy nghiêm, những danh lam thắng cảnh nhuốm màu lịch sử, tất cả làm nên vẻ đẹp độc đáo cho vùng đất xứ Huế. Hãy sắp xếp một chuyến du lịch cố đô Huế để tận mắt nhìn ngắm và cảm nhận những di sản văn hoá vật thể và phi vật thể mang nhiều giá trị trí tuệ và tinh thần của người dân Việt Nam.</p>
+    
+                                    <h3>2. Du lịch Huế thì nên đi vào thời điểm nào?</h3>
+                                    <p>Nếu có ý định đi du lịch Huế, bạn cần tìm hiểu xem đi mùa nào đẹp nhất. Ở Huế có rất nhiều danh lam thắng cảnh, những món ăn ngon mà bạn nên thử. Vì vậy nếu đến Huế du lịch vào thời tiết tốt, bạn sẽ thuận lợi khám phá miền đất cố đô xinh đẹp mà không sợ bị gián đoạn bởi những cơn mưa bất chợt.</p>
+                                    <div class="mb-3 pb-3">
+                                        <img class="img-fluid w-100" src="{% static 'img/hue/hue2.jpg' %}" alt="">
+                                    </div>
+                                    <p>Theo kinh nghiệm đi Huế của mình, mùa hạ ở Huế khí hậu nóng bức, kéo dài từ tháng 3 đến tháng 8. Mùa mưa ở Huế thường hay có bão lũ từ tháng 10 đến tháng giêng. Mùa đông trời se lạnh, nhiều khi nhiệt độ thấp dưới 10 độ C. Còn mùa xuân ở Huế là khí hậu dễ chịu nhất, từ tháng Giêng đến hết tháng 3. Vì vậy, với kinh nghiệm du lịch Huế tự túc của mình, bạn nên đi Huế vào mùa xuân để tận hưởng không khí mát mẻ và có thể thưởng ngoạn cảnh đẹp nơi đây thoải mái nhất.</p>
+                                    <p style="margin-top: 0px;">
+                                        <ul style="padding-left: 30px">
+                                            <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Từ tháng 1 - tháng 3: Thời tiết se lạnh, cây cối đâm chồi nảy lộc, cảnh sắc tươi đẹp. Thích hợp để chiêm ngưỡng nét đẹp dịu dàng ở Huế.</p></li>
+                                            <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Tháng 4: Mùa lễ hội Festival Huế. Không khí sôi động, náo nhiệt, đường phố trang trí rất đẹp. Nếu bạn là người ưa thích phồn hoa, có thể du lịch ở Huế vào thời điểm này.</p></li>
+                                            <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Từ tháng 5 - tháng 7: Lúc này khí hậu mát mẻ, khô ráo, cũng là thời điểm du lịch Huế đẹp nhất, đặc biệt là đầu tháng 8.</p></li>
+                                        </ul>
+                                    </p>
+
+                                    <h3>3. Có nên du lịch Huế? Những nét đặc trưng của xứ Huế</h3>
+                                    <p>Du lịch Huế mang đến nhiều cảm xúc cũng như ấn tượng cho du khách thập phương. Nếu ai đã tới Huế, hẳn sẽ lưu luyến vùng đất này không nỡ rời. Rất nhiều người từng hỏi, du lịch Huế có gì đẹp mà khiến biết bao du khách muốn quay trở lại? Thật khó mà diễn tả bằng lời nếu chưa bước chân đến mảnh đất cố đô.</p>
+                                    <p>
+                                        <ul style="padding-left: 30px">
+                                            <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Huế có kiến trúc đẹp, độc đáo: Hệ thống cung điện, lăng tẩm Huế mang đậm kiến trúc cung đình triều Nguyễn với những nét cổ kính, trầm mặc, uy nghiêm. Ngày nay, các công trình kiến trúc dù qua nhiều lần tu bổ nhưng vẫn giữ nguyên được bản sắc và hồn Việt.</p></li>
+                                            <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Là thành phố xanh, sạch đẹp: Đến du lịch Huế, du khách có thể dễ dàng bắt gặp hình ảnh người dân tham gia các chiến dịch bảo vệ môi trường, làm sạch đường phố, nhặt rác sông Hương và khuyến khích khách tham quan di chuyển bằng xe đạp. Những điều nhỏ bé này góp phần tạo nên một thành phố “Xanh - sạch - sáng” trong mắt khách du lịch.</p></li>
+                                            <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Con người Huế thân thiện, hiền hòa: Con người ở Huế đặc biệt rất gần gũi và thân thiện. Họ luôn nở nụ cười và nhiệt tình giúp đỡ người khác bất cứ khi nào. Nếu đến du lịch Huế mà không biết cố đô Huế ở đâu hoặc đường đi như thế nào thì cứ hỏi người dân nơi này, họ sẽ rất vui vẻ giúp đỡ bạn.</p></li>
+                                            <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Ấn tượng với nhạc cung đình Huế nổi tiếng: Nhã nhạc cung đình Huế là nét đẹp văn hóa, tinh hoa âm nhạc của Việt Nam và đã được UNESCO công nhận là di sản văn hoá phi vật thể của nhân loại. Đến du lịch Huế, bạn hãy thử lắng nghe loại hình âm nhạc độc đáo này nhé.</p></li>
+                                        </ul>
+                                    </p>
+                                    <div class="mb-3">
+                                        <img class="img-fluid w-100" src="{% static 'img/hue/hue3.jpg' %}" alt="">
+                                        <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Con người thanh nhã, xứ sở hạnh phúc</p>
+                                    </div>
+
+                                    <h3>4. Đến Huế du lịch đi bằng phương tiện gì?</h3>
+                                    <p>Nếu có nhiều thời gian, bạn có thể kết hợp du lịch Huế - Đà Nẵng hoặc nếu không thì chọn tour du lịch Huế. Dù bạn chọn lựa như thế nào thì cách thức di chuyển cũng tương tự nhau. Bạn có thể sử dụng những phương tiện sau:</p>
+                                    <p>
+                                        <ul style="padding-left: 30px;">
+                                            <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Máy bay: Đây là phương tiện di chuyển thuận tiện và nhanh nhất để du khách từ các tỉnh thành khác đến khu du lịch Huế. Hầu hết các hãng hàng không nội địa hiện nay đều có đường bay thẳng đến Huế. Bạn cần cập nhật thường xuyên để có thể săn được những tấm vé với giá cực kì rẻ.</p></li>
+                                            <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Xe khách: Nếu bạn sống ở những địa phương lân cận thì việc chọn lựa xe khách để là khá phù hợp vì thời gian di chuyển ngắn, chi phí tương đối thấp.</p></li>
+                                            <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Tàu hỏa: Nếu bạn có nhiều thời gian để du lịch Huế và yêu thích việc ngắm cảnh trên đường đi thì hãy lựa chọn tàu hoả. Giá vé tàu hoả cũng không quá đắt đỏ.</p></li>
+                                        </ul>
+                                    </p>
+                                   
+                                    <h3>5. Các phương tiện đi lại tại Huế</h3>
+                                    <p>Việc di chuyển tại Huế cũng khá dễ dàng. Bạn có thể lựa chọn những phương tiện sau cho chuyến du lịch Huế của mình:</p>
+                                    <p>
+                                        <ul style="padding-left: 30px;">
+                                            <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Taxi: Taxi là loại xe rất phổ biến, thuận tiện cho du khách đặc biệt là những du khách đi theo nhóm hoặc khi thời tiết không tốt. Tuy nhiên, chi phí taxi khá đắt đỏ, bạn nên cân nhắc.</p></li>
+                                            <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Xe máy: Để chủ động du lịch Huế và khám phá các món ẩm thực địa phương thì bạn nên thuê xe máy. Giá thuê cũng không quá đắt, từ 100.000 đến 200.000 VNĐ/ngày.</p></li>
+                                            <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Xích lô: Đến mảnh đất cố đô, bạn cũng có thể thử trải nghiệm di chuyển bằng xích lô để tận hưởng không khí trong lành, bình yên nơi đây. Giá giao động từ 40.000 đến 70.000 VNĐ/1 chuyến tuỳ lịch trình.</p></li>
+                                            <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Thuê ô tô: Nếu bạn muốn kết hợp nhiều điểm tham quan thì có thể thuê xe ô tô du lịch. Mức giá thuê xe 4 chỗ, 7 chỗ, 16 chỗ giao động từ 400.000 đến 1.600.000 VNĐ tùy lộ trình.</p></li>
+                                        </ul>
+                                    </p>
+                                    <div class="mb-3">
+                                        <img class="img-fluid w-100" src="{% static 'img/hue/hue4.jpg' %}" alt="">
+                                        <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Các phương tiện di chuyển phổ biến</p>
+                                    </div>
+
+                                    <h3>6. Ăn gì khi đi du lịch Huế?</h3>
+                                    <p>Du lịch Huế ăn gì là câu hỏi mà các tín đồ du lịch tìm kiếm nhiều nhất. Ẩm thực ở Huế mang nét đặc trưng rất riêng. Các món ăn không quá ngọt hoặc quá cay, đậm hương vị miền Trung và được chế biến rất khéo léo, tinh tế, khiến du khách ăn một lần mà nhớ mãi.</p>
+                                    <ul style="padding-left: 30px;">
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                            <p style="font-size: 20px; font-weight: 600;">Bún bò Huế</p>
+                                            <p>Bún bò là đặc sản nức tiếng của Huế. Đi du lịch Huế, chắc chắn bạn phải dậy sớm và ăn một tô bún bò ngon chuẩn vị tại đây. Nước dùng được ninh kĩ từ xương bò, hành tây, thêm các gia vị truyền thống khác tạo nên mùi vị thơm ngon, hấp dẫn. Bún bò Huế sợi to, mềm, ăn kèm miếng chả cùng chút tiết và móng heo béo ngậy. Trước khi ăn, bạn hãy thêm ít chanh tươi, vài miếng ớt cùng rau sống và trộn đều lên. Vị ngon của bún bò tại Huế khó nơi nào sánh bằng.</p>
+                                            <div class="mb-3">
+                                                <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hue/hue5.jpg' %}" alt="">
+                                                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Bún bò Huế</p>
+                                            </div>
+                                        </li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                            <p style="font-size: 20px; font-weight: 600;">Bánh bèo Huế</p>
+                                            <p>Chén bánh bèo nóng hổi với nhân thơm ngọt đi cùng bát nước chấm có chút cay cay. Khi ăn, bạn hãy chan nước mắm lên chén bánh bèo, thưởng thức vị mềm, dẻo của bột, vị thơm của hành phi, vị ngọt của nhân tôm thịt.</p>
+                                            <div class="mb-3">
+                                                <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hue/hue6.jpg' %}" alt="">
+                                                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Bánh bèo Huế</p>
+                                            </div>
+                                        </li>  
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                            <p style="font-size: 20px; font-weight: 600;">Bánh canh nam phổ</p>
+                                            <p>Một tô bánh canh Nam Phổ thơm ngon, xen lẫn nhân tôm thịt đậm đà cùng những cọng hành lá xanh mướt, rưới chút mắm ớt xanh, ai có thể nỡ từ chối món ăn đặc sắc nhường này khi du lịch Huế chứ.</p>
+                                            <div class="mb-3">
+                                                <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hue/hue7.jpg' %}" alt="">
+                                                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Bánh canh nam phổ</p>
+                                            </div>
+                                        </li>  
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                            <p style="font-size: 20px; font-weight: 600;">Chè Huế</p>
+                                            <p>Huế nổi tiếng với rất nhiều loại chè, mỗi loại đều có vị thơm ngon riêng như chè hạt sen, chè trôi nước, chè khoai môn, chè bột lọc thịt quay. Chẳng cần vào những nhà hàng lớn, chỉ cần ngồi bên những gánh hàng rong hay những con hẻm nhỏ, gọi một cốc chè là bạn đã có thể thưởng thức nét tinh tế trong thức quà vặt của Huế rồi.</p>
+                                            <div class="mb-3">
+                                                <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hue/hue8.jpg' %}" alt="">
+                                                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Chè Huế</p>
+                                            </div>
+                                        </li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                            <p style="font-size: 20px; font-weight: 600;">Bánh ép Huế</p>
+                                            <p>Những chiếc bánh vẫn còn nóng được đặt chiếc chiếc đĩa nhựa nhỏ. Khi ăn, khách bỏ thêm rau răm, đu đủ, dưa leo rồi cuộn lại, chấm vào bát nước mắm chua ngọt. Chiếc bánh ngậy vị của mỡ, chua giòn của đu đủ ngâm, đậm đà của thịt, trứng và mùi thơm của hành lá, thật khéo cho một món quà vặt chiều hè của khách du lịch Huế.</p>
+                                            <div class="mb-3">
+                                                <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hue/hue9.jpg' %}" alt="">
+                                                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Bánh ép Huế</p>
+                                            </div>
+                                        </li> 
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                            <p style="font-size: 20px; font-weight: 600;">Nem lụi Huế</p>
+                                            <p>Mặc dù nem lụi là món ăn không mấy xa lạ ở nhiều địa phương khác, nhưng ở Huế, nem lụi lại có vị rất riêng, thơm ngon đậm đà. Nem lụi ăn kèm với bánh tráng, rau thơm, chấm cùng nước lèo. Nước chấm được pha sền sệt, gồm đậu phộng xay nhuyễn, gan heo, thịt heo băm nhỏ.</p>
+                                            <div class="mb-3">
+                                                <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hue/hue10.jpg' %}" alt="">
+                                                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Nem lụi Huế</p>
+                                            </div>
+                                        </li> 
+                                    </ul>
+                                    <h3>7. Du lịch Huế nên đi đâu chơi?</h3>
+                                    <p>Ở Huế có rất nhiều địa điểm đẹp để bạn vui chơi, khám phá. Đừng bỏ qua những địa danh hấp dẫn nhất sau đây khi bạn đi du lịch Huế nhé.</p>
+                                    <ul style="padding-left: 30px;">
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                            <p style="font-size: 20px; font-weight: 600;">Kinh thành Huế</p>
+                                            <p>Kinh Thành Huế hay còn gọi là Đại Nội là địa điểm du lịch nổi tiếng nhất của Huế, gắn liền với lịch sử nhà Nguyễn. Kinh Thành Huế gồm Tử Cấm Thành và Hoàng Cung được xây dựng với lối kiến trúc cung đình độc đáo, còn nguyên giá trị lịch sử, văn hoá. Nơi đây cũng đã được UNESCO công nhận là di sản văn hoá thế giới.</p>
+                                            <div class="mb-3">
+                                                <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hue/hue11.jpg' %}" alt="">
+                                                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Kinh thành Huế</p>
+                                            </div>
+                                        </li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                            <p style="font-size: 20px; font-weight: 600;">Lăng Gia Long</p>
+                                            <p>Lăng Gia Long hay còn gọi là Thiên Thọ Lăng, nằm tại một dãy núi cách khá xa trung tâm. Nhưng nơi đây lại được cho là có vị trí phong thuỷ đẹp nhất trong quần thể lăng mộ của các vị vua triều Nguyễn. Địa điểm du lịch Huế này thu hút những ai thích vẻ đẹp yên bình, cổ kính.</p>
+                                            <div class="mb-3">
+                                                <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hue/hue12.jpg' %}" alt="">
+                                                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Lăng Gia Long</p>
+                                            </div>
+                                        </li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                            <p style="font-size: 20px; font-weight: 600;">Chợ Đông Ba</p>
+                                            <p>Chợ Đông Ba là chợ lớn và lâu đời nhất ở Huế, nằm bên bờ sông Hương thơ mộng. Đây là một trong những địa điểm được du khách ghé đến tham quan, mua sắm mỗi khi du lịch Huế. Ở chợ bày bán rất nhiều mặt hàng từ bình dân đến cao cấp.</p>
+                                            <div class="mb-3">
+                                                <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hue/hue13.jpg' %}" alt="">
+                                                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Chợ Đông Ba</p>
+                                            </div>
+                                        </li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                            <p style="font-size: 20px; font-weight: 600;">Phố đi bộ Huế</p>
+                                            <p>Chợ Đông Ba là chợ lớn và lâu đời nhất ở Huế, nằm bên bờ sông Hương thơ mộng. Đây là một trong những địa điểm được du khách ghé đến tham quan, mua sắm mỗi khi du lịch Huế. Ở chợ bày bán rất nhiều mặt hàng từ bình dân đến cao cấp.</p>
+                                            <div class="mb-3">
+                                                <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hue/hue14.jpg' %}" alt="">
+                                                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Phố đi bộ Huế</p>
+                                            </div>
+                                        </li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                            <p style="font-size: 20px; font-weight: 600;">Bãi biển Thuận An</p>
+                                            <p>Bãi biển Thuận An với làn nước trong xanh, bờ cát trắng mịn cùng nét đẹp hoang sơ làm say đắm biết bao du khách có dịp du lịch Huế. Thời gian lý tưởng nhất để đến bãi biển Thuận An là vào lúc sáng sớm. Bạn sẽ thấy được khung cảnh náo nhiệt của những chiếc ghe thuyền đầy cá tôm của ngư dân, được thưởng thức những món hải sản tươi ngon mà họ mới đánh bắt về.</p>
+                                            <div class="mb-3">
+                                                <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hue/hue15.jpg' %}" alt="">
+                                                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Bãi biển Thuận An</p>
+                                            </div>
+                                        </li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                            <p style="font-size: 20px; font-weight: 600;">Suối khoáng Thanh Tân</p>
+                                            <p>Khu suối khoáng với nhiệt độ lên tới 68 độ C, cung cấp dưỡng chất và năng lượng cho cơ thể. Không chỉ tắm suối khoáng, du khách còn được tham gia các trò chơi mạo hiểm, thưởng thức ẩm thực đa dạng tại đây.</p>
+                                            <div class="mb-3">
+                                                <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hue/hue16.jpg' %}" alt="">
+                                                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Suối khoáng Thanh Tân</p>
+                                            </div>
+                                        </li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                            <p style="font-size: 20px; font-weight: 600;">Cầu ngói Thanh Toàn</p>
+                                            <p>Cầu ngói Thanh Toàn là công trình kiến trúc mang nét đẹp độc đáo theo kiểu “thượng gia hạ kiều”. Cây cầu được xây dựng với mục đích đi lại thuận tiện và dùng tránh mưa nắng cho người dân. Ngày nay, cầu ngói Thanh Toàn là điểm du lịch hấp dẫn nhiều du khách khi du lịch Huế.</p>
+                                            <div class="mb-3">
+                                                <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/hue/hue17.jpg' %}" alt="">
+                                                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hình ảnh Cầu ngói Thanh Toàn</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex mt-4">
+                            {% for obj in qs %}
+                            <form action="." method='POST' class="ui form ml-4">
+                                {% csrf_token %}
+                                <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                                {% if user not in obj.liked.all %}
+                                    <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                        <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                        <span style="color: #fff; font-weight: 600">Thích</span>
+                                    </button>
+                                {% else %}
+                                    <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                        <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                        <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                    </button>
+                                {% endif %}
+                            </form>
+                            <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                            {% endfor %}
+                        </div>
+    
+                        <section class="comment-area">
+                            <div class="container">
+                                <div class="comment-content">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="comment-details">
+                                                <div class="section-title">
+                                                    <h5>Bình luận</h5>
+                                                </div>
+                                                <form action="." method="POST" style="margin-top: 1.3em;">
+                                                    {% csrf_token %}
+                                                    {% if not comments.all %} 
+                                                    <div class="col-lg-12">
+                                                        <center><h6 class="mb-4">Chưa có bình luận nào hết á :((</h6></center>
+                                                    </div>
+                                                    {% else %}
+                                                        {% for x in comments %}
+                                                        <div class="comment-item">
+                                                            <div class="user-avt">
+                                                                <img src="{% static 'img/decor/cat.png' %}" alt="">
+                                                            </div>
+                                                            <div class="comment-info">
+                                                                <h6>{{ x.user }} - <span>{{ x.created_on }}</span></h6>
+                                                                <p>{{ x.body }}</p>
+                                                            </div>
+                                                        </div>
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                    <input type="text" name="user" value="{{request.user}}" maxlength="200" required="" id="id_user" style="display: none">
+                                                    <input type="text" name="post_id" maxlength="200" value="CN11" required id="id_post_id" style="display: none">
+                                                    <div class="comment-body">
+                                                        <textarea placeholder="Nhập bình luận..." name="body" cols="40" rows="10" required id="id_body" style="width: 100%; outline: none; border: 1px solid #e53637; border-radius: 5px; padding: 10px;"></textarea>
+                                                        <button type="submit" class="btn button btn-lg" name="comment_submit"><i class="fa fa-location-arrow"></i> Bình luận</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    
+                    <div class="col-lg-4 pt-3 pt-lg-0">
+                        <!-- Popular News Start -->
+                        <div class="pb-3">
+                            <div class="bg-light py-2 px-4 mb-3">
+                                <h3 class="m-0 h3">Nổi bật</h3>
+                            </div>
+                            {% for item in oli %}
+                            <div class="d-flex mb-3 haha">
+                                <a href="{{item.link}}"><img src="/media/{{item.bg}}" style="width: 100px; height: 100px; object-fit: cover;"></a>
+                                <div class="w-100 d-flex flex-column justify-content-center bg-light px-3" style="height: 100px;">
+                                    <div class="mb-1" style="font-size: 13px;">
+                                        <span>{{item.date}}</span>
+                                    </div>
+                                    <a class="h6 m-0" href="{{item.link}}">{{item.camnang_name}}</a>
+                                    <div class="mb-2" style="font-size: 14px;">
+                                        <span>
+                                            <i class="far fa-eye"></i>
+                                            <span id="view">{{item.view}}</span> 
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <!-- Popular News End -->
+    
+                        <!-- Tags Start -->
+                        <div class="pb-3">
+                            <div class="bg-light py-2 px-4 mb-3">
+                                <h3 class="m-0 h3">Từ khóa</h3>
+                            </div>
+                            <div class="d-flex flex-wrap m-n1">
+                                <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Cẩm nang</a>
+                                <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Du lịch</a>
+                                <a href="{% url 'cn_dalat' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đà Lạt</a>
+                                <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Khách Sạn</a>
+                                <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đi phượt</a>
+                                <a href="{% url 'cn_vungtau' %}" class="btn1 btn-sm btn-outline-secondary m-1">Vũng Tàu</a>
+                                <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Kinh nghiệm du lịch</a>
+                                <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đi chơi</a>
+                                <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Tham quan</a>
+                                <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Chỗ ở</a>
+                                <a href="{% url 'weather' %}" class="btn1 btn-sm btn-outline-secondary m-1">Thời tiết</a>
+                                <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Nhà nghỉ</a>
+                                <button onclick="deadlines()" class="btn1 btn-sm btn-outline-secondary m-1" style="cursor: pointer; outline: none">Deadline</button>
+                                <script>function deadlines() {alert("NAPUN có sẵn khăn giấy đây. KHÓC ĐIIII :))");}</script>
+                            </div>
+                        </div>
+                        <!-- Tags End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid py-3">
+            <div class="container">
+                <img width="50px" height="50px" src="https://cdn-icons-png.flaticon.com/512/1645/1645943.png" atl="">
+                <div class="d-flex align-items-center bg-light justify-content-between py-2 px-4 mb-3">
+                    <p class="h3 m-0 orange" style="font-style: italic; text-align: justify;">Với những kinh nghiệm du lịch Huế tự túc được chia sẻ trong bài viết, hi vọng du khách sẽ có thêm các thông tin tham khảo bổ ích cho chuyến du lịch của mình. Hãy ghé qua những địa điểm nổi tiếng, quán ăn, nhà hàng ngon để thưởng thức trọn vẹn nét đẹp của Huế. Và đừng quên <a href="{% url 'hotel' %}">đặt khách sạn tại NAPUN</a> để có một trải nghiệm thực tế nhé ! <i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i></p>
+                </div>
+            </div>
+        </div>
+{% endblock %}

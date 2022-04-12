@@ -1,0 +1,132 @@
+{% extends 'base1.html' %}
+{% load static %}
+{% block title %}Trang cá nhân{% endblock %}
+
+{% block css %}
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css"/>
+    <link rel="stylesheet" href="fonts/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+
+    <style>
+        #fname::placeholder,
+        #name::placeholder {
+            color: #ddd;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <section class="user-profile section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1 col-lg-4 offset-lg-0">
+                    <div class="sidebar">
+                        <!-- User Widget -->
+                        <div class="widget user-dashboard-profile">
+                            <!-- User Image -->
+                            <div class="profile-thumb" width="100px" height="200px">
+                                <img src="{% static 'img/decor/avt.jpg' %}" alt="" class="rounded-circle">
+                            </div>
+                            <!-- User Name -->
+                            <h5 id ="username" class="text-center">{{request.user.username}}</h5>
+                            <p id="joined-date">{{request.user.date_joined.date}}</p>
+                        </div>
+                        <!-- Dashboard Links -->
+                        <div class="widget user-dashboard-menu">
+                            <ul>
+                                <li>
+                                    <a href="{% url 'profile' %}"><i class="fa fa-user"></i> Trang cá nhân</a></li>
+                                <li>
+                                    <a href="{% url 'history' %}"><i class="fa fa-history"></i>Lịch sử đặt khách sạn</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'user_favorite' %}"><i class="fas fa-heart"></i>Danh sách yêu thích</a>
+                                </li>
+                                <li>
+                                    <span><a href="{% url 'logout' %}"><i class="fa fa-cog"></i>Đăng xuất</a></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
+                    <div class="widget personal-info">
+                        <h3 class="widget-header user">Chỉnh sửa trang cá nhân</h3>
+                        <form method = 'POST' cation='.'>
+                            {% csrf_token %}
+                            {% load widget_tweaks %}
+
+                            <div class="form-group">
+                                <label for="last-name">Tên đăng nhập</label>
+                                {% render_field form.username class="form-control" id="usr" value="{{request.user.username}}" %}
+                            </div>
+
+                            {% if user.first_name %}
+                            <div class="form-group">
+                                <label for="last-name">Họ</label>
+                                {% render_field form.first_name class="form-control" id="first_name" value="{{user.first_name}}" %}
+                            </div>
+                            {% else %}
+                            <div class="form-group">
+                                <label for="last-name">Họ</label>
+                                {% render_field form.first_name class="form-control" id="first_name" value="" placeholder="Nhập họ" %}
+                            </div>
+                            {% endif %}
+                            
+                            {% if user.last_name %}
+                            <div class="form-group">
+                                <label for="last-name">Tên</label>
+                                {% render_field form.last_name class="form-control" id="last-name" value="{{user.last_name}}" %}
+                            </div>
+                            {% else %}
+                            <div class="form-group">
+                                <label for="last-name">Tên</label>
+                                {% render_field form.last_name class="form-control" id="last-name" value="" placeholder="Nhập tên" %}
+                            </div>
+                            {% endif %}
+
+                            <div class="form-group">
+                                <label for="last-name">Email</label>
+                                {% render_field form.email class="form-control" id="email" value="{{request.user.email}}" %}
+                            </div>
+                            <input class="btn btn-transparent" type="submit" value="LƯU" />
+                        </form>
+                    </div>
+                    {% comment %} <div class="widget">
+                        <h3 class="widget-header user">Đổi ảnh đại diện</h3> 
+                        <form action="." method='POST' enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% comment %} <div class="form-group choose-file">
+                                <i class="fa fa-user text-center"></i>
+                                <input type="file" name="avatar" class="form-control-file d-inline" id="input-file">
+                            </div>
+                            {{ avt.as_p}}
+                            <button type="submit" class="btn btn-transparent" name='avt'>Thay đổi</button>
+                        </form>
+                    </div>
+                    {% endcomment %}
+                    <div class="widget change-password">
+                        <h3 class="widget-header user">Đổi mật khẩu</h3>
+                        <form action=".">
+                            <!-- Submit Button -->
+                            <button class="btn btn-transparent"><a href="{% url 'reset_password' %}" style="color: #fff">Đổi Mật Khẩu</a></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $('#usr').attr('readonly', 'true');
+        $('#email').attr('readonly', 'true');
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.js"></script>
+{% endblock %}

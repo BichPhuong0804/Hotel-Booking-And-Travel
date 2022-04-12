@@ -1,0 +1,353 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Cẩm nang du lịch Vũng Tàu.{% endblock %}
+{% block content %}
+    <div class="container-fluid py-3">
+        <div class="container">
+            <div>
+                <div class="col-12">
+                    <p id="tieude" class="h3" style="color: #343a40;">Du lịch Vũng Tàu: Cẩm nang từ A đến Z (Cập nhật thông tin mới nhất)</p>
+                    <div class="d-flex">
+                        <img src="{% static 'img/decor/cat.png' %}" alt='' width="50px" height="50px">
+                        <p style="color: #555; font-weight: bold">Lượt xem: {{vi.view}} </p>
+                        <div class="d-flex">
+                            {% for obj in qs %}
+                            <form action="." method='POST' class="ui form ml-4">
+                                {% csrf_token %}
+                                <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                                {% if user not in obj.liked.all %}
+                                    <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                        <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                        <span style="color: #fff; font-weight: 600">Thích</span>
+                                    </button>
+                                {% else %}
+                                    <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                        <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                        <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                    </button>
+                                {% endif %}
+                            </form>
+                            <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="background-image: url({% static 'img/decor/bg.jpg' %})">
+                <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 5px;">
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 30px;">
+                </div>
+                <div class="col-12">
+                    <p id="tieude"><b>VŨNG TÀU</b></p>
+                </div>
+                <div class="col-12" style="color: black; ">
+                    <p class="m-0">Vũng Tàu là một trung tâm du lịch lớn. Sự kết hợp hài hoà giữa quần thể thiên nhiên biển, núi cùng kiến trúc đô thị và các công trình văn hoá như tượng đài, chùa chiền, nhà thờ... tạo cho Vũng Tàu có ưu thế của thành phố du lịch biển tuyệt đẹp, đầy quyến rũ. Vũng Tàu không có mùa đông, do vậy các khu nghỉ mát có thể hoạt động quanh năm.</p> 
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 5px; margin-top: 15px;">
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 20px;">
+                </div>
+            </div>
+            <div class="mb-3 pb-3">
+                <img class="img-fluid w-100" src="{% static 'img/vungtau/vt1.jpg' %}" alt="">
+                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Những điều cần biết khi du lịch Vũng Tàu (Ảnh: ST)</p>
+            </div>
+            <div class="mb-3 pb-3">
+                <img class="img-fluid w-100" src="{% static 'img/decor/dulich.jpg' %}" alt="">
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="col-12">
+                        <div class="single-services section-padding2">
+                            <div class="details-caption" style="color: #343a40">
+                                <h3>1. Tổng quan về du lịch Vũng Tàu</h3>
+                                <p>Vũng Tàu là một trung tâm du lịch lớn. Sự kết hợp hài hoà giữa quần thể thiên nhiên biển, núi cùng kiến trúc đô thị và các công trình văn hoá như tượng đài, chùa chiền, nhà thờ... tạo cho Vũng Tàu có ưu thế của thành phố du lịch biển tuyệt đẹp, đầy quyến rũ. Vũng Tàu không có mùa đông, do vậy các khu nghỉ mát có thể hoạt động quanh năm.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/sidebar/vungtau.jpg' %}" alt="">
+                                </div>
+                                <p>Vũng Tàu có nhiều bãi biển đẹp như bãi Sau (Thùy Vân), bãi Trước (Tầm Dương), bãi Dâu (Phương Thảo), bãi Dứa (Hương Phong),... và nhiều di tích, thắng cảnh như Hải Đăng trên núi Nhỏ, núi Lớn, Bạch Dinh, Niết Bàn Tịnh Xá, Thích Ca Phật Đài, nhà lớn Long Sơn... đã thu hút nhiều du khách.</p>
+
+                                <h3>2. Thời tiết Vũng Tàu</h3>
+                                <p>Nằm trong vùng khí hậu nhiệt đới gió mùa Đông Nam Bộ, Vũng Tàu sở hữu khí hậu 2 mùa đặc trưng:</p>
+                                <p style="margin-top: 0px;">
+                                    <ul style="padding-left: 30px">
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Mùa mưa: Tháng 5 – 10 và có gió mùa Tây Nam.</p></li>
+                                        <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p>Mùa nắng: Tháng 11 – 4 và có gió mùa Đông Bắc.</p></li>
+                                    </ul>
+                                </p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/vungtau/vt2.jpg' %}" alt="">
+                                </div>
+                                <p>Nhiệt độ trung bình năm ở Vũng Tàu là 27 độ, thấp nhất là 24 độ và cao nhất là 30 độ. Chính nhờ thời tiết ôn hòa này mà Vũng Tàu trở thành điểm đến quanh năm của khách du lịch. Lời khuyên của các kinh nghiệm du lịch Vũng Tàu là bạn chỉ cần chú ý không đi vào những ngày có bão hay biển động để đảm bảo an toàn.</p>
+                                <p>Có một lưu ý là do vị trí thuận lợi mà Vũng Tàu luôn đông đúc vào ngày cuối tuần, đặc biệt là mùa lễ Tết, khiến chi phí của các dịch vụ cũng tăng cao hơn so với thông thường. Vậy nên, nếu muốn thoải mái vui chơi, tận hưởng kỳ nghỉ của mình thì bạn nên tránh đi vào những thời điểm này.</p>
+
+                                <h3>3. Thời gian nên đi du lịch Vũng Tàu</h3>
+                                <p>Vào thời điểm này, thời tiết ở Vũng Tàu thuận lợi, trời trong xanh, nước trong veo, những vạt nắng vàng đón chào một khởi đầu mới tạo điều kiện cho những ai yêu biển thỏa thích hòa mình trong lòng đại dương, lắng nghe tiếng sóng vỗ thì thầm bên tai và trải dài trên những bờ cát vàng óng ánh.</p>
+                                <p>Bên cạnh đó vào giai đoạn tháng 2  m Lịch, thành phố Vũng Tàu lại nhộn nhịp với hai lễ hội văn hóa truyền thống lớn thường được tổ chức hàng năm. Lễ hội Nghinh Cô được tổ chức vào ngày 12/2  m Lịch ở thị trấn Long Hải.</p>
+                                <p>Lễ hội được tổ chức với quy mô lớn hàng trăm chiếc ghe được trang hoàng lộng lẫy trên biển với ý nghĩa cầu mong trời yên biển lặng, tôm cá đầy khoan cho ngư dân. Sau buổi nghi lễ là phần hội với nhiều trò chơi như múa lân, ca hát, đua thuyền, đánh trống…</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/vungtau/vt3.jpg' %}" alt="">
+                                </div>
+                                <p>Cũng trong giai đoạn này ở tại Lăng Cá Ông tổ chức lễ hội Nghinh Ông rơi vào ngày 16 – 18/2  m Lịch. Sau nghi lễ cầu an, du khách sẽ được thưởng thức những màn văn hóa nghệ thuật đặc sắc như hát bội, hát chạo, võ thuật, đánh đàn, đánh trống… và ẩm thực dân dã của địa phương.</p>
+                                
+                                <h3>4. Địa điểm du lịch tại Vũng Tàu</h3>
+                                <p>Khám phá du lịch Vũng Tàu tươi đẹp mỗi dịp cuối tuần thật tuyệt vời phải không các bạn, đối với những bạn mới lần đầu xuống Vũng Tàu thì đừng bỏ qua những địa điểm du lịch đẹp nhất sau đây nhé.</p>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Tượng chúa Giêsu Kito Vua</p>
+                                        <p>Tượng Chúa Kitô Vua – Biểu tượng của thành phố biển, là một bức tượng Chúa Giêsu được đặt trên đỉnh Núi Nhỏ của thành phố Vũng Tàu. Tượng có chiều cao 32 mét, chiều dài hai cánh tay là 18,4 mét, đặt trên bệ khối chạm hình Chúa và 12 tông đồ. Bên trong tượng là cầu thang xoắn ốc gồm 133 bậc, chạy từ bệ lên cổ tượng. Để lên tượng, bạn phải leo 1.000 bậc thang cao 500m và thành quả là du khách sẽ được chiêm ngưỡng cả thành phố từ trên cao với nếp nhà xinh, với bãi biển trong xanh bên triền cát trắng mịn,… hãy cảm nhận làn gió từ biển Đông thổi vào khi đứng trên cánh tay Chúa.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/vungtau/vt4.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Lối lên tượng Chúa phải đi qua hơn 800 bậc thang. Ảnh: ST</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Biển Long Hải</p>
+                                        <p>Biển Long Hải là điểm đến không thể bỏ qua khi tới du lịch Vũng Tàu bởi bức tranh thiên nhiên hoang sơ tuyệt đẹp sẽ níu chân du khách. Khí hậu ở Long Hải mát mẻ quanh năm nên bạn có thể tới bất cứ khi nào. Nước biển ở đây trong xanh và bao quanh biển là những dải núi hay rừng hoa anh đào khoe sắc. Đặc biệt, biển Long Hải rất sẵn hải sản tươi ngon giá rẻ.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/vungtau/vt5.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Một góc biển bình yên. Ảnh: Đỗ Tình</p>
+                                        </div>
+                                        <p>Nước biển Long hải rất sạch, ngắm bình minh và hoàng hôn tại đây thì còn gì tuyệt vời bằng. Nếu đi thẳng từ Sài Gòn ra Long Hải thì cũng khá xa, thì vậy bạn nên tìm một số khách sạn nghỉ lại để tiện tham quan khám phá nơi đây hơn nhé!</p>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Hải Đăng Vũng Tàu</p>
+                                        <p>Hải đăng Vũng Tàu được xem như một trong những biểu tượng của thành phố biển Vũng Tàu. Kiến trúc ngọn hải đăng cổ xưa nhất Việt Nam và Đông Nam Á này là một tháp hình trụ cao 18 m, đường kính 3 m và được sơn màu trắng. Bên trong ngọn hải đăng có cầu thang dẫn đến gần đỉnh để ngắm toàn cảnh thành phố Vũng Tàu. Du khách có thể di chuyển bằng ô tô, xe máy hoặc thả bộ trên con đường mòn lên núi.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/vungtau/vt6.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Một trong những địa điểm biểu tượng của Vũng Tàu. Ảnh: @nhitrinh_theora</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Mũi Nghinh Phong</p>
+                                        <p>Mũi Nghinh Phong là mũi đất vươn dài nhất ở phía Nam của bán đảo Vũng Tàu, đây là nơi đón gió suốt bốn mùa, chả vậy mà mũi có tên là Nghinh Phong. Mũi tạo ra hai bãi tắm là bãi Vọng Nguyệt và bãi Hương Phong, hai vịnh lớn ở hướng Tây và hướng Đông.</p>
+                                        <p>Du khách tìm đến mũi Nghinh Phong như một chốn để nghỉ ngơi, thư giãn sau những ngày làm việc vất vả. Nước biển ở đây trong và sạch, không khí trong lành dễ chịu.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/vungtau/vt7.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Điểm đến đẹp cho view từ trên cao Mũi Nghinh Phong. Ảnh: ST</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Hồ Đá Xanh</p>
+                                        <p>Hồ Đá Xanh là một địa điểm thu hút nhiều khách du lịch thời gian gần đây bởi sự quyện hòa tài tình của thiên nhiên- mộng mơ mà hùng vĩ. Để tới được đây, bạn đi theo quốc lộ 51, qua trạm thu phí tới ngã ba núi Dinh thì rẽ trái và đi thẳng theo hẻm bên cạnh nhà thờ Long Hương. Sau đó, bạn hỏi người dân địa phương, họ sẽ chỉ cho bạn tới hồ nhanh nhất. Một lưu ý cho du khách là khu vực này khá nguy hiểm nên các bạn không nên tắm ở đây nhé.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/vungtau/vt8.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Thuyền hoa thạch thảo rất được yêu thích. Ảnh: Ni Na</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Hòn Bà</p>
+                                        <p>Hòn Bà là một thắng cảnh đẹp được ví như một hòn đảo nhỏ với diện tích khoảng 5.000m2. Hòn Bà mang ý nghĩa tâm linh với người dân quanh đó và khách du lịch xa gần. Trên đảo, khi thủy triều xuống thấp, men theo lối đá ra đảo bạn sẽ gặp một ngôi miếu nhỏ được là Miếu Hòn Bà, đây được cho là nơi rất linh thiêng luôn nghi ngút khói hương bởi là nơi thờ cúng, cầu cho những chuyến đi biển thuận buồm xuôi gió của ngư dân địa phương.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/vungtau/vt9.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Điểm du lịch hòn đảo nhỏ ở Vũng Tàu (Nguồn sưu tầm)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bến thuyền Marina</p>
+                                        <p>Không chỉ cung cấp đầy đủ các dịch vụ vui chơi giải trí, bến du thuyền Marina còn hấp dẫn với nhiều tour tham quan đảo Long Sơn, Gò Găng, cầu Chà Và,… Đây là địa điểm chụp ảnh được yêu thích của người bản địa cũng như khách du lịch.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/vungtau/vt10.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Địa điểm chụp hình của giới trẻ (Nguồn sưu tầm)</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <h3>5. Món ngon Vũng Tàu bạn phải ăn thử một lần trong đời</h3>
+                                <p>Bạn không phải là “fan cứng” của Vũng Tàu nếu chưa thưởng thức hết những món ngon Vũng Tàu có trong bài viết này.</p>
+                                <p>Chẳng những “hớp hồn” du khách bằng nắng vàng, cát trắng và biển xanh, Vũng Tàu còn là thiên đường ẩm thực với vô số món ngon hấp dẫn. Hãy lưu lại danh sách đặc sản Vũng Tàu dưới đây để dành… ăn dần trong những chuyến vi vu cuối tuần nhé.</p>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bánh khọt</p>
+                                        <p>Bánh khọt được xem là món ăn đặc trưng của Vũng Tàu và bạn có thể dễ dàng bắt gặp hàng quán bán món ăn này tại nhiều con đường của thành phố. Bánh khọt là loại bánh được làm từ bột, đổ vào những khuôn nhỏ, rán giòn lớp bột bên dưới, phía trên sẽ đặt nhân tôm và một số loại nguyên liệu khác. Bánh chín sẽ ăn nóng, cuốn với rau cải, xà lách rồi chấm vào nước chấm chua mặn ngọt.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/vungtau/vt11.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hương vị bánh khọt ở Vũng Tàu thơm, ngon không đâu sánh bằng</p>
+                                        </div>
+                                        <p>Bánh khọt còn là món ăn vặt Vũng Tàu duy nhất được lọt vào top 12 món ăn Việt Nam được Tổ chức ẩm thực Châu Á công nhận món ăn mang "giá trị ẩm thực châu Á". Bánh khọt được yêu thích bởi nhân tôm thơm ngon nằm trong lớp vỏ giòn rụm thật khó cưỡng lại. Bạn nhớ chuẩn bị tinh thần sẽ có một chiếc bụng “căng tròn” sau khi thưởng thức món ăn này đó.</p>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bánh xèo</p>
+                                        <p>Hết bánh khọt rồi đến hương vị của bánh xèo chắc chắn sẽ là món ăn hấp dẫn mà bạn nên thử nếu chưa biết ăn gì ở Vũng Tàu. Bánh xèo hầu như ở vùng nào cũng có nhưng bánh xèo Vũng Tàu có một hương vị đặc trưng rất riêng. Đó chính là hương vị đậm đà của biển mà khó có thể thể nhầm lẫn với nơi nào khác. Thưởng thức các món ăn ngon ở Vũng Tàu chắc chắn không thể bỏ qua bánh xèo đâu nhé!</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/vungtau/vt12.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Đến Vũng Tàu nhớ thưởng thức bánh xèo nhé!</p>
+                                        </div>
+                                        <p>Bánh khọt còn là món ăn vặt Vũng Tàu duy nhất được lọt vào top 12 món ăn Việt Nam được Tổ chức ẩm thực Châu Á công nhận món ăn mang "giá trị ẩm thực châu Á". Bánh khọt được yêu thích bởi nhân tôm thơm ngon nằm trong lớp vỏ giòn rụm thật khó cưỡng lại. Bạn nhớ chuẩn bị tinh thần sẽ có một chiếc bụng “căng tròn” sau khi thưởng thức món ăn này đó.</p>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Lẩu cá đuối</p>
+                                        <p>Sẽ rất thiếu sót nếu đến Vũng Tàu chơi mà không ăn thử món lẩu cá đuối đặc sản tại thành phố biển thân thương này. Lẩu cá đuối ở đây không chỉ được quảng cáo là ngon mà còn có mức giá rất phải chăng nữa. </p>
+                                        <p>Là một trong những món ăn ngon rẻ ở Vũng Tàu, với lẩu cá đuối các bạn có thể tha hồ thưởng thức bữa ăn no nê với thịt cá đuối ngọt thịt ăn cùng với những món ăn kèm, mở vung nồi lẩu, hương vị thơm ngon bốc lên nghi ngút và bạn chỉ muốn thưởng thức ngay mà thôi.  Nước lẩu được nêm nếm vừa vặn, đặc biệt những miếng cá đuối tươi ngon sẽ là một trải nghiệm thú vị cho du khách khi đến đây.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/vungtau/vt13.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Lẩu cá đuối khác hẳn với những hương vị lẩu khác mà chúng ta từng thưởng thức</p>
+                                        </div>
+                                        <p>Khác với lẩu Thái, lẩu ếch, lẩu cua đồng hay lẩu hải sản… bạn vẫn thường hay ăn, cái độc lạ của món ngon Vũng Tàu này chính là nguyên liệu hải sản vô cùng độc đáo, đó là cá đuối. Cá đuối hầu như không có xương, lẩu cá đuối thường được ăn kèm với măng chua và các loại rau. Ăn tối ở Vũng Tàu với lẩu cá đuối là chuẩn không cần chỉnh rồi!</p>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Ốc và Hải Sản</p>
+                                        <p>Hải sản là món ăn không thể bỏ qua khi đi Vũng Tàu ăn gì, bởi đến với vùng biển thì hải sản là lựa chọn số một, vừa nổi tiếng ngon rẻ và lại chẳng đâu phong phú bằng. Nếu bạn còn đang băn khoăn chưa biết ở Vũng Tàu ăn gì ngon thì nhất định phải thưởng thức các hương vị hải sản hấp dẫn và đa dạng bao gồm các loại ốc biển, tôm hùm, cua, ghẹ, mực, bạch tuộc, hay mực trứng, món nào món nấy thơm ngậy và chắc chắn là chẳng khiến bạn thấy ngấy tẹo nào.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/vungtau/vt14.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Hải sản phong phú và đa dạng đủ cho bạn thưởng thức no say cả ngày</p>
+                                        </div>
+                                        <p>Khác với lẩu Thái, lẩu ếch, lẩu cua đồng hay lẩu hải sản… bạn vẫn thường hay ăn, cái độc lạ của món ngon Vũng Tàu này chính là nguyên liệu hải sản vô cùng độc đáo, đó là cá đuối. Cá đuối hầu như không có xương, lẩu cá đuối thường được ăn kèm với măng chua và các loại rau. Ăn tối ở Vũng Tàu với lẩu cá đuối là chuẩn không cần chỉnh rồi!</p>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Sữa chua cô Tiên</p>
+                                        <p>Quán nằm ở ven đường lên Hải đăng Vũng Tàu, địa điểm này rất đông khách đặc biệt là các bạn trẻ ghé đến với món sữa chua thơm ngon, mịn màng và mát mẻ ăn đã cơn thèm.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/vungtau/vt15.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Sữa chua vừa dẻo vừa béo ăn với trứng gà lòng đào thì còn gì bằng</p>
+                                        </div>
+                                        <p>Sữa chua được đựng trong hũ thủy tinh nhỏ. Bạn có thể tùy chọn loại yogurt cứng hay mềm tùy thích. Sữa chua ở đây được làm vừa ăn, chua chua, ngọt ngọt, dẻo dẻo. Đang mệt mà được hũ sữa chua mát lạnh, beo béo thì còn gì bằng đúng không?</p>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Gói cá mai</p>
+                                        <p>Gỏi cá mai cực kỳ nổi tiếng ở Vũng Tàu. Món ăn này được làm từ cá mai, một loài cá rất phổ biến ở vùng biển Vũng Tàu. Gỏi cá được ướp gia vị và pha chế nước mắm chấm theo bí quyết riêng rất đặc biệt, sau đó ăn cùng với rau thơm. Món ăn này dù là gỏi nhưng không hề bị tanh mà vẫn rất dễ ăn và ngọt thịt.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/vungtau/vt16.jpg' %}" lt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Gỏi cá mai chấm với nước chấm ngon tuyệt cú mèo</p>
+                                        </div>
+                                        <p>Gỏi cá mai được chế biến đầy đủ hương vị tạo sự thơm ngon, hấp dẫn mà bạn không thể cưỡng lại. Món ăn đặc biệt nhất chính là ở phần gia vị với cách pha chế rất vừa vị từ nước mắm và các gia vị mà không lo bị tanh.</p>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bánh tiêu đậu xanh</p>
+                                        <p>Đi Vũng Tàu ăn gì thì ngoài ăn hải sản và món mặn thả ga, bạn nhất định phải thử qua món bánh tiêu nha. Bánh tiêu đậu xanh chỉ có ở đường Đồ Chiểu mở cửa từ 15h chiều nhưng khách đứng đợi trước khi bán khá đông. Ở đây có bánh tiêu cade, bánh tiêu đậu xanh, bánh bò. Món ngon Vũng Tàu này đắt khách nhất chính là bánh tiêu cade. Ăn lúc nóng ngon tuyệt. Lớp bánh mỏng cùng nhân trứng đầy, bạn chỉ cần cắn một miếng nhân trứng tràn ra rất đã. Đây là một món ăn vặt rất bình dân, không chỉ giá rẻ mà còn dễ ăn và ngon nên được rất nhiều người yêu thích.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/vungtau/vt17.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Tiệm bánh tiêu ngon đến mức vừa mở cửa đã thông báo: HẾT BÁNH!</p>
+                                        </div>
+                                        <p>Gỏi cá mai được chế biến đầy đủ hương vị tạo sự thơm ngon, hấp dẫn mà bạn không thể cưỡng lại. Món ăn đặc biệt nhất chính là ở phần gia vị với cách pha chế rất vừa vị từ nước mắm và các gia vị mà không lo bị tanh.</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex mt-4">
+                        {% for obj in qs %}
+                        <form action="." method='POST' class="ui form ml-4">
+                            {% csrf_token %}
+                            <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                            {% if user not in obj.liked.all %}
+                                <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Thích</span>
+                                </button>
+                            {% else %}
+                                <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                </button>
+                            {% endif %}
+                        </form>
+                        <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                        {% endfor %}
+                    </div>
+
+                    <section class="comment-area">
+                        <div class="container">
+                            <div class="comment-content">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="comment-details">
+                                            <div class="section-title">
+                                                <h5>Bình luận</h5>
+                                            </div>
+                                            <form action="." method="POST" style="margin-top: 1.3em;">
+                                                {% csrf_token %}
+                                                {% if not comments.all %} 
+                                                <div class="col-lg-12">
+                                                    <center><h6 class="mb-4">Chưa có bình luận nào hết á :((</h6></center>
+                                                </div>
+                                                {% else %}
+                                                    {% for x in comments %}
+                                                    <div class="comment-item">
+                                                        <div class="user-avt">
+                                                            <img src="{% static 'img/decor/cat.png' %}" alt="">
+                                                        </div>
+                                                        <div class="comment-info">
+                                                            <h6>{{ x.user }} - <span>{{ x.created_on }}</span></h6>
+                                                            <p>{{ x.body }}</p>
+                                                        </div>
+                                                    </div>
+                                                    {% endfor %}
+                                                {% endif %}
+                                                <input type="text" name="user" value="{{request.user}}" maxlength="200" required="" id="id_user" style="display: none">
+                                                <input type="text" name="post_id" maxlength="200" value="CN06" required id="id_post_id" style="display: none">
+                                                <div class="comment-body">
+                                                    <textarea placeholder="Nhập bình luận..." name="body" cols="40" rows="10" required id="id_body" style="width: 100%; outline: none; border: 1px solid #e53637; border-radius: 5px; padding: 10px;"></textarea>
+                                                    <button type="submit" class="btn button btn-lg" name="comment_submit"><i class="fa fa-location-arrow"></i> Bình luận</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                
+                <div class="col-lg-4 pt-3 pt-lg-0">
+                    <!-- Popular News Start -->
+                    <div class="pb-3">
+                        <div class="bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0 h3">Nổi bật</h3>
+                        </div>
+                        {% for item in oli %}
+                        <div class="d-flex mb-3 haha">
+                            <a href="{{item.link}}"><img src="/media/{{item.bg}}" style="width: 100px; height: 100px; object-fit: cover;"></a>
+                            <div class="w-100 d-flex flex-column justify-content-center bg-light px-3" style="height: 100px;">
+                                <div class="mb-1" style="font-size: 13px;">
+                                    <span>{{item.date}}</span>
+                                </div>
+                                <a class="h6 m-0" href="{{item.link}}">{{item.camnang_name}}</a>
+                                <div class="mb-2" style="font-size: 14px;">
+                                    <span>
+                                        <i class="far fa-eye"></i>
+                                        <span id="view">{{item.view}}</span> 
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!-- Popular News End -->
+
+                    <!-- Tags Start -->
+                    <div class="pb-3">
+                        <div class="bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0 h3">Từ khóa</h3>
+                        </div>
+                        <div class="d-flex flex-wrap m-n1">
+                            <a href="camnang.html" class="btn1 btn-sm btn-outline-secondary m-1">Cẩm nang</a>
+                            <a href="camnang.html" class="btn1 btn-sm btn-outline-secondary m-1">Du lịch</a>
+                            <a href="DaLat.html" class="btn1 btn-sm btn-outline-secondary m-1">Đà Lạt</a>
+                            <a href="khach_san.html" class="btn1 btn-sm btn-outline-secondary m-1">Khách Sạn</a>
+                            <a href="camnang.html" class="btn1 btn-sm btn-outline-secondary m-1">Đi phượt</a>
+                            <a href="VungTau.html" class="btn1 btn-sm btn-outline-secondary m-1">Vũng Tàu</a>
+                            <a href="camnang.html" class="btn1 btn-sm btn-outline-secondary m-1">Kinh nghiệm du lịch</a>
+                            <a href="camnang.html" class="btn1 btn-sm btn-outline-secondary m-1">Đi chơi</a>
+                            <a href="camnang.html" class="btn1 btn-sm btn-outline-secondary m-1">Tham quan</a>
+                            <a href="khach_san.html" class="btn1 btn-sm btn-outline-secondary m-1">Chỗ ở</a>
+                            <a href="#" class="btn1 btn-sm btn-outline-secondary m-1">Thời tiết</a>
+                            <a href="khach_san.html" class="btn1 btn-sm btn-outline-secondary m-1">Nhà nghỉ</a>
+                            <button onclick="deadlines()" class="btn1 btn-sm btn-outline-secondary m-1" style="cursor: pointer; outline: none">Deadline</button>
+                            <script>function deadlines() {alert("NAPUN có sẵn khăn giấy đây. KHÓC ĐIIII :))");}</script>
+                        </div>
+                    </div>
+                    <!-- Tags End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid py-3">
+        <div class="container">
+            <img width="50px" height="50px" src="{% static 'img/decor/pen.png' %}" atl="">
+            <div class="d-flex align-items-center bg-light justify-content-between py-2 px-4 mb-3">
+                <p class="h3 m-0 orange" style="font-style: italic; text-align: justify;">Với những kinh nghiệm du lịch Vũng Tàu tự túc được chia sẻ trong bài viết, hi vọng du khách sẽ có thêm các thông tin tham khảo bổ ích cho chuyến du lịch của mình. Hãy ghé qua những địa điểm nổi tiếng, quán ăn, nhà hàng ngon để thưởng thức trọn vẹn nét đẹp của Vũng Tàu. Và đừng quên <a href="{% url 'hotel' %}">đặt khách sạn tại NAPUN</a> để có một trải nghiệm thực tế nhé ! <i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

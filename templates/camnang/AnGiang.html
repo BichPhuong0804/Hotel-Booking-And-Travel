@@ -1,0 +1,385 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Cẩm nang du lịch An Giang.{% endblock %}
+{% block content %}
+    <div class="container-fluid py-3">
+        <div class="container">
+            <div>
+                <div class="col-12">
+                    <p id="tieude" class="h3" style="color: #343a40;">Du lịch An Giang: Những điều “cần phải” biết trước khi đến đây</p>
+                    <div class="d-flex">
+                        <img src="{% static 'img/decor/cat.png' %}" alt='' width="50px" height="50px">
+                        <p style="color: #555; font-weight: bold">Lượt xem: {{vi.view}} </p>
+                        <div class="d-flex">
+                            {% for obj in qs %}
+                            <form action="." method='POST' class="ui form ml-4">
+                                {% csrf_token %}
+                                <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                                {% if user not in obj.liked.all %}
+                                    <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                        <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                        <span style="color: #fff; font-weight: 600">Thích</span>
+                                    </button>
+                                {% else %}
+                                    <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                        <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                        <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                    </button>
+                                {% endif %}
+                            </form>
+                            <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="background-image: url({% static 'img/decor/bg.jpg' %})">
+                <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 5px;">
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 30px;">
+                </div>
+                <div class="col-12">
+                    <p id="tieude"><b>AN GIANG</b></p>
+                </div>
+                <div class="col-12" style="color: black; ">
+                    <p class="m-0">Không chỉ thu hút khách du lịch bằng vẻ đẹp dân dã, yên bình nhưng đầy quyến rũ, những địa điểm tham quan ở An Giang còn được gắn liền với nhiều câu chuyện huyền bí, khiến bất cứ du khách nào cũng phải tò mò. Vậy cùng lưu lại Cẩm nang kinh nghiệm du lịch An Giang từ A đến Z để chuẩn bị cho chuyến đi khám phá vùng đất huyền bí miền Tây nam bộ nào!</p>
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 3px; margin-bottom: 5px; margin-top: 15px;">
+                </div>
+                <div class="col-12" style="background-color: #ff5f13; height: 6px; margin-bottom: 20px;">
+                </div>
+            </div>
+            <div class="mb-3 pb-3">
+                <a><img class="img-fluid w-100" src="{% static 'img/angiang/ag1.jpg' %}" alt=""></a>
+                <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Những điều cần biết khi du lịch An Giang (Ảnh: ST)</p>
+            </div>
+            <div class="mb-3 pb-3">
+                <a href="{% url 'hotel' %}"><img class="img-fluid w-100" src="{% static 'img/decor/dulich.jpg' %}" alt=""></a>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="col-12">
+                        <div class="single-services section-padding2">
+                            <div class="details-caption" style="color: #343a40">
+                                <h3>1. Tổng Quan Du Lịch An Giang</h3>
+                                <p>An Giang thuộc miền Tây Nam Bộ Việt Nam và là một phần của Tứ giác Long Xuyên nên hay phải gánh chịu nhiều thiên tai lũ lụt. Tuy nhiên, đó cũng là lợi thế khiến nơi đây đất đai phù sa màu mỡ. Sản sinh ra những cánh đồng lúa tươi tốt, bạt ngàn. An Giang còn là tỉnh đông dân nhất miền Tây Nam Bộ, có truyền thống văn hóa đặc trưng của miền Tây sông nước với chợ nổi và nhiều di tích như: núi Sam, rừng tràm Trà Sư, hồ Thoại Sơn, miễu Bà Chúa Xứ…</p>
+                                <p>Đặt chân đến vùng đất An Giang, cảm giác đầu tiên chính là sự bình yên, thoải mái nơi đây. Những ruộng lúa xanh non, tươi mát. Bầu trời cao vút, trong veo. Tiếng chim hót ríu tít trên những ngọn cây cao hòa với tiếng trẻ em vui đùa dưới ruộng lúa. Tất cả tạo nên một bức tranh đồng quê tươi đẹp mà ắt hẳn, ai đến đây một lần sẽ nhớ mãi.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-100" src="{% static 'img/angiang/ag2.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Phong cảnh hữu tình chùa Tà Pạ, An Giang. Ảnh: Anh Tuan</p>
+                                </div>
+                                
+                                <h3>2. Thời tiết ở An Giang? Du lịch An Giang mùa nào đẹp?</h3>
+                                <p>An Giang có vị trí địa lý nằm gần xích đạo nên khí hậu nơi đây có những nét tương đương với khí hậu xích đạo. Mỗi mùa ở An Giang đều có nét đẹp riêng và có nhiều cảnh đẹp, văn hóa thú vị để du khách khám phá.</p>
+                                <div class="mb-3">
+                                    <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/angiang/ag3.jpg' %}" alt="">
+                                    <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Nên đi du lịch An Giang vào mùa thu đẹp nhất là Tháng 10 (Ảnh: sưu tầm)</p>
+                                </div>
+                                <p>Còn muốn chiêm ngưỡng cảnh đẹp nhất ở An Giang thì nên đến vào khoảng tháng 9 – 11. Lúc này, mùa nước lũ tràn về, cảnh sắc bình yên đến kỳ lạ, khung cảnh nên thơ, hữu tình, sâu lắng. Thời điểm du lịch An Giang xấu nhất là ở tháng 4 và tháng 5, thời tiết quá nóng, sẽ ảnh hưởng đến chuyến đi.</p>
+                                                                    
+                                <h3>3. Phương tiện di chuyển đến An Giang?</h3>
+                                <p>Đường sá giao thông đến An Giang khá thuận lợi nên bạn có thể di chuyển đến đây bằng nhiều phương tiện khác nhau. Với những khách du lịch ở miền Bắc, bạn có thể đặt vé máy bay đến TP.HCM và từ đây di chuyển bằng ô tô hoặc xe máy đến An Giang. Bạn có thể di chuyển bằng ô tô bằng cách mua vé ở các bến xe TP.HCM đến thị xã Châu Đốc hoặc thành phố Long Xuyên với giá vé 150.000-300.000 đồng.</p>
+                                <p>Với những bạn có ý định đi phượt bằng xe máy, bạn có thể di chuyển theo 2 cung đường sau:</p>
+                                <p style="padding-left: 10px;">- Từ TP.HCM đi theo Quốc lộ 1A hướng về Tiền Giang, qua cầu Mỹ Thuận theo Quốc Lộ 80 để đi Sa Đéc, tiếp tục qua phà Vàm Cống đến thành phố Long Xuyên.</p>
+                                <p style="padding-left: 10px;">- Cung đường khám phá vùng ven biên giới: theo Quốc Lộ 62 hướng cửa khẩu Bình Hiệp, tiếp tục đi theo đường sát biên giới hướng Hồng Ngự – Tân Châu là sẽ đến Châu Đốc.</p>
+                                
+                                <h3>4. Đi lại bằng gì ở An Giang?</h3>
+                                <p>Đến tham quan và khám phá Quảng Bình, bạn có thể thuê xe máy, xe điện hoặc bắt taxi để di chuyển.</p>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({%  static 'img/logo/sakura.png' %});"><p><b>Xe máy:</b> Đi xe máy hoặc ô tô riêng từ TP.HCM về An Giang mất tầm 4-5h đồng hồ với các lộ trình như sau:</p>
+                                        <p style="padding-left: 10px;">- TP.HCM : Theo quốc lộ 1A hướng về Tiền Giang, qua cầu Mỹ Thuận theo quốc lộ 80 để đi Sa Đéc, tiếp tục qua phà Vàm Cống đến thành phố Long Xuyên.</p>
+                                        <p style="padding-left: 10px;">- Cung đường khám phá vùng ven biên giới: Theo quốc lộ 62 hướng cửa khẩu Bình Hiệp, tiếp tục đi theo đường sát biên giới hướng Hồng Ngự – Tân Châu là sẽ đến Châu Đốc.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/angiang/ag4.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Đi xe máy khám phá cảnh đẹp An Giang là trải nghiệm hấp dẫn. Ảnh: @langthang.angiang</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p><b>Xe lôi:</b> Xe lôi, được biết đến là nghề kiếm cơm ở An Giang. Xe lôi là một phương tiện phổ biến ở Nam Kỳ lục tỉnh vào những năm đầu 90 và giờ ta lại thấy chúng vẫn còn hiện hữu ở TP. Châu Đốc. Vào những ngày diễn ra lễ hội Vía Bà mỗi năm, phương tiện này cực kỳ được trưng dụng. Bởi số lượng du khách và người dân đổ về, có thể ngang ngửa sổ khách du lịch của miền Tây mỗi ngày.</p>
+                                        <p>Lúc này, binh đoàn xe lôi lại trở nên đông đúc, nhộn nhịp để phục vụ cho nhu cầu đi lại của du khách. Nếu bạn yêu thích vẻ cũ kỹ, ngược xuôi khám phá phố phường Châu Đốc một cách bình dị, hãy một lần yên vị trên những chiếc xe lôi.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/angiang/ag5.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Khám phá An Giang bằng xe lôi – trải nghiệm thú vị</p>
+                                        </div>
+                                        <p>Lúc này, binh đoàn xe lôi lại trở nên đông đúc, nhộn nhịp để phục vụ cho nhu cầu đi lại của du khách. Nếu bạn yêu thích vẻ cũ kỹ, ngược xuôi khám phá phố phường Châu Đốc một cách bình dị, hãy một lần yên vị trên những chiếc xe lôi.</p>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p><b>Xe bus:</b> Sau xe máy cũng có khá nhiều bạn trẻ lựa chọn xe bus, bởi đây là phương tiện giá rẻ, có lịch trình dày đặc và đặc biệt là dễ dàng để di chuyển từ điểm du lịch này sang điểm du lịch khác trong tỉnh. Từ TP. Long Xuyên, bạn có thể bắt xe lên Châu Đốc, rồi lại đón xe bus đẻ ngược lên cửa khẩu Tịnh Biên, khám phá vùng Thất Sơn huyền bí. Sau đó, lại đi xe bus để về Tri Tôn, ghé tham nhiều điểm đến thú vị như di tích Óc Eo rồi lại quay trở về TP. Long Xuyên.</p>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});"><p><b>Thuyền:</b> Đến với An Giang là đến với vùng sông nước, bạn sẽ rất dễ dàng bắt gặp hình ảnh những chiếc thuyền lên đênh trên sông. Ở đây, thuyền không chỉ phục vụ cho nhu cầu đi lại, sinh hoạt của người dân mà còn là phương tiện chuyên chở khách thú vị.</p></li>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/angiang/ag6.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Bạn có thể ngồi thuyền và tham quan làng cá bè ở Châu Đốc, ngắm nhìn cảnh đẹp hữu tình của Búng Bình Thiên,…</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                                
+                                <h3>5. Những địa điểm thu hút nhất ở An Giang</h3>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Núi Cấm</p>
+                                        <p>Nhắc đến Thất Sơn ở An Giang, không ai là không biết ngọn núi Cấm nổi tiếng cao nhất trong dãy 7 ngọn núi Thất Sơn. Núi Cấm thuộc địa bàn xã An Hảo, huyện Tịnh Biên, cách trung tâm TP Long Xuyên khoảng 90km. Ngay từ cái tên đã gợi lên sự huyền bí, vì dường như chưa từng có tài liệu nào ghi lại cụ thể nguồn gốc cái tên núi Cấm bắt đầu từ đâu. Với dòng suối Thanh Long hiền hòa, động Thủy Liêm bí ẩn, Vồ Bạch Tượng uy nghi, cao nguyên núi cấm bao la, những ngôi chùa cổ kính với kiến trúc độc đáo, quang cảnh núi Cấm tuyệt đẹp và đầy lãng mạn chắc chắn sẽ làm thỏa mãn bất cứ du khách nào đặt chân đến An Giang.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/angiang/ag7.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Khu du lịch Ozo Quảng Bình (Nguồn: sưu tầm)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Khu du lịch Đồi Tức Dụp</p>
+                                        <p>Tức Dụp là tên một ngọn đồi của núi Tô, nằm trong dãy Thất Sơn, thuộc xã An Tức, huyện Tri Tôn. Tức Dụp có độ cao 300m, so với các núi của Thất Sơn như núi Dài, núi Cấm thì Tức Dụp tuy nhỏ nhưng có nhiều hang sâu, động lớn được thông với nhau bằng nhiều ngõ ngách chằng chịt, hiểm trở. Hiện nay nơi đây đã được xây dựng thành khu du lịch, đường lên đồi là các bậc thang hai chiều dẫn đến các hang động và nhiều khung cảnh tự nhiên làm “background” hoàn hảo cho bạn check-in đấy.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/angiang/ag8.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Các bậc thang hai chiều với nhiều màu sắc và họa tiết độc đáo thu hút khách du lịch. Ảnh: @vic_tor_ten</p>
+                                        </div>
+                                    </li>  
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Núi Sập Thoại Sơn</p>
+                                        <p>Núi Sập là ngọn núi lớn nhất nằm trong cụm núi Sập bao gồm núi Sập, núi Bà, núi Cậu và núi Nhỏ nằm ở huyện Thoại Sơn. Núi vốn dĩ có hình dáng như một con thỏ khổng lồ nằm bên những đồng lúa xanh ngút ngàn. Nhưng qua thời gian, hình dạng ngọn núi đã bị biến đổi thành những khối, khuôn màu kì lạ, tạo nên một không gian núi non huyền bí. Đặc biệt bao quanh núi Sập là hồ nước xanh trong, bình lặng làm cảnh quan nơi đây trở nên lãng mạn, hữu tình.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/angiang/ag9.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Mặc dù ngọn núi này không quá cao, nhưng lại được những tán cây rừng bao phủ, giúp núi Sập giữ được vẻ hoang sơ đến tận bây giờ. Ảnh: @anlu2605</p>
+                                        </div>
+                                    </li>  
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Núi Sam</p>
+                                        <p>Miếu Bà Chúa Xứ Núi Sam tọa lạc tại chân núi Sam, trước thuộc xã Vĩnh Tế, nay thuộc phường Núi Sam, thành phố Châu Đốc, tỉnh An Giang. Đây là một di tích lịch sử, kiến trúc đặc biệt quan trọng của tỉnh và khu vực. Điều đặc biệt nhất ở núi Sam là pho tượng Bà Chúa Xứ nằm trong một ngôi miếu ở núi này. Đây là một pho tượng rất nổi tiếng, hàng năm có đông đảo du khách hành hương đến viếng thăm nhưng không ai xác định được lai lịch cũng như nguồn gốc của pho tượng này.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/angiang/ag10.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Sự linh thiêng của Miễu Bà Chúa Xứ núi Sam là lí do khiến du khách khắp nơi đổ về đây hành hương và khấn vái cầu nguyện. Ảnh: lucynguyen2403</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Chùa Lầu Tịnh Biên</p>
+                                        <p>Đây là ngôi chùa đang thu hút đông đảo người dân và khách du lịch ghé thăm- chùa Phước Lâm (huyện Tịnh Biên – tỉnh An Giang). Chùa Phước Lâm hay còn gọi là chùa Lầu, không chỉ được biết đến là ngôi chùa có không gian thanh tịnh và kiến trúc độc đáo mà nơi đây còn níu chân du khách bởi khung cảnh tuyệt đẹp của khuôn viên xanh xung quanh chùa. Điểm nổi bật của chùa Phước Lâm chính là trong khuôn viên trồng rất nhiều cây xanh. Vào những ngày đầu xuân, mọi người thường cùng nhau đi lễ chùa với mong muốn cầu cho một năm mới an lành, bình an.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/angiang/ag11.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Chùa Lầu với không gian thanh tịnh và kiến trúc độc đáo. Ảnh: @phithogn</p>
+                                        </div>
+                                    </li>      
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Cánh đồng Tà Pạ (huyện Tri Tôn)</p>
+                                        <p>Đến Tà Pạ- An Giang, du sách sẽ phải ngỡ ngàng trước quang cảnh bao la như một tấm thảm rộng lớn của những đồng lúa xanh ngắt và những hàng thốt nốt hiên ngang giữa trời xanh. Ở An Giang cũng như ở miền Tây có một thông lệ khá đặc biệt về việc trồng lúa, cũng được xem là một nét văn hóa đặc sắc của nên nông nghiệp lúa nước có từ lâu đời chính là tập quán “làm ruộng vần công”. Cánh đồng Pà Tạ được xem là ruộng bậc thang độc nhất ở vùng đồng bằng sông Cửu Long. Nhờ tập quán canh tác của người đồng bào Khơ Me mà những ruộng lúa An Giang mang vẻ đẹp đặc sắc riêng, hút hồn mọi du khách.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/angiang/ag12.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Ruộng lúa xanh tươi bạt ngàn tựa tấm thảm xanh, hài hòa, tươi mát. Ảnh: Nguyễn Hoàng Nam</p>
+                                        </div>
+                                    </li> 
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Rừng tràm Trà Sư</p>
+                                        <p>Rừng tràm Trà Sư nằm trên địa bàn xã Văn Giáo, huyện Tịnh Biên, tỉnh An Giang. Đây là khu rừng ngập nước tiêu biểu cho vùng Tây sông Hậu, là nơi sinh sống của nhiều loài động vật và thực vật thuộc hệ thống rừng đặc dụng Việt Nam . Với diện tích khoảng 850 ha, rừng tràm Trà Sư phủ một màu xanh mơn mởn của đám bèo tây giăng kín mặt nước. Trải nghiệm đi thuyền giữa thảm bèo xanh ngút ngàn, len lỏi trong các ngóc ngách của rừng tràm, nghe tiếng chim chóc đùa giỡn trên tán tràm sẽ rất khó quên.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/angiang/ag13.jpg' %}">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Cánh rừng xanh tươi bạt ngàn, hài hòa, tươi mát. Ảnh: Nguyễn Hoàng Nam</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Búng Bình Thiên</p>
+                                        <p>Búng Bình Thiên là một trong những hồ nước ngọt lớn nhất của Tây Nam Bộ, nằm gần biên giới Campuchia, thông với sông Bình Di (An Phú, An Giang). Búng có chiều dài khoảng 500 m, rộng 3.000 m. Búng rất đẹp vào mùa nước nổi với sắc vàng bông điên điển xen giữa sắc xanh lục bình. Xung quanh búng là ngôi làng Chăm còn vẹn nguyên những giá trị văn hóa xưa.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/angiang/ag14.jpg' %}">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Một góc sinh hoạt của người dân bên hồ nước ngọt Búng Bình Thiên. Ảnh: @seanla999</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Làng nổi Châu Đốc</p>
+                                        <p>Từ trung tâm thị xã Châu Đốc ngược theo dòng sông Hậu, du khách sẽ đến làng nổi Châu Đốc. Đây là khu vực nuôi cá bè gồm những ngôi nhà nổi san sát kéo dài đến vài cây số, quây quần thành một vùng đậm chất vùng sông nước. Xuồng, ghe là phương tiện di chuyển chính của các hộ gia đình sinh sống ở khu làng nổi này. Điều khá đặc biệt là mọi sinh hoạt thường ngày của tất cả thành viên trong gia đình chỉ quẩn quanh và gói gọn trên chiếc bè ngang 4m, dài 7-8m. Trước đây các hộ gia đình ở đây chủ yếu nuôi cá ba sa nhưng giờ đây họ đã chuyển sang nhiều loại cá khác có giá trị kinh tế cao hơn.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/angiang/ag15.jpg' %}">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Làng bè nổi Châu Đốc lung linh về đêm. Ảnh: Nguyễn Phố</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Thánh đường Mubarak</p>
+                                        <p>Trong khu vực cư trú của đồng bào Chăm, có rất nhiều Thánh đường được xây dựng nên, mà tiêu biểu nhất là thánh đường Hồi Giáo Mubarak ở Châu Giang (xã Phú Hiệp – huyện Phú Tân). Tại đây, thánh đường được xem là một trong những trung tâm sinh hoạt văn hóa, một công trình kiến trúc nghệ thuật rất độc đáo, với đường nét riêng mang đậm tính tôn giáo của dân tộc Chăm.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/angiang/ag16.jpg' %}">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Đây là một trong những nhà thờ Hồi giáo lâu đời nhất Hồi giáo của cộng đồng người Chăm. Ảnh: Nguyễn Phố</p>
+                                        </div>
+                                    </li>                                     
+                                </ul>
+                                <h3>6. Ăn gì khi đi du lịch An Giang?</h3>
+                                <p>An Giang là tỉnh có rất nhiều đồng bào dân tộc cư trú như Chăm, Khmer, Hoa,.. chính vì nền văn hóa đa dạng đó mà ẩm thực nơi đây cũng rất phong phú, mỗi món ăn đều mang đậm chất riêng biệt mà không phải ở đâu cũng có.</p>
+                                <ul style="padding-left: 30px;">
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bò cạp Bảy Núi</p>
+                                        <p>Không phải ngoa khi nói tới An Giang mà không thưởng thức các món ăn từ côn trùng thì chưa tới An Giang quả không sai. Nơi đây còn có hẳn một ngôi chợ sầm uất chuyên bán các loại côn trùng đó là chợ Tịnh Biên An Giang.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/angiang/ag17.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Bò cạp Bảy Núi – Loài côn trùng rùng rợn nhưng là đặc sản của An Giang</p>
+                                        </div>
+                                        <p>Ngôi chợ vùng biên nổi tiếng này của An Giang ngoài các mặt hàng chúng ta thường thấy. Thì khi tới đây, du khách sẽ còn được chứng kiến nào là rắn, rết, nhện độc,… tới bọ rầy. Và trong số đó ấn tượng nhất là bò cạp.</p>
+                                        <p>Những chậu bò cạp Bảy Núi đen sì to đùng bò lổm ngổm đầy “kinh dị” được người dân bày bán khiến cho chẳng mấy ai dám nhìn chứ chưa nói tới việc thưởng thức chúng.</p>
+                                        <p>Ấy vậy mà nếu lỡ nhắm mắt làm liều cắn một miếng bò cạp chiên giòn thì thôi rồi. Con côn trùng độc gớm ghiếc bỗng trở nên giòn rụm và béo ngậy khó mà cưỡng lại việc cầm đũa gắp tiếp con thứ hai, rồi thứ ba, thứ tư. Chỉ có thể diễn tả bằng câu cửa miệng của người dân miền Tây – Ngon bá cháy.</p>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Bún cá Long Xuyên</p>
+                                        <p>Nói đến bún cá An Giang thì nhiều người sành ăn sẽ nghĩ ngay tới bún cá Châu Đốc – Món đặc sản An Giang nổi tiếng khắp nơi xa gần. Nhưng khi đến An Giang, bạn sẽ dễ nhận ra đâu đâu cũng có món bún cá không riêng gì ở huyện Châu Đốc mới có. Và nếu có dịp trải nghiệm, bạn sẽ nhận ra được dư vị khác biệt của mỗi nơi mỗi khác. Và bún cá Long Xuyên cũng mang trong mình cái dư vị rất riêng, riêng trong cái riêng của bún cá An Giang.</p>
+                                        <p>Cần phải nói thêm, ngoài côn trùng, An Giang còn được biết tới là cái rốn của lũ, và tất nhiên cũng là cái rốn của cá. Mỗi mùa nước nổi, cá về nơi đây rất nhiều. Bởi thế, bún cá là một hình thức chế biến món ăn từ cá của người dân An Giang. Và nếu có dịp về đây, đừng quên thưởng thức món bún cá nổi tiếng này nhé.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/angiang/ag18.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Đặc sản bún cá Long Xuyên – Bún cá An Giang (Nguồn: sưu tầm)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Gỏi sầu đâu An Giang</p>
+                                        <p>Gỏi sầu đâu ở An Giang bắt nguồn từ món ăn của người dân Khmer sống dọc biên giới với Campuchia. Nguyên liệu làm gỏi sầu đâu bao gồm rau sầu đâu ( cây sầu đâu còn được gọi là cây xoan miền Tây) vị đắng. Kết hợp với các loại khô vị mặn ngọt cho ra tên gọi như gỏi sầu đâu cá sặt, gỏi sầu đâu khô cá lóc,… Trở thành món đặc sản của An Giang gây thương nhớ cho bao người phương xa.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src= "{% static 'img/angiang/ag19.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Gỏi sầu đâu An Giang – Món ăn gây thương nhớ quê nhà! (Nguồn: sưu tầm)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Dưa Xoài Cù Lao Giêng</p>
+                                        <p>Còn gì thú vị hơn khi trong lúc chờ đợi đồ ăn lên hoặc khi bạn bè tụ tập lại với nhau lại được nhâm nhi đĩa dưa xoài chua ngọt chấm với muối ớt cay xè vô cùng hấp dẫn. Mà đã nhắc đến món ăn này sao có thể không nhắc đến đặc sản Dưa xoài Cù Lao Giêng.</p>
+                                        <p>Cù Lao Giêng, xã Bình Phước Xuân, huyện Chợ Mới, tỉnh An Giang được thiên nhiên ưu ái, quanh năm cây trái tươi tốt. Người ta kể lại rằng, cứ mỗi lần đến mùa, xoài non rụng trắng cả mặt đất. Xót xoài phải đem bỏ, ông Nguyễn Hoàng Liệt (người dân ở Cù Lao Giêng) thử đem chế biến chúng bằng cách ngâm với nước đường… Thế là từ ấy món dưa xoài Cù Lao Giêng được ra đời.</p>
+                                        <p>Đưa miếng dưa xoài Cù Lao Giêng vàng giòn giòn đủ vị chua cay ngọt hòa quyện với nhau lên miệng thì khó ai có thể cưỡng lại nổi vị ngon của món đặc sản An Giang này.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/angiang/ag20.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Dưa xoài Cù Lao Giêng món ăn chơi ngon tuyệt (Nguồn: sưu tầm)</p>
+                                        </div>
+                                    </li>
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Cơm Nị – Cà Púa An Giang</p>
+                                        <p>Ai trong chúng ta có lần về An Giang chắc hẳn đã nghe nói đến hoặc được thưởng thức món cơm nị – cà púa, một trong những đặc sản nức tiếng của miền này. Đây là món ăn truyền thống kết hợp bổ sung của hai món cơm nị và cà púa tạo nên một sự độc đáo và cầu kì mang đậm vị Chăm.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/angiang/ag21.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Cơm nị – cà púa An Giang: chấm phá hương vị Chăm (Nguồn: sưu tầm)</p>
+                                        </div>
+                                        <p>Cơm nị được nấu với sữa hoặc nước cốt dừa nêm thêm gia vị vừa miệng tạo nên vị béo ngọt đặc trưng. Một số người có thể bỏ thêm nho khô để tăng hương vị độc đáo cho món ăn. Đi kèm theo đó là cà púa được làm từ nguyên liệu chính là thịt bò tươi. Sau khi khử mùi sẽ được xào và chế biến để vừ đủ kết hợp tạo nên sự hòa quyện mà người ăn một khi đã thưởng thức khó có thể quên được cái tên cơm nị – cà púa này.</p>
+                                    </li> 
+                                    <li style="list-style-image: url({% static 'img/logo/sakura.png' %});">
+                                        <p style="font-size: 20px; font-weight: 600;">Tung Lò Mò – Món ngon đặc biệt từ thịt bò</p>
+                                        <p>ung lò mò (lạp xưởng bò) là đặc sản An Giang làm quà chế  biết từ thịt bò với vị thơm ngon được nhiều du khách mua về cho người thân. Đây cũng là một trong số những món ăn đặc biệt ấn tượng mà người Chăm ở An Giang đặc biệt yêu thích. Món ăn này hấp dẫn người ta ở cả công đoạn lựa chọn nguyên liệu cho tới khâu chế biến.</p>
+                                        <p>Để làm được món tung lò mò ngon đúng điệu, người ta cần lựa chọn thịt bò nạc (loại thịt được lọc xương hoặc thịt đùi). Sau đó người ta sẽ lọc bỏ sạch gân, mỡ, rửa sạch, thái mỏng, ướp nguyên liệu đường, muối tinh, thính và phụ gia.</p>
+                                        <div class="mb-3">
+                                            <img class="img-fluid w-80" style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/angiang/ag22.jpg' %}" alt="">
+                                            <p style="text-align: center; font-size: 14px; font-style: italic; padding-bottom: 0px;">Tung lò mò ngon đặc biệt từ thịt bò (Nguồn: sưu tầm)</p>
+                                        </div>
+                                    </li>                               
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex mt-4">
+                        {% for obj in qs %}
+                        <form action="." method='POST' class="ui form ml-4">
+                            {% csrf_token %}
+                            <input type='hidden' name='post_id' value="{{ obj.camnang_id }}">
+                            {% if user not in obj.liked.all %}
+                                <button class="ui button positive" name='like' type='submit' style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-up" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Thích</span>
+                                </button>
+                            {% else %}
+                                <button class="ui button negative" name='unlike' type='submit'  style="background: #4169E1; border: none; outline: none; border-radius: 5px; cursor: pointer">
+                                    <i class="far fa-thumbs-down" style="color: #fff;"></i>
+                                    <span style="color: #fff; font-weight: 600">Bỏ thích</span>
+                                </button>
+                            {% endif %}
+                        </form>
+                        <strong class="ml-2">{{ obj.liked.all.count }} lượt thích</strong>
+                        {% endfor %}
+                    </div>
+
+                    <section class="comment-area">
+                        <div class="container">
+                            <div class="comment-content">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="comment-details">
+                                            <div class="section-title">
+                                                <h5>Bình luận</h5>
+                                            </div>
+                                            <form action="." method="POST" style="margin-top: 1.3em;">
+                                                {% csrf_token %}
+                                                {% if not comments.all %} 
+                                                <div class="col-lg-12">
+                                                    <center><h6 class="mb-4">Chưa có bình luận nào hết á :((</h6></center>
+                                                </div>
+                                                {% else %}
+                                                    {% for x in comments %}
+                                                    <div class="comment-item">
+                                                        <div class="user-avt">
+                                                            <img src="{% static 'img/decor/cat.png' %}" alt="">
+                                                        </div>
+                                                        <div class="comment-info">
+                                                            <h6>{{ x.user }} - <span>{{ x.created_on }}</span></h6>
+                                                            <p>{{ x.body }}</p>
+                                                        </div>
+                                                    </div>
+                                                    {% endfor %}
+                                                {% endif %}
+                                                <input type="text" name="user" value="{{request.user}}" maxlength="200" required="" id="id_user" style="display: none">
+                                                <input type="text" name="post_id" maxlength="200" value="CN09" required id="id_post_id" style="display: none">
+                                                <div class="comment-body">
+                                                    <textarea placeholder="Nhập bình luận..." name="body" cols="40" rows="10" required id="id_body" style="width: 100%; outline: none; border: 1px solid #e53637; border-radius: 5px; padding: 10px;"></textarea>
+                                                    <button type="submit" class="btn button btn-lg" name="comment_submit"><i class="fa fa-location-arrow"></i> Bình luận</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                                    
+                <div class="col-lg-4 pt-3 pt-lg-0">
+                    <!-- Popular News Start -->
+                    <div class="pb-3">
+                        <div class="bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0 h3">Nổi bật</h3>
+                        </div>
+                        {% for item in oli %}
+                        <div class="d-flex mb-3 haha">
+                            <a href="{{item.link}}"><img src="/media/{{item.bg}}" style="width: 100px; height: 100px; object-fit: cover;"></a>
+                            <div class="w-100 d-flex flex-column justify-content-center bg-light px-3" style="height: 100px;">
+                                <div class="mb-1" style="font-size: 13px;">
+                                    <span>{{item.date}}</span>
+                                </div>
+                                <a class="h6 m-0" href="{{item.link}}">{{item.camnang_name}}</a>
+                                <div class="mb-2" style="font-size: 14px;">
+                                    <span>
+                                        <i class="far fa-eye"></i>
+                                        <span id="view">{{item.view}}</span> 
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!-- Popular News End -->
+
+                    <!-- Tags Start -->
+                    <div class="pb-3">
+                        <div class="bg-light py-2 px-4 mb-3">
+                            <h3 class="m-0 h3">Từ khóa</h3>
+                        </div>
+                        <div class="d-flex flex-wrap m-n1">
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Cẩm nang</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Du lịch</a>
+                            <a href="{% url 'cn_dalat' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đà Lạt</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Khách Sạn</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đi phượt</a>
+                            <a href="{% url 'cn_vungtau' %}" class="btn1 btn-sm btn-outline-secondary m-1">Vũng Tàu</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Kinh nghiệm du lịch</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Đi chơi</a>
+                            <a href="{% url 'cn_detail' %}" class="btn1 btn-sm btn-outline-secondary m-1">Tham quan</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Chỗ ở</a>
+                            <a href="{% url 'weather' %}" class="btn1 btn-sm btn-outline-secondary m-1">Thời tiết</a>
+                            <a href="{% url 'hotel' %}" class="btn1 btn-sm btn-outline-secondary m-1">Nhà nghỉ</a>
+                            <button onclick="deadlines()" class="btn1 btn-sm btn-outline-secondary m-1" style="cursor: pointer; outline: none">Deadline</button>
+                            <script>function deadlines() {alert("NAPUN có sẵn khăn giấy đây. KHÓC ĐIIII :))");}</script>
+                        </div>
+                    </div>
+                    <!-- Tags End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid py-3">
+        <div class="container">
+            <img width="50px" height="50px" src="{% static 'img/decor/pen.png' %}" atl="">
+            <div class="d-flex align-items-center bg-light justify-content-between py-2 px-4 mb-3">
+                <p class="h3 m-0 orange" style="font-style: italic; text-align: justify;">Với những kinh nghiệm du lịch An Giang tự túc được chia sẻ trong bài viết, hi vọng du khách sẽ có thêm các thông tin tham khảo bổ ích cho chuyến du lịch của mình. Hãy ghé qua những địa điểm nổi tiếng, quán ăn, nhà hàng ngon để thưởng thức trọn vẹn nét đẹp của An Giang. Và đừng quên <a href="{% url 'hotel' %}">đặt khách sạn tại NAPUN</a> để có một trải nghiệm thực tế nhé ! <i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i><i class="fas fa-heart text-warning"></i></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

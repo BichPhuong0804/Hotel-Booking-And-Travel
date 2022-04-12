@@ -1,0 +1,8 @@
+{% autoescape off %}
+NAPUN - Cẩm nang du lịch và Đặt khách sạn
+Chào {{username}}
+
+Nhấn vào link bên dưới để xác nhận tài khoản của bạn:
+
+https://{{ domain }}:8000{% url 'activate' uidb64=uid token=token %}
+{% endautoescape %}
